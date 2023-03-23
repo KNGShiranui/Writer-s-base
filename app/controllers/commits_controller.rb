@@ -1,5 +1,5 @@
 class CommitsController < ApplicationController
-  before_action :authenticate_user!, only: %i(new create)
+  before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_commit, only: %i(show edit update destroy)
 
   # GET /commits or /commits.json

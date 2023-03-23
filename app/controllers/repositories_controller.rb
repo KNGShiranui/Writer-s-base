@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
-  before_action :authenticate_user!, only: %i(new create)
+  before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_repository, only: %i(show edit update destroy)
 
   # GET /repositories or /repositories.json
