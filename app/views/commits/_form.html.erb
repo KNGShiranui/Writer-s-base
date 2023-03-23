@@ -1,0 +1,32 @@
+<%= form_with(model: commit) do |form| %>
+  <% if commit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(commit.errors.count, "error") %> prohibited this commit from being saved:</h2>
+
+      <ul>
+        <% commit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :branch_id %>
+    <%= form.text_field :branch_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

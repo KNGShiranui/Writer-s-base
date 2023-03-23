@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @commit.message %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @commit.user_id %>
+</p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @commit.branch_id %>
+</p>
+
+<%= link_to 'Edit', edit_commit_path(@commit) %> |
+<%= link_to 'Back', commits_path %>
