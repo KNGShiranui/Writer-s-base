@@ -33,5 +33,4 @@
 ## ワイヤーフレーム
   https://drive.google.com/drive/folders/10IG6nYSs7ahhPLE9sYMJM020ar3YJcC7
 ## 画面遷移図
-  https://docs.google.com/spreadsheets/d/1qV1A6FU7vy2-N8xqLOxNf0yL5Fnsz7u3/edit#gid=30523286
-  https://drive.google.com/drive/folders/1sOazQZBQBend8XAyl8gvdrPYHXzCLoov
+  https://github.com/KNGShiranui/Writer-s-base/blob/introduction_of_devise/image/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png
