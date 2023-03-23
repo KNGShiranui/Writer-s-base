@@ -1,5 +1,5 @@
 class AssigneesController < ApplicationController
-  before_action :set_assignee, only: %i[ show edit update destroy ]
+  before_action :set_assignee, only: %i(show edit update destroy)
 
   # GET /assignees or /assignees.json
   def index
