@@ -13,9 +13,9 @@
   <header>
     <% if current_user&.admin? %>
     <%# if current_user.try!admin?は上記と意味は同じ。 %>
-      <h1>Blogs_admin</h1>
+      <h1>WritersBase_admin</h1>
     <% else %>
-      <h1>Blogs</h1>
+      <h1>WritersBase</h1>
     <% end %>
 
     <% if user_signed_in? %>
