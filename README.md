@@ -29,7 +29,7 @@
 ## テーブル定義書
   https://docs.google.com/spreadsheets/d/1qV1A6FU7vy2-N8xqLOxNf0yL5Fnsz7u3/edit#gid=1153070755
 ## ER図
-  ![画面遷移図](https://github.com/KNGShiranui/Writer-s-base/blob/introduction_of_devise/image/ER%E5%9B%B3.png)
+  ![ER図](https://github.com/KNGShiranui/Writer-s-base/blob/rails_admin/image/ER%E5%9B%B3%EF%BC%88%E6%94%B9%EF%BC%89.png)
 ## ワイヤーフレーム
   https://drive.google.com/drive/folders/10IG6nYSs7ahhPLE9sYMJM020ar3YJcC7
 ## 画面遷移図
