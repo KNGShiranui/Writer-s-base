@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'devise-i18n'
+gem 'rails_admin', '~> 3.0'
 gem 'rexml'
 # gem 'bootstrap', '~> 4.1.3'
 # gem 'coffee-rails', '~> 4.2'
