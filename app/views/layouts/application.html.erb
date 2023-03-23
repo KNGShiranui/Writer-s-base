@@ -11,6 +11,13 @@
   </head>
 
   <header>
+    <% if current_user&.admin? %>
+    <%# if current_user.try!admin?は上記と意味は同じ。 %>
+      <h1>Blogs_admin</h1>
+    <% else %>
+      <h1>Blogs</h1>
+    <% end %>
+
     <% if user_signed_in? %>
       <%= link_to "リポジトリ一覧", repositories_path %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
