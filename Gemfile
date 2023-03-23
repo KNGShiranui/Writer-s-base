@@ -13,6 +13,13 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'rexml'
+# gem 'bootstrap', '~> 4.1.3'
+# gem 'coffee-rails', '~> 4.2'
+# gem 'jquery-rails'
+# gem 'markdiff'
+# gem 'paper_trail'
+# gem 'turbolinks', '~> 5'
+# gem 'uglifier', '>= 1.3.0'
 
 
 group :development, :test do
