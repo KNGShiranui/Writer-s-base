@@ -10,7 +10,31 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <header>
+    <% if current_user&.admin? %>
+    <%# if current_user.try!admin?は上記と意味は同じ。 %>
+      <h1>WritersBase_admin</h1>
+    <% else %>
+      <h1>WritersBase</h1>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to "リポジトリ一覧", repositories_path %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "新規登録", new_user_registration_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+
+    <% if notice %>
+      <p class="alert alert-notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-error"><%= alert %></p>
+    <% end %>
+  </header>
+  
+  <body>  
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
