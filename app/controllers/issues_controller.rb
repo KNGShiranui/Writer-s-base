@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
 
   # GET /issues or /issues.json
   def index
-    @issues = Issue.all
+    @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # GET /issues/1 or /issues/1.json

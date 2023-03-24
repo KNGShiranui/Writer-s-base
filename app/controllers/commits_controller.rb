@@ -4,7 +4,7 @@ class CommitsController < ApplicationController
 
   # GET /commits or /commits.json
   def index
-    @commits = Commit.all
+    @commits = Commit.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # GET /commits/1 or /commits/1.json

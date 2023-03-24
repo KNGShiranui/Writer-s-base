@@ -4,7 +4,7 @@ class BranchesController < ApplicationController
 
   # GET /branches or /branches.json
   def index
-    @branches = Branch.all
+    @branches = Branch.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # GET /branches/1 or /branches/1.json

@@ -3,7 +3,7 @@ class AssigneesController < ApplicationController
 
   # GET /assignees or /assignees.json
   def index
-    @assignees = Assignee.all
+    @assignees = Assignee.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # GET /assignees/1 or /assignees/1.json
