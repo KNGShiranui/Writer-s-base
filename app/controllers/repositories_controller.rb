@@ -4,7 +4,7 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories or /repositories.json
   def index
-    @repositories = Repository.all
+    @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # GET /repositories/1 or /repositories/1.json
