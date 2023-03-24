@@ -21,7 +21,7 @@ gem 'kaminari', '~> 0.17.0'
 # gem 'coffee-rails', '~> 4.2'
 # gem 'jquery-rails'
 # gem 'markdiff'
-# gem 'paper_trail'
+gem 'paper_trail'
 # gem 'turbolinks', '~> 5'
 # gem 'uglifier', '>= 1.3.0'
 
