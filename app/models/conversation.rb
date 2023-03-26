@@ -8,10 +8,7 @@ class Conversation < ApplicationRecord
   # [:sender_id, :recipient_id]が同じ組み合わせで保存されないようにするためのバリデーションを設定。
   validates_uniqueness_of :sender_id, scope: :recipient_id
   # validates_uniqueness_of("検証するフィールド名" [, "オプション"])
-
-  # 下記で解説
-  # scopeメソッドを使用して、「between」というスコープを定義しています。
-  # validates_uniqueness_ofに書いてあるscopeとはまた違うscopeなので注意
+  # 同一のrecipient_idに対するsender_idは一意である（重複してはならない）。という制約
   scope :between, -> (sender_id,recipient_id) do
     where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND  conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)
   end

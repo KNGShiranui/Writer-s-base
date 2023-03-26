@@ -7,6 +7,8 @@
 ## 就業Termの技術
 - devise
 - 1対1のメッセージ機能（もしくは友だち繋がり機能）
+- cancancan
+- rails_admin
 
 ## カリキュラム外の技術
 - paper_trail
