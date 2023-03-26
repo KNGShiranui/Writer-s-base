@@ -23,7 +23,7 @@ class RepositoriesController < ApplicationController
   # POST /repositories or /repositories.json
   def create
     @repository = Repository.new(repository_params)
-
+    @repository.user = current_user
     respond_to do |format|
       if @repository.save
         format.html { redirect_to repository_url(@repository), notice: "Repository was successfully created." }
