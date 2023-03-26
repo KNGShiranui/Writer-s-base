@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :commits, dependent: :destroy
   has_many :assignees, dependent: :destroy
   has_many :issues, through: :assignees
+  has_many :documents, dependent: :destroy
   # has_many :team_members, dependent: :destroy  # 機能拡張時に使うかも
   # has_many :teams, through: :team_members  # 機能拡張時に使うかも
   # has_many :owned_teams, class_name: 'Team', foreign_key: 'owner_id', dependent: :destroy
