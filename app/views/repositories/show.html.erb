@@ -1,17 +1,79 @@
 <p>
-  <strong>Name:</strong>
+  <strong>リポジトリオーナー:</strong>
+  <%= @repository.user_id %>
+</p>
+
+<p>
+  <strong>リポジトリ名:</strong>
   <%= @repository.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>リポジトリ説明:</strong>
   <%= @repository.description %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @repository.user_id %>
+  <strong>ブランチ作成:</strong>
+  <%= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
+  <%# (repository_id: @repository.id)を明示的に書く必要あり %>
 </p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ブランチ名</th>
+      <th>リポジトリ名</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @branches.each do |branch| %>
+      <tr>
+        <td><%= branch.name %></td>
+        <td><%= branch.repository_id %></td>
+        <td><%= link_to 'Show', branch %></td>
+        <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
+        <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <strong>イシュー作成:</strong>
+  <%= link_to 'イシュー作成', new_issue_path(repository_id: @repository.id) %>
+  <%# (repository_id: @repository.id)を明示的に書く必要あり %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>イシュー名</th>
+      <th>イシュー説明</th>
+      <th>ステータス（公開／非公開）</th>
+      <th>優先度</th>
+      <th>リポジトリ</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @issues.each do |issue| %>
+      <tr>
+        <td><%= issue.name %></td>
+        <td><%= issue.description %></td>
+        <td><%= issue.status %></td>
+        <td><%= issue.priority %></td>
+        <td><%= issue.repository_id %></td>
+        <td><%= link_to 'Show', issue %></td>
+        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_repository_path(@repository) %> |
 <%= link_to 'Back', repositories_path %>

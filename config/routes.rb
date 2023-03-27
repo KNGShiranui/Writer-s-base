@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resources :issues
   resources :relationships, only: %i(create destroy)
-  resources :repositories
+  resources :repositories 
   resources :users, only: %i(index show)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

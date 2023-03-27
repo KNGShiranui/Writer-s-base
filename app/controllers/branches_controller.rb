@@ -4,7 +4,7 @@ class BranchesController < ApplicationController
 
   # GET /branches or /branches.json
   def index
-    @branches = Branch.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @branches = Branch.all.order(created_at: :desc).page(params[:page])
   end
 
   # GET /branches/1 or /branches/1.json
@@ -13,7 +13,8 @@ class BranchesController < ApplicationController
 
   # GET /branches/new
   def new
-    @branch = Branch.new
+    @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+    @branch = @repository.branches.build
   end
 
   # GET /branches/1/edit
@@ -22,8 +23,9 @@ class BranchesController < ApplicationController
 
   # POST /branches or /branches.json
   def create
+    @repository = Repository.find(params[:branch][:repository_id])  # 明示的に書く必要あり
+    @repository_id = @repository.id # 明示的に書く必要あり
     @branch = Branch.new(branch_params)
-
     respond_to do |format|
       if @branch.save
         format.html { redirect_to branch_url(@branch), notice: "Branch was successfully created." }
