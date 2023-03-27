@@ -9,6 +9,10 @@ class IssuesController < ApplicationController
   end
 
   def show
+    # @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+    @repository = @issue.repository # これでissueとそれに結び付いたrepositoryを呼び出す
+    # それにより
+    # binding.pry
   end
 
   def new
@@ -17,6 +21,8 @@ class IssuesController < ApplicationController
   end
 
   def edit
+    # @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+    # binding.pry
   end
 
   def create
@@ -35,9 +41,11 @@ class IssuesController < ApplicationController
   end
 
   def update
+    @repository = Repository.find(params[:issue][:repository_id])  # 明示的に書く必要あり
+    @repository_id = @repository.id # 明示的に書く必要あり
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to issue_url(@issue), notice: "Issue was successfully updated." }
+        format.html { redirect_to issue_path(@issue), notice: "Issue was successfully updated." }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit, status: :unprocessable_entity }
