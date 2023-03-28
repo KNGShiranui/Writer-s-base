@@ -2,4 +2,4 @@
 
 <%= render 'form', branch: @branch %>
 
-<%= link_to 'Back', branches_path %>
+<%= link_to 'Back', branches_path(@branch, repository_id: @repository) %>
