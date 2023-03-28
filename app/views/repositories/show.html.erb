@@ -40,6 +40,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @branches %>
 
 <p>
   <strong>イシュー作成:</strong>
@@ -74,6 +75,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @issues %>
 
 <%= link_to 'Edit', edit_repository_path(@repository) %> |
 <%= link_to 'Back', repositories_path %>

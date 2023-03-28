@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
   def index
     @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
     # @issue = Issue.find(params[:repository_id])
-    @issues = Issue.all.order(created_at: :desc).page(params[:page]) # issue全件
+    @issues = current_repository.issues.order(created_at: :desc).page(params[:page]) # issue全件
     # binding.pry
     # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
     # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
