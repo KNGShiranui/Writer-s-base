@@ -2,25 +2,24 @@ class RepositoriesController < ApplicationController
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_repository, only: %i(show edit update destroy)
 
-  # GET /repositories or /repositories.json
   def index
     @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
-  # GET /repositories/1 or /repositories/1.json
   def show
+    @branches = Branch.all.order(created_at: :desc).page(params[:page])
+    # @issues = Issue.all.order(created_at: :desc).page(params[:page])
+    @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
+    # binding.pry 
   end
 
-  # GET /repositories/new
   def new
     @repository = Repository.new
   end
 
-  # GET /repositories/1/edit
   def edit
   end
 
-  # POST /repositories or /repositories.json
   def create
     @repository = Repository.new(repository_params)
     @repository.user = current_user
@@ -35,7 +34,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /repositories/1 or /repositories/1.json
   def update
     respond_to do |format|
       if @repository.update(repository_params)
@@ -48,7 +46,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # DELETE /repositories/1 or /repositories/1.json
   def destroy
     @repository.destroy
 
@@ -59,13 +56,15 @@ class RepositoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = Repository.find(params[:id])
-    end
+  # def current_repository
+  #   @current_repository ||= Repository.find_by(id: @repository[:id])
+  # end
 
-    # Only allow a list of trusted parameters through.
-    def repository_params
-      params.require(:repository).permit(:name, :description, :user_id)
-    end
+  def set_repository
+    @repository = Repository.find(params[:id])
+  end
+
+  def repository_params
+    params.require(:repository).permit(:name, :description, :user_id)
+  end
 end

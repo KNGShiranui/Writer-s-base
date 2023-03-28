@@ -3,4 +3,4 @@
 <%= render 'form', issue: @issue %>
 
 <%= link_to 'Show', @issue %> |
-<%= link_to 'Back', issues_path %>
+<%= link_to 'Back', issues_path(@issue, repository_id: @repository)  %>

@@ -9,4 +9,4 @@
 </p>
 
 <%= link_to 'Edit', edit_branch_path(@branch) %> |
-<%= link_to 'Back', branches_path %>
+<%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %>
