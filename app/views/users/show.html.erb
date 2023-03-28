@@ -1,27 +1,22 @@
 <p>
   <strong>Name:</strong>
-  <%= @issue.name %>
+  <%= current_user.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @issue.description %>
+  <strong>Email:</strong>
+  <%= current_user.email %>
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @issue.status %>
+  <strong>Content:</strong>
+  <%= current_user.content %>
 </p>
 
 <p>
-  <strong>Priority:</strong>
-  <%= @issue.priority %>
+  <strong>Icon:</strong>
+  <%= current_user.icon %>
 </p>
 
-<p>
-  <strong>Repository:</strong>
-  <%= @issue.repository_id %>
-</p>
-
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
+<%= link_to 'Edit', edit_user_registration_path %> |
+<%= link_to 'Back', users_path %>
