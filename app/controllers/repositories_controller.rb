@@ -8,8 +8,9 @@ class RepositoriesController < ApplicationController
 
   def show
     @branches = Branch.all.order(created_at: :desc).page(params[:page])
-    @issues = Issue.all.order(created_at: :desc).page(params[:page])
-    # binding.pry
+    # @issues = Issue.all.order(created_at: :desc).page(params[:page])
+    @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
+    # binding.pry 
   end
 
   def new
@@ -55,6 +56,10 @@ class RepositoriesController < ApplicationController
   end
 
   private
+  # def current_repository
+  #   @current_repository ||= Repository.find_by(id: @repository[:id])
+  # end
+
   def set_repository
     @repository = Repository.find(params[:id])
   end

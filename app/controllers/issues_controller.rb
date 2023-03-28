@@ -3,7 +3,10 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: %i(show edit update destroy)
 
   def index
-    @issues = Issue.all.order(created_at: :desc).page(params[:page])
+    @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
+    # @issue = Issue.find(params[:repository_id])
+    @issues = Issue.all.order(created_at: :desc).page(params[:page]) # issue全件
+    # binding.pry
     # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
     # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
   end
@@ -21,7 +24,8 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    # @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+    @repository = Repository.find(params[:repository_id])
+    @repository_id = @repository.id
     # binding.pry
   end
 
@@ -55,10 +59,10 @@ class IssuesController < ApplicationController
   end
 
   def destroy
+    @repository_id = params[:repository_id] # 明示的に書く必要あり？
     @issue.destroy
-
     respond_to do |format|
-      format.html { redirect_to issues_url, notice: "Issue was successfully destroyed." }
+      format.html { redirect_to issues_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
       format.json { head :no_content }
     end
   end
