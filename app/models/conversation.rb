@@ -2,6 +2,7 @@ class Conversation < ApplicationRecord
   # 会話はUserの概念をsenderとrecipientに分けた形でアソシエーションする。
   belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
   belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
+  # belongs_to :user # この記述は不要！書くとエラーが出る！
   # 一つの会話はメッセージをたくさん含む一対多。
   has_many :messages, dependent: :destroy
 
