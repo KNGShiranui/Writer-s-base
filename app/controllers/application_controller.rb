@@ -23,7 +23,15 @@ class ApplicationController < ActionController::Base
     # current_userがアクセス権限のある人かどうかはensure_correct_userで確認される。
   end
 
-  helper_method :current_repository
+  # def current_branch
+  #   @current_branch ||= Branch.find_by(id: @repository[:id])
+  # end
+
+  # def current_issue
+  #   @current_issue ||= Issue.find_by(id: @repository[:id])
+  # end
+
+  helper_method :current_repository, :current_branch
   # helper_method :current_userを記載しないとapplication_controllerに記載していてもcurrent_userメソッドをローカル変数の
   # ようにuserのshowページで用いることはできない。
   # というのも、helperはビューに適用されるのが前提だが、controllerに記載されているメソッドはそのままではビューで使用するという

@@ -20,12 +20,13 @@
 
     <% if user_signed_in? %>
       <%= link_to "リポジトリ一覧", repositories_path %>
+      <%= link_to 'ユーザー一覧', users_path %>
+      <%= link_to 'プロフィール', user_path(current_user) %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to "新規登録", new_user_registration_path %>
       <%= link_to "ログイン", new_user_session_path %>
     <% end %>
-    <%= link_to 'ユーザー一覧', users_path if user_signed_in? %>
 
     <% if notice %>
       <p class="alert alert-notice"><%= notice %></p>
@@ -38,4 +39,9 @@
   <body>  
     <%= yield %>
   </body>
+
+  <footer style="position: fixed; bottom: 0; width: 100%; background-color: #f5f5f5; text-align: center;">
+      <p>あなたの「書く」が加速する</p>
+      <p>みんなの「書く」が結びつく</p>
+  </footer>
 </html>

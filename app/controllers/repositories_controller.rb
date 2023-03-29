@@ -7,7 +7,7 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    @branches = Branch.all.order(created_at: :desc).page(params[:page])
+    @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
     # @issues = Issue.all.order(created_at: :desc).page(params[:page])
     @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
     # binding.pry 

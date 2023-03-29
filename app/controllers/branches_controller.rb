@@ -5,7 +5,7 @@ class BranchesController < ApplicationController
   def index
     @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
     # これでbranchのindexビューからnew branch作成可能になる
-    @branches = Branch.all.order(created_at: :desc).page(params[:page])
+    @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
   end
 
   def show
