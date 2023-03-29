@@ -1,13 +1,13 @@
-<h2>ユーザー</h2>
+<h2>ユーザー一覧</h2>
+<h3>現在のユーザー:<%= "#{current_user.name}さん" %></h3>
+
 <% @users.each do |user| %>
   <% if user.id != current_user.id %>
-    <li>
-      <div class="item">
-        <%= link_to user.name, user %>
-        <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
-      </div>
-    </li>
-    <li><%= render 'follow_form', user: user %></li> <!-- フォロー機能が実装されていればこの一文も必要 -->
+    <div class="item">
+      <%= link_to "#{user.name}さん", user %>
+      <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+    </div>
+    <%= render 'follow_form', user: user %> <!-- フォロー機能が実装されていればこの一文も必要 -->
     <%# user.nameじゃない方のuserがリンク先を示している。@がないのはeach do内のローカル変数だから %>
   <% end %>
 <% end %>

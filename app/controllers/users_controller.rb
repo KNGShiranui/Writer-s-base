@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    # binding.pry
   end
 
 #   def new
@@ -24,6 +25,8 @@ class UsersController < ApplicationController
 #   end
 
   def show
+    @repositories = current_user.repositories
+    @conversations = current_user
     redirect_to(repositories_path, danger:"権限がありません") unless current_user == @user
     # set_userで定義した@user = User.find(params[:id])のこと
     # ログインしているユーザーが他のユーザーのページを表示しようとした場合、
