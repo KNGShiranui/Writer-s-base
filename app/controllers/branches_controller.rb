@@ -3,9 +3,11 @@ class BranchesController < ApplicationController
   before_action :set_branch, only: %i(show edit update destroy)
 
   def index
+    # binding.pry
     @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
     # これでbranchのindexビューからnew branch作成可能になる
     @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
+    # @branches = current_user.branches.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -50,10 +52,15 @@ class BranchesController < ApplicationController
   end
 
   def destroy
+    @repository_id = params[:repository_id] # 明示的に書く必要あり!
+    # これにより、以下のbranches_path(repository_id: @repository_id)でbranch#indexへrepository_id:
+    # を持っていけるようになる
     @branch.destroy
-
     respond_to do |format|
-      format.html { redirect_to branches_url, notice: "Branch was successfully destroyed." }
+      # binding.pry
+      format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Branch was successfully destroyed." }
+      # 以下のように書くと@Repositoryがnilなのでダメ！注意！
+      # format.html { redirect_to branches_path(repository_id: @repository), notice: "Branch was successfully destroyed." }
       format.json { head :no_content }
     end
   end
