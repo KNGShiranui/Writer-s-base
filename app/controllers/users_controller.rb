@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @repositories = current_user.repositories
-    @conversations = current_user
+    @conversations = Conversation.all
     redirect_to(repositories_path, danger:"権限がありません") unless current_user == @user
     # set_userで定義した@user = User.find(params[:id])のこと
     # ログインしているユーザーが他のユーザーのページを表示しようとした場合、
@@ -59,12 +59,4 @@ class UsersController < ApplicationController
   # def user_params
   #   params.require(:user).permit(:name, :email, :password, :password_confirmation)
   # end
-
-#   def ensure_correct_user
-#     @user = User.find_by(id: params[:id])
-#     unless @user == current_user || current_user.administrator?
-#       flash[:notice] = "権限がありません"
-#       redirect_to tasks_path
-#     end
-#   end
 end

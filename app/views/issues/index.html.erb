@@ -13,24 +13,26 @@
   </thead>
 
   <tbody>
-    <% @issues.each do |issue| %>
-      <tr>
-        <td><%= issue.name %></td>
-        <td><%= issue.description %></td>
-        <td><%= issue.status %></td>
-        <td><%= issue.priority %></td>
-        <td><%= issue.repository_id %></td>
-        <td><%= link_to 'Show', issue_path(issue) %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: @repository) %></td>
-        <td><%= link_to 'Destroy', issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%#= link_to 'Destroy', issue_path(repository_id: issue.repository.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%# 上記だとshowアクションにとぶ・・・ %>
-      </tr>
+    <% if @issues.present? %>
+      <% @issues.each do |issue| %>
+        <tr>
+          <td><%= issue.name %></td>
+          <td><%= issue.description %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td><%= issue.repository_id %></td>
+          <td><%= link_to 'Show', issue_path(issue) %></td>
+          <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: @repository) %></td>
+          <td><%= link_to 'Destroy', issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%#= link_to 'Destroy', issue_path(repository_id: issue.repository.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%# 上記だとshowアクションにとぶ・・・ %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= paginate @issues %>
+<%#= paginate @issues %>
 <%= link_to 'New Issue', new_issue_path(repository_id: @repository) %>
 <%# 上記のパラメータを用いてnew issueを作成するとリポジトリに結びついたissue作成がコントローラでできるようになる %>

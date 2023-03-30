@@ -3,12 +3,16 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: %i(show edit update destroy)
 
   def index
-    @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
-    # @issue = Issue.find(params[:repository_id])
-    @issues = current_repository.issues.order(created_at: :desc).page(params[:page]) # issue全件
-    # binding.pry
-    # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
-    # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
+    if params[:repository_id].present?
+      @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
+      # @issue = Issue.find(params[:repository_id])
+      @issues = current_repository.issues.order(created_at: :desc).page(params[:page]) # issue全件
+      # binding.pry
+      # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
+      # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
+    elsif params[:user_id].present?
+      @issues = current_user.issues.order(created_at: :desc).page(params[:page])
+    end
   end
 
   def show

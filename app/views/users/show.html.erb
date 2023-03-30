@@ -1,8 +1,12 @@
+<p> <strong><%= current_user.name %>のプロフィール:</strong> </p>
 <p> <strong>Name:</strong> <%= current_user.name %> </p>
 <p> <strong>Email:</strong> <%= current_user.email %> </p>
 <p> <strong>Content:</strong> <%= current_user.content %> </p>
 <p> <strong>Icon:</strong> <%= current_user.icon %> </p>
+<%= link_to 'Edit', edit_user_registration_path %> |
+<%= link_to 'Back', users_path %>
 
+<p> <strong><%= current_user.name %>のRepository:</strong> </p>
 <table>
   <thead>
     <tr>
@@ -27,5 +31,14 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_user_registration_path %> |
-<%= link_to 'Back', users_path %>
+<p> <strong><%= current_user.name %>のConversation:</strong> </p>
+<% @conversations.each do |conversation| %>
+  <td>
+    <% if conversation.target_user(current_user).present? %>
+      <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
+    <% end %>
+  </td>
+  <br>
+<% end %>
+
+
