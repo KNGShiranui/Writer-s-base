@@ -1,4 +1,8 @@
-<h1>Issues</h1>
+<% if params[:repository_id].present? %>
+  <h1>Repositoryにぶら下がっているIssues</h1>
+<% else %>
+  <h1>Userにぶら下がっているIssues</h1>
+<% end %>
 
 <table>
   <thead>
