@@ -34,9 +34,11 @@ class IssuesController < ApplicationController
   end
 
   def create
+    # user_id = current_user.id
     @repository = Repository.find(params[:issue][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
-    @issue = Issue.new(issue_params)
+    @issue = Issue.new(issue_params.merge(user_id: current_user.id))
+    # .merge(user_id: current_user.id)が重要だった。他の書き方ない？
     respond_to do |format|
       if @issue.save
         format.html { redirect_to issue_url(@issue), notice: "Issue was successfully created." }
@@ -52,7 +54,8 @@ class IssuesController < ApplicationController
     @repository = Repository.find(params[:issue][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
     respond_to do |format|
-      if @issue.update(issue_params)
+      if @issue.update(issue_params) 
+      # .merge(user_id: current_user.id)は不要？idは明示的には編集しないので不要かも
         format.html { redirect_to issue_path(@issue), notice: "Issue was successfully updated." }
         format.json { render :show, status: :ok, location: @issue }
       else
@@ -78,6 +81,6 @@ class IssuesController < ApplicationController
   end
 
   def issue_params
-    params.require(:issue).permit(:name, :description, :status, :priority, :repository_id)
+    params.require(:issue).permit(:name, :description, :status, :priority, :user_id, :repository_id)
   end
 end

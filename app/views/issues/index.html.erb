@@ -1,4 +1,8 @@
-<h1>Issues</h1>
+<% if params[:repository_id].present? %>
+  <h1>Repositoryにぶら下がっているIssues</h1>
+<% else %>
+  <h1>Userにぶら下がっているIssues</h1>
+<% end %>
 
 <table>
   <thead>
@@ -26,6 +30,16 @@
           <td><%= link_to 'Destroy', issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%#= link_to 'Destroy', issue_path(repository_id: issue.repository.id), method: :delete, data: { confirm: 'Are you sure?' } %>
           <%# 上記だとshowアクションにとぶ・・・ %>
+          <td>
+            <% if current_user.id == issue.user_id %>
+              <% if issue.assignees.present? %>
+                <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                <%# issue.idが必要な理由は、どのidのissueのassign削除するか指定するため %>
+              <% else %>
+                <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     <% end %>

@@ -1,4 +1,5 @@
 class AssigneesController < ApplicationController
+  before_action :set_issue, only: %i(create destroy)
   before_action :set_assignee, only: %i(new create edit update destroy)
 
   def index
@@ -16,26 +17,28 @@ class AssigneesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
-    @issue.assignees.create(user: user)
-    redirect_to @issue
+    @user = User.find(params[:user_id])
+    @issue = Issue.find(params[:issue])
+    @assignee = @issue.assignees.create(user: @user)
+    redirect_to issues_path(user_id: current_user.id)
   end
 
   def destroy
-    user = User.find(params[:user_id])
-    assignee = @issue.assignees.find_by(user: user)
-    assignee.destroy if assignee
-    redirect_to @issue
+    @user = User.find(params[:user_id])
+    @issue = Issue.find(params[:issue])
+    @assignee.destroy if @assignee
+    redirect_to issues_path(user_id: current_user.id)
   end
 
   private
-  def set_assignee
-    @assignee = Assignee.find(params[:id])
+  def set_issue
+    @issue = Issue.find(params[:issue])
   end
 
-  def set_issue
-    @issue = Issue.find(params[:issue_id])
+  def set_assignee
+    @assignee = @issue.assignees.find_by(user_id: params[:user_id])
   end
+
 
   def assignee_params
     params.require(:assignee).permit(:user_id, :issue_id)
