@@ -24,7 +24,7 @@
       <%= link_to "リポジトリ一覧", repositories_path %>
       <%= link_to "参加中のイシュー", issues_path(user_id: current_user.id) %>
       <%= link_to 'フォロー', following_relationships_path %>
-      <%#TODO: followerとfollowをindexアクション内で条件分岐したら行けると思う %>
+      <%# followerとfollowをindexアクション内で条件分岐したらOK %>
       <%= link_to 'フォロワー', followers_relationships_path %>
       <%= link_to "チャット一覧", conversations_path %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
