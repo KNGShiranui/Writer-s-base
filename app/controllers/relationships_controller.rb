@@ -3,6 +3,16 @@ class RelationshipsController < ApplicationController
   before_action :authenticate_user!
   respond_to? :js # 存在するアクションのrespondを全てjsで返す場合はこのような記述でも可能。
 
+  def following
+    @user = current_user
+    @users = @user.following
+  end
+  
+  def followers
+    @user = current_user
+    @followers = @user.followers
+  end
+  
   def create
     # 自身で作ったログイン機能であれば、独自実装してあるはずの
     # logged_in?メソッドを使用して、ログイン時のみフォローできるようにする。

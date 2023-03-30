@@ -12,7 +12,12 @@ Rails.application.routes.draw do
     resources :changes, only: %i[show], module: :documents
   end
   resources :issues
-  resources :relationships, only: %i(create destroy)
+  resources :relationships, only: %i(create destroy) do
+    collection do
+      get :following
+      get :followers 
+    end
+  end
   resources :repositories 
   resources :users, only: %i(index show)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
