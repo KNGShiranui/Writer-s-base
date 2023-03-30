@@ -73,7 +73,7 @@
         <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><% if current_user.id == issue.user_id %>
           <% if issue.assignees.present? %>
-            <%= link_to 'Fire!', assignee_path(issue: issue, user_id: current_user), method: :delete %>
+            <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
           <% else %>
             <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
           <% end %>
