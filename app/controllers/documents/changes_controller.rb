@@ -12,6 +12,7 @@ class Documents::ChangesController < ApplicationController
       @document = Document.find(params[:document_id])
       @version = @document.versions.find(params[:id])
       # binding.pry
+      # 以下のifの条件に合致していないのでこの経路は通っていない
       if params[:before] && params[:after]
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
         html_before = markdown.render(params[:before])

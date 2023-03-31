@@ -18,7 +18,7 @@
           <%= Document.human_attribute_name(key) %>
         </h3>
         <div>
-          <%= raw @version.changeset[key].last %>
+          <%= raw @version.changeset(key).last %>
         </div>
       </div>
     <% end %>

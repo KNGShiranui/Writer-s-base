@@ -4,6 +4,7 @@
       <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document) %>
     </div>
     <h1 class="font-weight-bold mb-4">差分を表示する</h1>
+    <%# binding.pry %>
     <% @version.changeset.keys.select { |key| %w[name content] }.each do |key| %>
       <div class="mb-4">
         <h3 class="font-weight-bold">
