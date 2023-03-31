@@ -3,7 +3,8 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: %i(show edit update destroy)
 
   def index
-    @documents = Document.all.includes(:user).order(created_at: :desc).page(params[:page])
+    # @documents = Document.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @documents = Document.all.order(created_at: :desc).page(params[:page])
   end
 
   def show
