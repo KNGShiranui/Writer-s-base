@@ -22,6 +22,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Repository.statuses.keys, {prompt: "選択してください"}, class: "status_select" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, Repository.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
+  </div>
+
+  <div class="field">
     <%= form.label :user_id %>
     <%= form.text_field :user_id %>
   </div>

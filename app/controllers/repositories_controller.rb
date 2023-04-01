@@ -7,10 +7,16 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
-    # @issues = Issue.all.order(created_at: :desc).page(params[:page])
-    @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
-    # binding.pry 
+    if @repository.status_closed? && @repository.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+      @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
+      # @issues = Issue.all.order(created_at: :desc).page(params[:page])
+      @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
+      # binding.pry
+    end
   end
 
   def new
@@ -18,6 +24,12 @@ class RepositoriesController < ApplicationController
   end
 
   def edit
+    if @repository.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+    end
   end
 
   def create
@@ -47,11 +59,17 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    @repository.destroy
+    if @repository.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+      @repository.destroy
 
-    respond_to do |format|
-      format.html { redirect_to repositories_url, notice: "Repository was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to repositories_url, notice: "Repository was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -65,6 +83,6 @@ class RepositoriesController < ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:name, :description, :user_id)
+    params.require(:repository).permit(:name, :description, :status, :priority, :user_id)
   end
 end
