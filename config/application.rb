@@ -11,6 +11,12 @@ module WritersBase
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.i18n.default_locale = :ja
+    # TODO:次の行の挿入で解決。ActiveSupport::TimeWithZone, ActiveSupport::TimeZoneが必要だったらしい。
+    config.active_record.yaml_column_permitted_classes = [Symbol, Date, Hash, Array, ActiveSupport::HashWithIndifferentAccess, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time]
+    # TODO:以下2行はいらないみたい
+    # config.active_record.use_yaml_unsafe_load
+    # config.active_support.use_yaml_unsafe_load
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
