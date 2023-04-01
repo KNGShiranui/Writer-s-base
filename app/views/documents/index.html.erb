@@ -15,7 +15,11 @@
     <% @documents.each do |document| %>
       <tr>
         <td><%= document.name %></td>
-        <td><%= simple_format(document.content) %></td>
+        <td><%= truncate_html(simple_format(document.content), length: 100) %>
+          <% if document.content.size >= 100 %>
+            <%= link_to document do %>続きを読む<% end %>
+          <% end %>
+        </td>
         <td><%= document.user_id %></td>
         <td><%= document.branch_id %></td>
         <td><%= link_to 'Show', document %></td>
@@ -29,3 +33,6 @@
 <br>
 <%= paginate @documents %>
 <%= link_to 'New Document', new_document_path %>
+
+
+
