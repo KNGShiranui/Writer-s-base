@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status, Issue.statuses.keys, {prompt: "選択してください"}, class: "status_select" %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.text_field :priority %>
+    <%= form.select :priority, Issue.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
   </div>
 
   <div class="field">
