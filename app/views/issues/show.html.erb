@@ -23,5 +23,5 @@
   <%= @issue.repository_id %>
 </p>
 
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Edit', edit_issue_path(@issue, repository_id: @repository) %> |
 <%= link_to 'Back', issues_path(repository_id: @issue.repository.id) %>
