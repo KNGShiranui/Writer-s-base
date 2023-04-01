@@ -16,8 +16,16 @@ class IssuesController < ApplicationController
   end
 
   def show
+    if @issue.status_closed? && @issue.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+    # TODO: elsif @issue.status_semi_closed? && ....
+      # semi_closed実装後、リポジトリに参加しているユーザ内でのみ共有可能にする。
+      @repository = @issue.repository # これでissueとそれに結び付いたrepositoryを呼び出す
+    end
     # @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
-    @repository = @issue.repository # これでissueとそれに結び付いたrepositoryを呼び出す
     # それにより
     # binding.pry
   end
@@ -28,13 +36,18 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @repository = Repository.find(params[:repository_id])
-    @repository_id = @repository.id
+    if @issue.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+      @repository = Repository.find(params[:repository_id])
+      @repository_id = @repository.id
+    end
     # binding.pry
   end
 
   def create
-    # user_id = current_user.id
     @repository = Repository.find(params[:issue][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
     @issue = Issue.new(issue_params.merge(user_id: current_user.id))
@@ -66,11 +79,17 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    @repository_id = params[:repository_id] # 明示的に書く必要あり？
-    @issue.destroy
-    respond_to do |format|
-      format.html { redirect_to issues_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
-      format.json { head :no_content }
+    if @issue.user_id != current_user.id
+      respond_to do |format|
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+      end
+    else
+      @repository_id = params[:repository_id] # 明示的に書く必要あり？
+      @issue.destroy
+      respond_to do |format|
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 
