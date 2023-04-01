@@ -5,13 +5,15 @@
     </div>
     <h1 class="font-weight-bold mb-4">差分を表示する</h1>
     <%# binding.pry %>
-    <% @version.changeset.keys.select { |key| %w[name content] }.each do |key| %>
+    <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
+    <%# 参考：配列オブジェクト.select { |変数| ブロック処理 } %>
+    <%# 参考：ary = ["a", "b", "c"]においてary.include?("a") は順にtrue, false, falseを返す%>
       <div class="mb-4">
         <h3 class="font-weight-bold">
           <%= Document.human_attribute_name(key) %>
         </h3>
         <div>
-          <%= raw Markdiff::Differ.new.render(*@version.changeset[:content]) %>
+          <%= raw Markdiff::Differ.new.render(*@version.changeset[key]) %>
         </div>
       </div>
     <% end %>

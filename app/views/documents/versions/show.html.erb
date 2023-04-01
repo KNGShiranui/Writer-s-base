@@ -10,7 +10,7 @@
       <% end %>
     </div>
     <h1 class="font-weight-bold mb-4">
-      このバージョンを表示する
+      バージョン○○
     </h1>
     <% @version.changeset.keys.select { |key| %i[name content].include?(key) }.each do |key| %>
       <div class="mb-4">
@@ -18,7 +18,7 @@
           <%= Document.human_attribute_name(key) %>
         </h3>
         <div>
-          <%= raw @version.changeset(key).last %>
+          <%= raw @version.changeset[:content].last %>
         </div>
       </div>
     <% end %>
