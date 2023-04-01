@@ -62,23 +62,38 @@
 
   <tbody>
     <% @issues.each do |issue| %>
-      <tr>
-        <td><%= issue.name %></td>
-        <td><%= issue.description %></td>
-        <td><%= issue.status %></td>
-        <td><%= issue.priority %></td>
-        <td><%= issue.repository_id %></td>
-        <td><%= link_to 'Show', issue_path(issue) %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
-        <td><% if current_user.id == issue.user_id %>
-          <% if issue.assignees.present? %>
-            <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
-          <% else %>
-            <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
-          <% end %>
-        <% end %></td>
-      </tr>
+      <% if current_user.present? %>
+        <% if !issue.status_closed? || issue.user_id == current_user.id %>
+          <%# unless issue.status_closed? && issue.user_id != current_user.id %>
+          <tr>
+            <td><%= issue.name %></td>
+            <td><%= issue.description %></td>
+            <td><%= issue.status %></td>
+            <td><%= issue.priority %></td>
+            <td><%= issue.repository_id %></td>
+            <td><%= link_to 'Show', issue_path(issue) %></td>
+            <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
+            <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
+            <td>
+              <% if current_user.id == issue.user_id %>
+                <% if issue.assignees.present? %>
+                  <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                <% else %>
+                  <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% elsif current_user.present? == false %>
+        <tr>
+          <td><%= issue.name %></td>
+          <td><%= issue.description %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td><%= issue.repository_id %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -14,22 +14,37 @@
 
   <tbody>
     <% @repositories.each do |repository| %>
-      <tr>
-        <td><%= repository.name %></td>
-        <td><%= repository.description %></td>
-        <td><%= repository.status %></td>
-        <td><%= repository.priority %></td>
-        <td><%= repository.user_id %></td>
-        <td><%= link_to 'Show', repository %></td>
-
-        <% if current_user.present? %>
-          <% if repository.user_id == current_user.id %>
-            <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
-            <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        <% else %>
-        <% end %>        
-      </tr>
+      <% if current_user.present? == true %>
+        <% if !repository.status_closed? || repository.user_id == current_user.id %>
+          <%# unless repository.status_closed? && repository.user_id != current_user.id %>
+          <tr>
+            <td><%= repository.name %></td>
+            <td><%= repository.description %></td>
+            <td><%= repository.status %></td>
+            <td><%= repository.priority %></td>
+            <td><%= repository.user_id %></td>
+            <td><%= link_to 'Show', repository %></td>
+            <% if current_user.present? %>
+              <% if repository.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
+                <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            <% else %>
+            <% end %>        
+          </tr>
+        <% end %>
+      <% elsif current_user.present? == false %>
+        <% if !repository.status_closed? %>
+          <tr>
+            <td><%= repository.name %></td>
+            <td><%= repository.description %></td>
+            <td><%= repository.status %></td>
+            <td><%= repository.priority %></td>
+            <td><%= repository.user_id %></td>
+            <td><%= link_to 'Show', repository %></td>
+          </tr>
+        <% end %>          
+      <% end %>
     <% end %>
   </tbody>
 </table>
