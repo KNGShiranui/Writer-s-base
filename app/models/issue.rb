@@ -8,6 +8,6 @@ class Issue < ApplicationRecord
   validates :status, presence: true # これは公開か非公開かを振り分けてる？
   validates :priority, presence: true
 
-  enum status: { open: 0, semi_open: 1, closed: 2 }, _prefix: true
-  enum status: { very_low: 0, low: 1, medium: 2, high: 3, very_high: 4, immediately: 5 }, _prefix: true
+  enum status: %i[open semi_open closed], _prefix: true
+  enum priority: %i[very_low low medium high very_high immediately], _prefix: true
 end
