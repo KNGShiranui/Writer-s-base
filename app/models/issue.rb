@@ -5,9 +5,9 @@ class Issue < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :status, presence: true # これは公開か非公開かを振り分けてる？
+  validates :status, presence: true # これは公開か非公開かを振り分けてる
   validates :priority, presence: true
 
-  enum status: %i[open semi_open closed], _prefix: true
+  enum status: %i[open semi_closed closed], _prefix: true
   enum priority: %i[very_low low medium high very_high immediately], _prefix: true
 end
