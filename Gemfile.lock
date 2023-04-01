@@ -247,6 +247,7 @@ GEM
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
+    truncate_html (0.9.3)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -308,6 +309,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
+  truncate_html
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
