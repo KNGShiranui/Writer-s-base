@@ -3,7 +3,10 @@ class RepositoriesController < ApplicationController
   before_action :set_repository, only: %i(show edit update destroy)
 
   def index
-    @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
+    # @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
+    #このよくある１文を下記2行に変換
+    @q = Repository.ransack(params[:q])
+    @repositories = @q.result(distinct: true).includes(:user).page(params[:page]).order("created_at desc")
   end
 
   def show
