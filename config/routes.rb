@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   resources :repositories 
   resources :users, only: %i(index show)
+  resources :favorite_repositories, only: %i(index create destroy)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

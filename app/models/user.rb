@@ -23,6 +23,10 @@ class User < ApplicationRecord
   # ....
   has_many :conversations, dependent: :destroy
 
+  ## 以下でリポジトリのお気に入りを定義
+  has_many :favorite_repositories
+  has_many :favorited_repositories, through: :favorite_repositories, source: :repository
+
   validates :name, presence: true, length: { maximum: 30}
   validates :email, presence: true, length: { maximum: 255}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: { minimum: 6 }
