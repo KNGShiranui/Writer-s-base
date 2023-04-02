@@ -46,4 +46,13 @@ class User < ApplicationRecord
   end
   # has_secure_password
   #上の記述はいらないのでコメントアウト。deviseでencrypt_passwordを使用しているので。
+    # ransack使用のためのattributes設定
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name content]
+  end
+
+  # ransack使用のためのassociations設定
+  def self.ransackable_associations(auth_object = nil)
+    %w[user]
+  end
 end
