@@ -1,0 +1,12 @@
+<h1>お気に入りリポジトリ一覧</h1>
+
+<% @favorite_repositories.each do |favorite_repository| %>
+  <div>
+    <%= link_to favorite_repository.name, repository_path(favorite_repository) %>
+    <%= link_to 'お気に入り解除', favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to 'リポジトリ一覧', repositories_path %>

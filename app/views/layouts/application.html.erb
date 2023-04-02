@@ -21,12 +21,13 @@
     <% if user_signed_in? %>
       <%= link_to 'ユーザー一覧', users_path %>
       <%= link_to 'プロフィール', user_path(current_user) %>
-      <%= link_to "リポジトリ一覧", repositories_path %>
-      <%= link_to "参加中のイシュー", issues_path(user_id: current_user.id) %>
       <%= link_to 'フォロー', following_relationships_path %>
       <%# followerとfollowをindexアクション内で条件分岐したらOK %>
       <%= link_to 'フォロワー', followers_relationships_path %>
       <%= link_to "チャット一覧", conversations_path %>
+      <%= link_to "リポジトリ一覧", repositories_path %>
+      <%= link_to 'お気に入りリポジトリ', favorite_repositories_path %>
+      <%= link_to "参加中のイシュー", issues_path(user_id: current_user.id) %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to "新規登録", new_user_registration_path %>

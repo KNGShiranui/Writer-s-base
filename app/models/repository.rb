@@ -12,6 +12,10 @@ class Repository < ApplicationRecord
   # has_many :repository_holder_teams, dependent: :destroy # 機能拡張時に使うかも
   # has_many :teams, through: :repository_holder_teams # 機能拡張時に使うかも
 
+  ## 以下でリポジトリのお気に入りを定義
+  has_many :favorite_repositories
+  has_many :favorited_by_users, through: :favorite_repositories, source: :user
+
   validates :name, presence: true, uniqueness: { scope: :user_id }
   # validates :access_level, presence: true, inclusion: { in: %w[public private] } # 機能拡張時に使うかも
   enum status: %i[open semi_closed closed], _prefix: true

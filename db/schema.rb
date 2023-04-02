@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_01_141740) do
+ActiveRecord::Schema.define(version: 2023_04_01_173532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 2023_04_01_141740) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "favorite_repositories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "repository_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["repository_id"], name: "index_favorite_repositories_on_repository_id"
+    t.index ["user_id"], name: "index_favorite_repositories_on_user_id"
+  end
+
   create_table "issues", force: :cascade do |t|
     t.string "name", limit: 100, default: "", null: false
     t.string "description", limit: 100
@@ -182,6 +191,8 @@ ActiveRecord::Schema.define(version: 2023_04_01_141740) do
   add_foreign_key "commits", "users"
   add_foreign_key "documents", "branches"
   add_foreign_key "documents", "users"
+  add_foreign_key "favorite_repositories", "repositories"
+  add_foreign_key "favorite_repositories", "users"
   add_foreign_key "issues", "repositories"
   add_foreign_key "issues", "users"
   add_foreign_key "messages", "conversations"
