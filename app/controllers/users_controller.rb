@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   before_action :current_user
   
   def index
-    @users = User.all
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).order("created_at desc")
     # binding.pry
   end
 

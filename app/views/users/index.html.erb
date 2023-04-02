@@ -1,5 +1,6 @@
 <h2>ユーザー一覧</h2>
 <h3>現在のユーザー:<%= "#{current_user.name}さん" %></h3>
+<%= render 'search', q: @q, url: users_path %>
 
 <% @users.each do |user| %>
   <% if user.id != current_user.id %>
