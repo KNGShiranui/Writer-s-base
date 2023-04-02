@@ -20,4 +20,14 @@ class Repository < ApplicationRecord
   # validates :access_level, presence: true, inclusion: { in: %w[public private] } # 機能拡張時に使うかも
   enum status: %i[open semi_closed closed], _prefix: true
   enum priority: %i[very_low low medium high very_high immediately], _prefix: true
+
+  # ransack使用のためのattributes設定
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name description]
+  end
+
+  # ransack使用のためのassociations設定
+  def self.ransackable_associations(auth_object = nil)
+    %w[repository]
+  end
 end

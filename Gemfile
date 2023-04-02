@@ -24,8 +24,9 @@ gem 'markdiff'
 gem 'paper_trail'
 # gem 'turbolinks', '~> 5'
 # gem 'uglifier', '>= 1.3.0'
-gem 'truncate_html'
 # gem 'nokogiri'
+gem 'truncate_html'
+gem 'ransack'
 
 
 group :development, :test do
