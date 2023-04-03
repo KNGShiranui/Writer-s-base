@@ -3,15 +3,20 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: %i(show edit update destroy)
 
   def index
+    @repository = Repository.find(params[:repository_id])
+    @branch = @repository.branches.find(params[:branch_id])
     # @documents = Document.all.includes(:user).order(created_at: :desc).page(params[:page])
-    @documents = Document.all.order(created_at: :desc).page(params[:page])
+    @documents = @branch.documents.order(created_at: :desc).page(params[:page])
   end
 
   def show
   end
 
   def new
+    @repository = Repository.find(params[:repository_id])
+    @branch = Branch.find(params[:branch_id])
     @document = Document.new
+    # binding.pry
   end
 
   def edit
@@ -58,6 +63,6 @@ class DocumentsController < ApplicationController
   end
 
   def document_params
-    params.require(:document).permit(:name, :content, :user_id, :branch_id)
+    params.require(:document).permit(:name, :content, :user_id, :branch_id, :repository_id)
   end
 end
