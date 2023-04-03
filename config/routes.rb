@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get :followers 
     end
   end
-  resources :repositories 
+  resources :repositories
   resources :users, only: %i(index show)
   resources :favorite_repositories, only: %i(index create destroy)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
