@@ -40,6 +40,7 @@ class RepositoriesController < ApplicationController
     @repository.user = current_user
     respond_to do |format|
       if @repository.save
+        @branch = @repository.branches.create(name: 'main', status: 0)
         format.html { redirect_to repository_url(@repository), notice: "Repository was successfully created." }
         format.json { render :show, status: :created, location: @repository }
       else
