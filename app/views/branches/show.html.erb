@@ -8,5 +8,6 @@
   <%= @branch.repository_id %>
 </p>
 
-<%= link_to 'Edit', edit_branch_path(@branch) %> |
-<%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %>
+<%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id) %> |
+<%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %> |
+<%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id) %> |

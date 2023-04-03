@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_01_173532) do
+ActiveRecord::Schema.define(version: 2023_04_02_180302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2023_04_01_173532) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
     t.bigint "conversation_id"
     t.bigint "user_id"
     t.boolean "read", default: false
@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(version: 2023_04_01_173532) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", limit: 100, default: "", null: false
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "name", limit: 100, null: false
+    t.string "email", limit: 255, null: false
+    t.string "encrypted_password", limit: 255, null: false
     t.text "content"
     t.text "icon"
     t.string "reset_password_token"

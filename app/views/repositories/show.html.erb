@@ -33,9 +33,9 @@
       <tr>
         <td><%= branch.name %></td>
         <td><%= branch.repository_id %></td>
-        <td><%= link_to 'Show', branch_path(branch) %></td>
+        <td><%= link_to 'Show', branch_path(branch, repository_id: branch.repository.id) %></td>
         <td><%= link_to 'Edit', edit_branch_path(branch, repository_id: branch.repository.id) %></td>
-        <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

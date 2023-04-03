@@ -52,6 +52,7 @@ class BranchesController < ApplicationController
   end
 
   def destroy
+    # TODO:owner以外削除できなくすること！
     @repository_id = params[:repository_id] # 明示的に書く必要あり!
     # これにより、以下のbranches_path(repository_id: @repository_id)でbranch#indexへrepository_id:
     # を持っていけるようになる
