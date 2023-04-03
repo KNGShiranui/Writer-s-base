@@ -22,9 +22,9 @@
         </td>
         <td><%= document.user_id %></td>
         <td><%= document.branch_id %></td>
-        <td><%= link_to 'Show', document %></td>
+        <td><%= link_to 'Show', document_path(document, branch_id: @branch, repository_id: @repository) %></td>
         <td><%= link_to 'Edit', edit_document_path(document, branch_id: @branch, repository_id: @repository) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', document_path(document, branch_id: @branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

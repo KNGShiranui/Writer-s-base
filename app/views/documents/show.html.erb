@@ -1,5 +1,5 @@
-<%= link_to 'Edit', edit_document_path(@document), class: 'btn btn-outline-dark' %>
-<%= link_to 'Back', documents_path %>
+<%= link_to 'Edit', edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id] ), class: 'btn btn-outline-dark' %>
+<%= link_to 'Back', documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id] ) %>
 
 <p> <strong>User:</strong> <%= @document.user_id %> </p>
 <p> <strong>Branch:</strong> <%= @document.branch_id %> </p>
