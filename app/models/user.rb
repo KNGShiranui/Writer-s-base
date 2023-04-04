@@ -29,7 +29,9 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 30}
   validates :email, presence: true, length: { maximum: 255}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-  validates :password, length: { minimum: 6 }
+  # validates :password, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, confirmation: true, on: :create
+  validates :password, length: { minimum: 6 }, confirmation: true, allow_blank: true, on: :update
 
   #指定のユーザをフォローする
   def follow!(other_user)

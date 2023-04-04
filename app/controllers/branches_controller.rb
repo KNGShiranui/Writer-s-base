@@ -12,6 +12,11 @@ class BranchesController < ApplicationController
 
   def show
     @repository = @branch.repository
+    if @branch.present?
+      @branch = @branch
+    elsif @new_branch.present?
+      @branch = @new_branch
+    end
   end
 
   def new
@@ -36,6 +41,32 @@ class BranchesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  ## 基本的に以下の部分は結構苦労した
+  def create_from_existing
+    @repository = Repository.find(params[:repository_id])  # 明示的に書く必要あり
+    @repository_id = @repository.id # 明示的に書く必要あり
+    @existing_branch = Branch.find(params[:id])
+    @new_branch = Branch.new(
+      name: "#{@existing_branch.name}のbranch",
+      repository_id: @repository.id,
+      status: @existing_branch.status + 1
+    )
+    if @new_branch.save
+      ## 以下でbranchにぶら下がっているdocumentの複製
+      @existing_branch.documents.each do |document|
+        new_document = document.dup
+        new_document.branch = @new_branch
+        new_document.save
+      end
+      # 保存成功
+      redirect_to branch_path(@new_branch, branch: @new_branch), notice: 'Branch was successfully created.'
+    else
+      # 保存失敗
+      flash[:alert] = "Error: Failed to create a new branch."
+      render :show
     end
   end
 

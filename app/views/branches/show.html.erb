@@ -1,13 +1,30 @@
-<p>
-  <strong>Name:</strong>
-  <%= @branch.name %>
-</p>
+<% if @branch.present? %>
+  <p>
+    <strong>Name:</strong>
+    <%= @branch.name %>
+  </p>
 
-<p>
-  <strong>Repository:</strong>
-  <%= @branch.repository_id %>
-</p>
+  <p>
+    <strong>Repository:</strong>
+    <%= @branch.repository_id %>
+  </p>
 
-<%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id) %> |
-<%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %> |
-<%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id) %> |
+  <p>
+    <%= button_to 'branchを切る', create_from_existing_branch_path(@branch, repository_id: @repository.id), method: :post %>
+  </p>
+
+  <%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id) %> |
+  <%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %> |
+  <%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id) %> |
+
+<% elsif @new_branch.present? %>
+  <p>
+    <strong>Name:</strong>
+    <%= @new_branch.name %>
+  </p>
+
+  <p>
+    <strong>Repository:</strong>
+    <%= @new_branch.repository_id %>
+  </p>
+<% end %>
