@@ -1,6 +1,9 @@
 class Document < ApplicationRecord
   belongs_to :user
   belongs_to :branch
+  has_one :commit
+  accepts_nested_attributes_for :commit, allow_destroy: true, reject_if: :all_blank
+  # , update_only: true  # commitかcommitsかどっち？
 
   # TODO:has_many :versionsのような記載はいらない？
   has_paper_trail

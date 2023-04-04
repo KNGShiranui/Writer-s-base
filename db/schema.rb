@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_03_132534) do
+ActiveRecord::Schema.define(version: 2023_04_04_042208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,9 @@ ActiveRecord::Schema.define(version: 2023_04_03_132534) do
     t.bigint "branch_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "document_id"
     t.index ["branch_id"], name: "index_commits_on_branch_id"
+    t.index ["document_id"], name: "index_commits_on_document_id"
     t.index ["user_id"], name: "index_commits_on_user_id"
   end
 
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(version: 2023_04_03_132534) do
   add_foreign_key "assignees", "users"
   add_foreign_key "branches", "repositories"
   add_foreign_key "commits", "branches"
+  add_foreign_key "commits", "documents"
   add_foreign_key "commits", "users"
   add_foreign_key "documents", "branches"
   add_foreign_key "documents", "users"
