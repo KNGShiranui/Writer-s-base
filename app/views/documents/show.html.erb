@@ -4,6 +4,15 @@
 <p> <strong>User:</strong> <%= @document.user_id %> </p>
 <p> <strong>Branch:</strong> <%= @document.branch_id %> </p>
 
+<p> <strong>Commit message:</strong>
+  <% if @document.commit.present? && @document.commit.message.present? %>
+    <%= @document.commit.message %>
+  <% else %>
+    No commit message provided.
+  <% end %>
+</p>
+
+
 <div class="row justify-content-md-center">
   <div class="col-8 p-4">
     <div class="d-flex justify-content-between mb-3">
