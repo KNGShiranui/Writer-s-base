@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'repositories#index'
   devise_for :users
   resources :assignees
-  resources :branches
+  resources :branches do
+    post 'create_from_existing', on: :member
+  end
   resources :commits
   resources :conversations do
     resources :messages
