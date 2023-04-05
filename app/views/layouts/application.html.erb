@@ -19,6 +19,9 @@
     <% end %>
 
     <% if user_signed_in? %>
+      <% if current_user&.admin? %>
+        <%= link_to '管理者画面', rails_admin_path %>
+      <% end %>
       <%= link_to 'ユーザー一覧', users_path %>
       <%= link_to 'プロフィール', user_path(current_user) %>
       <%= link_to 'フォロー', following_relationships_path %>
@@ -32,6 +35,8 @@
     <% else %>
       <%= link_to "新規登録", new_user_registration_path %>
       <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to 'ゲスト管理者ログイン', guest_admin_sign_in_path %>
+      <%= link_to 'ゲストログイン', guest_sign_in_path %>
     <% end %>
 
     <% if notice %>
