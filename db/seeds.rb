@@ -16,8 +16,8 @@
 
 # <administratorデータ>
 User.create!(
-  name: "KNG1", 
-  email: 'KNG1@example.com', 
+  name: "KNG", 
+  email: 'KNG@example.com', 
   password: '11101252', 
   password_confirmation: '11101252', 
   admin: true)
