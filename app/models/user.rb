@@ -58,4 +58,23 @@ class User < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     %w[user] # テーブル名
   end
+
+  ## ゲストユーザーに関するメソッド
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = 'Guest User' # ここで名前を設定
+      # 必要に応じて他の属性を設定
+    end
+  end
+
+  ## ゲスト管理者に関するメソッド
+  def self.guest_admin
+    find_or_create_by!(email: 'guest_admin@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = 'Guest Admin' # ここで名前を設定
+      user.admin = true
+      # 必要に応じて他の属性を設定
+    end
+  end
 end

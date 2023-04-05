@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   root 'repositories#index'
-  devise_for :users
+  ## deviseを使う場合のゲストログイン実装には以下の記載が必要
+  devise_for :users, controllers: {
+    sessions: 'sessions'
+  }
+  ## deviseを使う場合は以下のようにブロックでゲストログインルーティングの記載をする必要あり
+  devise_scope :user do
+    get 'guest_sign_in', to: 'sessions#guest_sign_in'
+    get 'guest_admin_sign_in', to: 'sessions#guest_admin_sign_in'
+  end
+
   resources :assignees
   resources :branches do
     post 'create_from_existing', on: :member
