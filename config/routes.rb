@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'repositories#index'
+  root 'top#index'
   ## deviseを使う場合のゲストログイン実装には以下の記載が必要
   devise_for :users, controllers: {
     sessions: 'sessions'

@@ -1,58 +1,127 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WritersBase</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%# 以下のdescriptionとauthorはSEO対策で使われる %>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Writer's Base</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'dropdown', 'data-turbolinks-track': 'reload' %>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3W5speXa1NTwwcZeBk5l/5W6Yg/Slf" crossorigin="anonymous">
+    <style>
+      body {
+        background-image: url(<%= asset_url 'home-bg.jpg' %>);
+        /* 背景画像の表示方法を指定する場合は、background-size, background-positionなどのプロパティを追加することができます */
+        background-size: cover; /* 画面いっぱいに表示 */
+        background-position: center center; /* 画像を中央に表示 */
+        /* その他のスタイルを追加 */
+        min-height: 100vh; /* 追加 */
+      }
+    </style>
   </head>
 
-  <header>
-    <% if current_user&.admin? %>
-    <%# if current_user.try!admin?は上記と意味は同じ。 %>
-      <h1>WritersBase_admin</h1>
-    <% else %>
-      <h1>WritersBase</h1>
-    <% end %>
+  <body>
+    <header>
+      <div class="nav-container">
+        <div class="nav-left">
+          <nav class="nav-item">
+            <div class="dropdown">
+              <button class="dropbtn">メニュー</button>
+              <div class="dropdown-content">
+                <% if current_user&.admin? %>
+                <%# if current_user.try!admin?は上記と意味は同じ。 %>
+                  <h1><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
+                <% else %>
+                  <h1>  <%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
+                <% end %>
 
-    <% if user_signed_in? %>
-      <% if current_user&.admin? %>
-        <%= link_to '管理者画面', rails_admin_path %>
-      <% end %>
-      <%= link_to 'ユーザー一覧', users_path %>
-      <%= link_to 'プロフィール', user_path(current_user) %>
-      <%= link_to 'フォロー', following_relationships_path %>
-      <%# followerとfollowをindexアクション内で条件分岐したらOK %>
-      <%= link_to 'フォロワー', followers_relationships_path %>
-      <%= link_to "チャット一覧", conversations_path %>
-      <%= link_to "リポジトリ一覧", repositories_path %>
-      <%= link_to 'お気に入りリポジトリ', favorite_repositories_path %>
-      <%= link_to "参加中のイシュー", issues_path(user_id: current_user.id) %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-      <%= link_to 'ゲスト管理者ログイン', guest_admin_sign_in_path %>
-      <%= link_to 'ゲストログイン', guest_sign_in_path %>
-    <% end %>
+                <% if user_signed_in? %>
+                  <% if current_user&.admin? %>
+                    <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
+                  <% end %>
+                    <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
+                    <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user) %>
+                    <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
+                    <%# followerとfollowをindexアクション内で条件分岐したらOK %>
+                    <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
+                    <%= link_to raw('<i class="material-icons">chat</i> チャット'), conversations_path %>
+                    <%= link_to raw('<i class="material-icons">folder</i> リポジトリ一覧'), repositories_path %>
+                    <%= link_to raw('<i class="material-icons">favorite</i> お気に入りリポジトリ'), favorite_repositories_path %>
+                    <%= link_to raw('<i class="material-icons">error</i> イシュー'), issues_path(user_id: current_user.id) %>
+                    <%= link_to raw('<i class="material-icons">logout</i> ログアウト'), destroy_user_session_path, method: :delete %>
+                <% else %>
+                    <%= link_to raw('<i class="material-icons">person_add</i> 新規登録'), new_user_registration_path %>
+                    <%= link_to raw('<i class="material-icons">login</i> ログイン'), new_user_session_path %>
+                    <%= link_to raw('<i class="material-icons">person_outline</i> ゲスト管理者ログイン'), guest_admin_sign_in_path %>
+                    <%= link_to raw('<i class="material-icons">person_outline</i> ゲストログイン'), guest_sign_in_path %>
+                <% end %>
+              </div>
+            </div>    
+          </nav>
+        </div>
 
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
-  </header>
-  
-  <body>  
-    <%= yield %>
+        <div class="nav-right">
+          <% if notice %>
+            <p class="alert alert-notice"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert alert-error"><%= alert %></p>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    
+    <div>
+      <%= yield %>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="footer-icons">
+              <!--tweetボタン-->
+              <a href="#" target="_blank" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL) + '&text=' + encodeURIComponent(document.title)); return false;" style="background-color: transparent;">
+                <i class="fab fa-twitter fa-2x twitter-icon"></i>
+              </a>
+              <!--facebookボタン-->
+              <a href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
+                <i class="fab fa-facebook-f fa-2x facebook-icon"></i>
+              </a>
+              <!--LINEボタン-->
+              <a href="#" target="_blank" onclick="window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
+                <%= image_tag 'LINE_Brand_icon.png', alt: 'LINE', class: 'line-icon', width: 24, height: 24 %>
+              </a>
+              <!--GitHubボタン-->
+              <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
+                <%= image_tag 'github-mark.png', alt: 'GitHub', class: 'github-icon', width: 24, height: 24 %>
+              </a>
+              <span>←共同開発者募集中</span> 
+            </div>
+            <div class="footer-text">
+              あなたの「書く」が加速する&nbsp;&nbsp;&nbsp; みんなの「書く」が結びつく<br>
+              <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">
+                Copyright &copy; This Website 2023
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
   </body>
-
-  <footer style="position: fixed; bottom: 0; width: 100%; background-color: #f5f5f5; text-align: center;">
-      <p>あなたの「書く」が加速する</p>
-      <p>みんなの「書く」が結びつく</p>
-  </footer>
 </html>
