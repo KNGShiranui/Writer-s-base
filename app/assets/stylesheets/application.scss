@@ -25,3 +25,216 @@
   * Copyright 2011-2022 Twitter, Inc.
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
+
+/* 省略: ファイルの先頭部分のコメントは変更していません */
+
+/* body */
+body {
+  margin: 0;
+}
+
+/* header */
+header {
+  margin: 0;
+  left: 0; /* マージンをなくすために追加 */
+  right: 0; /* マージンをなくすために追加 */
+  background-color: rgba(255, 255, 255, 0.3);
+  position: relative;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+nav.nav-item {
+  list-style: none;
+  margin-right: 1rem;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #333;
+  margin-right: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.nav-item a:hover {
+  color: #A0A0A0;
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+.nav-title {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+/* alerts */
+.alert {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.alert-notice {
+  background-color: #e6e6e6;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+/* footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* マージンレフトをなくすために追加 */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem 0;
+  color: #333;
+  text-align: center;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.footer-text {
+  font-size: smaller;
+  text-align: center;
+  color: #333;
+  font-style: italic;
+  font-variant: small-caps;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-icons a {
+  color: #333;
+  background-color: transparent;
+  transition: color 0.2s;
+}
+
+.footer-icons a:hover {
+  color: transparent;
+  background-color:  transparent;
+  text-decoration: none;
+}
+
+a.footer-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.footer-link:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* SNS icons */
+.twitter-icon {
+  color: #1DA1F2;
+}
+
+.twitter-icon:hover {
+  filter: brightness(1.5);
+}
+
+.facebook-icon {
+  color: #1877F2;
+}
+
+.facebook-icon:hover {
+  filter: brightness(2.0);
+}
+
+.line-icon {
+  color: #00C300;
+  background-color: transparent;
+  transition: filter 0.2s;
+}
+
+.line-icon:hover {
+  color: #33e833;
+  filter: brightness(1.5);
+}
+
+/* GitHub icons */
+.github-icon {
+  color: transparent;
+  background-color: transparent;
+}
+
+.github-icon:hover {
+  color: #6cc644; /* GitHubの緑色 */
+  background-color: transparent;
+  filter: brightness(5.0);
+}
+
+
+
+
+/* プルダウン設定 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
