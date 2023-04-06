@@ -30,13 +30,15 @@
             Menu
             <i class="fas fa-bars"></i>
           </button>
-      
+
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
               <% if user_signed_in? %>
                 <li class="nav-item">
                   <% if current_user&.admin? %>
-                    <%= link_to '管理者画面', rails_admin_path %>
+                    <div class="alert alert-primary" role="alert ">
+                      <%= link_to '管理者画面', rails_admin_path %>
+                    </div>
                   <% end %>
                 </li>
                 <li class="nav-item">
@@ -86,13 +88,11 @@
         </div>
       </nav>  
     </header>
+
+    <%= yield %>
       
-    <main>
-      <%= yield %>
-    </main>
-    
     <!-- Footer-->
-    <footer class="border-top">
+    <footer class="border-top" style="position: fixed; bottom: 0; width: 100%; background-color: #f5f5f5; text-align: center;">
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
@@ -126,7 +126,8 @@
               </li> 
             </ul>
             <div class="small text-center text-muted fst-italic">
-              Copyright &copy; Your Website 2023
+              あなたの「書く」が加速する&nbsp;&nbsp;&nbsp;  みんなの「書く」が結びつく<br>
+              Copyright &copy; This Website 2023
             </div>
           </div>
         </div>
