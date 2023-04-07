@@ -1,12 +1,18 @@
-<h1>お気に入りリポジトリ一覧</h1>
-
-<% @favorite_repositories.each do |favorite_repository| %>
-  <div>
-    <%= link_to favorite_repository.name, repository_path(favorite_repository) %>
-    <%= link_to 'お気に入り解除', favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete %>
+<div class="favorite-repositories-wrapper">
+  <h1>お気に入りリポジトリ一覧</h1>
+  <div class="favorite-repositories-container">
+    <% @favorite_repositories.each do |favorite_repository| %>
+      <div class="repository-item">
+        <span class="repository-name">
+          <%= link_to favorite_repository.name, repository_path(favorite_repository), class: "repository-link" %>
+        </span>
+        <span class="unfavorite-button">
+          <%= link_to 'お気に入り解除', favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete, class: "unfavorite-link" %>
+        </span>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<br>
-
-<%= link_to 'リポジトリ一覧', repositories_path %>
+  <div class="repositories-link">
+    <%= link_to 'リポジトリ一覧', repositories_path, class: "repository-link" %>
+  </div>
+</div>
