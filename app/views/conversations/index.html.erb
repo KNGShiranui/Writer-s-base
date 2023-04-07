@@ -1,14 +1,34 @@
-<table class="table table-hover">
-  <thead>
+<div class="conversation-fun-links-wrapper">
+  <div class="conversation-list-container box-container">
     <h2>メッセージ一覧</h2>
-  </thead>
-  <tbody>
-    <% @conversations.each do |conversation| %>
-      <td>
-        <% if conversation.target_user(current_user).present? %>
-          <%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation)%>
+    <table class="table table-hover">
+      <tbody>
+        <% @conversations.each do |conversation| %>
+          <% if conversation.target_user(current_user).present? %>
+            <tr>
+              <td>
+                <%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation) %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      </td>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fun-links-container box-container">
+    <div class="topic-hints">
+      <h3>今日の話題ヒント:</h3>
+      <ul>
+        <% 3.times do %>
+          <% random_topics = ["映画", "音楽", "旅行", "スポーツ", "ファッション", "ゲーム", "料理", "ペット"] %>
+          <li><%= random_topics.sample %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="fun-link">
+      <h3>ジャスティス！！！！:</h3>
+      <a href="https://www.youtube.com/watch?v=cpQbrKuQuHw" target="_blank">ジャスティス！！！！</a>
+    </div>
+  </div>
+</div>

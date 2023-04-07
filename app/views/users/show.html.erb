@@ -1,44 +1,53 @@
-<p> <strong><%= current_user.name %>のプロフィール:</strong> </p>
-<p> <strong>Name:</strong> <%= current_user.name %> </p>
-<p> <strong>Email:</strong> <%= current_user.email %> </p>
-<p> <strong>Content:</strong> <%= current_user.content %> </p>
-<p> <strong>Icon:</strong> <%= current_user.icon %> </p>
-<%= link_to 'Edit', edit_user_registration_path %> |
-<%= link_to 'Back', users_path %>
+<div class="profile-container">
+<div class="profile-info">
+  <p><strong><%= current_user.name %>のプロフィール:</strong></p>
+  <p><strong>Name:</strong> <%= current_user.name %></p>
+  <p><strong>Email:</strong> <%= current_user.email %></p>
+  <p><strong>Content:</strong> <%= current_user.content %></p>
+  <p><strong>Icon:</strong> <%= current_user.icon %></p>
+  <div class="profile-actions">
+    <%= link_to '<i class="fas fa-pencil-alt"></i> Edit'.html_safe, edit_user_registration_path, class: "profile-action-btn" %>
+    <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, users_path, class: "profile-action-btn" %>
+  </div>
+</div>
 
-<p> <strong><%= current_user.name %>のRepository:</strong> </p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Owner</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="repository-info">
+    <p> <strong><%= current_user.name %>のRepository:</strong> </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Owner</th>
+          <th colspan="3">action</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @repositories.each do |repository| %>
-      <tr>
-        <td><%= repository.name %></td>
-        <td><%= repository.description %></td>
-        <td><%= repository.user_id %></td>
-        <td><%= link_to 'Show', repository %></td>
-        <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
-        <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <tbody>
+        <% @repositories.each do |repository| %>
+          <tr>
+            <td><%= repository.name %></td>
+            <td><%= repository.description %></td>
+            <td><%= repository.user_id %></td>
+            <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, repository %></td>
+            <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_repository_path(repository) %></td>
+            <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<div class="conversation-container">
+  <div class="conversation-info">
+    <p> <strong><%= current_user.name %>のConversation:</strong> </p>
+    <% @conversations.each do |conversation| %>
+      <div>
+        <% if conversation.target_user(current_user).present? %>
+          <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<p> <strong><%= current_user.name %>のConversation:</strong> </p>
-<% @conversations.each do |conversation| %>
-  <td>
-    <% if conversation.target_user(current_user).present? %>
-      <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
-    <% end %>
-  </td>
-  <br>
-<% end %>
-
+  </div>
+</div>
 

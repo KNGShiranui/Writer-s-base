@@ -53,6 +53,9 @@ header {
   left: 0;
   width: 100%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-icons {
@@ -74,11 +77,17 @@ header {
   text-decoration: none;
 }
 
+.current-user {
+  flex-grow: 1;
+  text-align: center;
+}
+
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0rem 1rem;
+  flex-grow: 1;
 }
 
 .nav-left,
@@ -174,6 +183,14 @@ a.footer-link:hover {
   text-decoration: underline;
 }
 
+.footer-icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem; /* 右の余白を設定 */
+  transform: translateY(-50%);
+  /* 他のスタイル */
+}
+
 /* SNS icons */
 .twitter-icon {
   color: #1DA1F2;
@@ -212,6 +229,20 @@ a.footer-link:hover {
   color: #6cc644; /* GitHubの緑色 */
   background-color: transparent;
   filter: brightness(5.0);
+}
+
+/* Blue_Mystic */
+.Blue_Mystic-icon {
+  color: #00C300;
+  background-color: transparent;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.Blue_Mystic-icon:hover {
+  color: #33e833;
+  filter: brightness(1.5);
 }
 
 /* プルダウン設定 */

@@ -1,17 +1,22 @@
-<h3>現在のユーザー:<%= "#{current_user.name}さん" %></h3>
-<h3><%= "#{@conversation.recipient.name}さんとのメッセージ" %></h3>
-<% if @over_ten %>
-  <%= link_to '以前のメッセージ', '?m=all' %>
-<% end %>
+<div class="message-wrapper">
+  <div class="message-container">
+    <h3 class="recipient-user"><%= "#{@conversation.recipient.name}さんとのメッセージ" %></h3>
 
-<div class="ui segment">
-  <% @messages.each do |message| %>
-    <% if message.content.present? %>
-      <div class="item">
-        <div class="content">
-          <div class="header"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
-          <div class="list">
-            <div class="item">
+    <% if @over_ten %>
+      <div class="previous-messages">
+        <%= link_to '以前のメッセージ', '?m=all' %>
+      </div>
+    <% end %>
+
+    <div class="message-list">
+      <% @messages.each do |message| %>
+        <% if message.content.present? %>
+          <div class="message-item">
+            <div class="message-header">
+              <strong><%= message.user.name %></strong>
+              <span class="message-time"><%= message.message_time %></span>
+            </div>
+            <div class="message-content">
               <i class="right triangle icon"></i>
               <%= message.content %> /
               <% if message.user == current_user %>
@@ -19,18 +24,18 @@
               <% end %>
             </div>
           </div>
-        </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= form_with(model: [@conversation, @message], html: { class: "message-form" }) do |f| %>
+      <div class="field">
+        <%= f.text_area :content, class: "form-control" %>
+      </div>
+      <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+      <div class="submit-button">
+        <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
       </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
-
-<%= form_with(model: [@conversation, @message]) do |f| %>
-  <div class="field">
-    <%= f.text_area :content, class: "form-control" %>
-  </div>
-    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-  <div>
-    <%= f.submit "メッセージを送る" %>
-  </div>
-<% end %>
