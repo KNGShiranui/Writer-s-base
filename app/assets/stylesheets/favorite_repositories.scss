@@ -1,3 +1,68 @@
-// Place all the styles related to the favorite_repositories controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.favorite-repositories-wrapper {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.favorite-repositories-container {
+  display: inline-block;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  min-width: 40%;
+  max-width: 90%;
+}
+
+.repository-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.repository-name {
+  flex: 1;
+  text-align: left;
+}
+
+.unfavorite-button {
+  margin-left: 1rem;
+}
+
+.repository-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.repository-link:hover {
+  color: #0056b3;
+}
+
+.unfavorite-link {
+  text-decoration: none;
+  color: #dc3545;
+  transition: color 0.3s;
+}
+
+.unfavorite-link:hover {
+  color: #c82333;
+}
+
+.repositories-link {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .favorite-repositories-container {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

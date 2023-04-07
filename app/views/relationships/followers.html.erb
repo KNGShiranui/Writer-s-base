@@ -1,8 +1,10 @@
-<table class="table table-hover">
-
-<h3>フォロワー</h3>
-<ul>
-  <% @followers.each do |follower| %>
-    <li><%= link_to follower.name, user_path(follower) %></li>
-  <% end %>
-</ul>
+<div class="follow-wrapper">
+  <div class="followers-container box-container">
+    <h2>フォロワー</h2>
+    <ul>
+      <% @followers.each do |follower| %>
+        <li><%= link_to follower.name, user_path(follower) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
