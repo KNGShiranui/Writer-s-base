@@ -33,21 +33,52 @@ body {
   margin: 0;
 }
 
+/*メインコンテンツのヘッダー、フッターとの重なり解消*/
+.main-content {
+  margin-top: 80px;    /* ヘッダーの高さに合わせる */
+  margin-bottom: 70px; /* フッターの高さに合わせる */
+  /* 他のメインコンテンツのスタイルをここに追加 */
+}
+
 /* header */
 header {
   margin: 0;
+  height: 60px;
   left: 0; /* マージンをなくすために追加 */
   right: 0; /* マージンをなくすために追加 */
   background-color: rgba(255, 255, 255, 0.3);
-  position: relative;
+  /*position: relative;*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.header-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icons a {
+  color: #333;
+  background-color: transparent;
+  transition: color 0.2s;
+}
+
+.header-icons a:hover {
+  color: transparent;
+  background-color:  transparent;
+  text-decoration: none;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem 1rem;
 }
 
 .nav-left,
@@ -75,7 +106,7 @@ nav.nav-item {
 }
 
 .nav-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-right: 1rem;
 }
 
@@ -108,6 +139,7 @@ nav.nav-item {
 /* footer */
 .footer {
   position: fixed;
+  height: 30px;
   bottom: 0;
   left: 0; /* マージンレフトをなくすために追加 */
   width: 100%;
@@ -130,25 +162,6 @@ nav.nav-item {
   color: #333;
   font-style: italic;
   font-variant: small-caps;
-}
-
-.footer-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.footer-icons a {
-  color: #333;
-  background-color: transparent;
-  transition: color 0.2s;
-}
-
-.footer-icons a:hover {
-  color: transparent;
-  background-color:  transparent;
-  text-decoration: none;
 }
 
 a.footer-link {
@@ -256,7 +269,7 @@ button {
   display: block;
 }
 
-/*sign_in*/
+/* Common styles */
 .form-container {
   display: flex;
   flex-direction: column;
@@ -264,6 +277,61 @@ button {
   width: 100%;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.field label {
+  font-size: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Sign Up */
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.auth-form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actions input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Sign In */
 .form-wrapper {
   background-color: #f9f9f9;
   padding: 30px;
@@ -277,57 +345,195 @@ button {
   margin-bottom: 20px;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.field label {
-  margin-bottom: 5px;
-}
-
-.actions {
-  margin-top: 20px;
-}
-
 input[type='email'],
-input[type='password'],
-input[type='submit'] {
+input[type='password'] {
   padding: 8px;
   font-size: 14px;
   border-radius: 5px;
-}
-
-input[type='email'],
-input[type='password'] {
   border: 1px solid #ccc;
   width: 100%;
 }
 
-input[type='submit'] {
+/* Password Reset */
+.password-reset-form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* Shared Links */
+.shared-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shared-link {
+  text-decoration: none;
+  color: #1a73e8;
+  margin-bottom: 0px;
+  transition: color 0.2s;
+}
+
+.shared-link:hover {
+  color: #0a57bd;
+  background-color: transparent;
+}
+
+.omniauth-button {
+  margin-bottom: 0px;
+}
+
+/* Error Messages */
+.error-messages-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+.error-messages-container h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.error-messages-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  }
+  
+  .error-messages-container ul li {
+  margin-bottom: 5px;
+  }
+  
+  /* Sign In - Remember Me */
+  .field.remember-me {
+  display: flex;
+  justify-content: center;
+  }
+  
+  .field.remember-me label {
+  display: inline-flex;
+  align-items: center;
+  }
+  
+  .field.remember-me input[type="checkbox"] {
+  margin-right: 5px;
+  }
+  
+  /* Sign In - Submit Button */
+  input[type='submit'] {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
   background-color: #5cb85c;
   color: white;
   border: none;
   cursor: pointer;
   width: 100%;
-}
-
-input[type='submit']:hover {
+  }
+  
+  input[type='submit']:hover {
   background-color: #449d44;
+  }
+  
+  /* Password Reset - Email Field */
+  .password-reset-form .field {
+  margin-bottom: 10px;
+  }
+  
+  .password-reset-form input[type="email"] {
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  font-size: 14px;
+  }
+  
+  /* Password Reset - Submit Button */
+  .password-reset-form input[type="submit"] {
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  }
+
+  /* Update Account Form */
+.update-account-form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.field.remember-me {
+.update-account-form .field {
+  margin-bottom: 20px;
+}
+
+.update-account-form .field label {
+  font-size: 16px;
+}
+
+.update-account-form .field input[type="text"],
+.update-account-form .field input[type="email"],
+.update-account-form .field input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-account-form .actions {
   display: flex;
   justify-content: center;
 }
 
-.field.remember-me label {
-  display: inline-flex;
-  align-items: center;
+.update-account-form .actions input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.field.remember-me input[type="checkbox"] {
-  margin-right: 5px;
+.update-account-form .actions input[type="submit"]:hover {
+  background-color: #0056b3;
 }
 
+/* Cancel Account */
+.cancel-account {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cancel-account a {
+  text-decoration: none;
+  color: #dc3545;
+  transition: color 0.2s;
+}
+
+.cancel-account a:hover {
+  color: #b21f2d;
+}
+
+/* Back Link */
+.back-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: #1a73e8;
+  transition: color 0.2s;
+}
+
+.back-link a:hover {
+  color: #0a57bd;
+}

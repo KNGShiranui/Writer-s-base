@@ -43,7 +43,7 @@
               <%# if current_user.try!admin?は上記と意味は同じ。 %>
                 <h1><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
               <% else %>
-                <h1>  <%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
+                <h1><%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
               <% end %>
             </div>    
           </nav>
@@ -57,6 +57,26 @@
         <% end %>
 
         <div class="nav-right">
+          <div class="header-icons">
+            <!--tweetボタン-->
+            <a href="#" target="_blank" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL) + '&text=' + encodeURIComponent(document.title)); return false;" style="background-color: transparent;">
+              <i class="fab fa-twitter fa-2x twitter-icon"></i>
+            </a>
+            <!--facebookボタン-->
+            <a href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
+              <i class="fab fa-facebook-f fa-2x facebook-icon"></i>
+            </a>
+            <!--LINEボタン-->
+            <a href="#" target="_blank" onclick="window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
+              <%= image_tag 'LINE_Brand_icon.png', alt: 'LINE', class: 'line-icon', width: 24, height: 24 %>
+            </a>
+            <!--GitHubボタン-->
+            <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
+              <%= image_tag 'github-mark.png', alt: 'GitHub', class: 'github-icon', width: 24, height: 24 %>
+            </a>
+            <span>←共同開発者募集中</span> 
+          </div>
+          
           <div class="dropdown">
             <button><i class="material-icons dropbtn">menu</i> </button>
             <div class="dropdown-content">
@@ -86,33 +106,16 @@
       </div>
     </header>
     
-    <div>
-      <%= yield %>
+    <div class="main-content"> 
+      <div>
+        <%= yield %>
+      </div>
     </div>
-
+    
     <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="footer-icons">
-              <!--tweetボタン-->
-              <a href="#" target="_blank" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL) + '&text=' + encodeURIComponent(document.title)); return false;" style="background-color: transparent;">
-                <i class="fab fa-twitter fa-2x twitter-icon"></i>
-              </a>
-              <!--facebookボタン-->
-              <a href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
-                <i class="fab fa-facebook-f fa-2x facebook-icon"></i>
-              </a>
-              <!--LINEボタン-->
-              <a href="#" target="_blank" onclick="window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(document.URL)); return false;" style="background-color: transparent;">
-                <%= image_tag 'LINE_Brand_icon.png', alt: 'LINE', class: 'line-icon', width: 24, height: 24 %>
-              </a>
-              <!--GitHubボタン-->
-              <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
-                <%= image_tag 'github-mark.png', alt: 'GitHub', class: 'github-icon', width: 24, height: 24 %>
-              </a>
-              <span>←共同開発者募集中</span> 
-            </div>
             <div class="footer-text">
               あなたの「書く」が加速する&nbsp;&nbsp;&nbsp; みんなの「書く」が結びつく<br>
               <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">

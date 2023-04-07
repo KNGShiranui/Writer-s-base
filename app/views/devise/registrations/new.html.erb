@@ -1,26 +1,27 @@
-<h2><%= t('.sign_up') %></h2>
+<h2 class="form-title"><%= t('.sign_up') %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'auth-form' }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autocomplete: "name" %>
+    <!-- autofocus 属性を削除しました。1つのフォームには1つのautofocus属性だけが必要です。 -->
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content, autofocus: true, autocomplete: "content" %>
+    <%= f.text_field :content, autocomplete: "content" %>
   </div>
 
   <div class="field">
     <%= f.label :icon %><br />
-    <%= f.text_field :icon, autofocus: true, autocomplete: "icon" %>
+    <%= f.text_field :icon, autocomplete: "icon" %>
   </div>
 
   <div class="field">
