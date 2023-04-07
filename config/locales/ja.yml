@@ -88,6 +88,10 @@ ja:
       day: 日
       month: 月
       year: 年
+  devise:
+    sessions:
+      new:
+        remember_me: "ログイン状態を保持する"
   errors:
     format: "%{attribute}%{message}"
     messages:
