@@ -2,13 +2,16 @@
 <h3>現在のユーザー:<%= "#{current_user.name}さん" %></h3>
 <%= render 'search', q: @q, url: users_path %>
 
-<% @users.each do |user| %>
-  <% if user.id != current_user.id %>
-    <div class="item">
-      <%= link_to "#{user.name}さん", user %>
-      <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
-    </div>
-    <%= render 'follow_form', user: user %> <!-- フォロー機能が実装されていればこの一文も必要 -->
-    <%# user.nameじゃない方のuserがリンク先を示している。@がないのはeach do内のローカル変数だから %>
+<div class="user-list">
+  <% @users.each do |user| %>
+    <% if user.id != current_user.id %>
+      <div class="user-item">
+        <div class="user-info">
+          <%= link_to "#{user.name}さん", user, class: "user-name" %>
+          <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %>
+        </div>
+        <%= render 'follow_form', user: user %> <!-- フォロー機能が実装されていればこの一文も必要 -->
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
