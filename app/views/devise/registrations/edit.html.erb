@@ -49,15 +49,16 @@
   <div class="actions">
     <%= f.submit t('.update') %>
   </div>
+
+  <%# Wrap cancel account section in a div with the class "cancel-account" %>
+  <div class="cancel-account">
+    <div><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
+  </div>
+
+  <%# Add class to the back link %>
+  <div class="back-link">
+    <%= link_to t('devise.shared.links.back'), :back %>
+  </div>
 <% end %>
 
-<%# Wrap cancel account section in a div with the class "cancel-account" %>
-<div class="cancel-account">
-  <h3><%= t('.cancel_my_account') %></h3>
-  <div><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
-</div>
 
-<%# Add class to the back link %>
-<div class="back-link">
-  <%= link_to t('devise.shared.links.back'), :back %>
-</div>

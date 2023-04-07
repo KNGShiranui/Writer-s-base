@@ -46,7 +46,7 @@ header {
   height: 60px;
   left: 0; /* マージンをなくすために追加 */
   right: 0; /* マージンをなくすために追加 */
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 200, 200, 1);
   /*position: relative;*/
   position: fixed;
   top: 0;
@@ -143,7 +143,7 @@ nav.nav-item {
   bottom: 0;
   left: 0; /* マージンレフトをなくすために追加 */
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 200, 200, 1);
   padding: 1rem 0;
   color: #333;
   text-align: center;
@@ -506,6 +506,21 @@ input[type='password'] {
 }
 
 /* Cancel Account */
+.update-account-form .cancel-account input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #64e43d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.update-account-form .cancel-account input[type="submit"]:hover {
+  background-color: #2ab300;
+}
+
 .cancel-account {
   text-align: center;
   margin-bottom: 20px;
@@ -523,7 +538,9 @@ input[type='password'] {
 
 /* Back Link */
 .back-link {
+  font-size: 1rem;
   display: flex;
+  background-color: transparent;
   justify-content: center;
   margin-top: 20px;
 }
@@ -536,4 +553,5 @@ input[type='password'] {
 
 .back-link a:hover {
   color: #0a57bd;
+  background-color: transparent;
 }
