@@ -24,9 +24,20 @@
 
 .user-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+.user-info h2,
+.user-info h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.user-info h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #000;
 }
 
 .user-name {
@@ -74,4 +85,121 @@
 .follow-button:hover {
   background-color: white;
   color: #4CAF50;
+}
+
+/*search 検索フォームのスタイル */
+.search-form {
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+.search-form .form-control {
+  width: 50%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
+
+.search-form .btn {
+  padding: 0.5rem 1rem;
+  width: 100px; /* ここでボタンの横幅を設定 */
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form .btn:hover {
+  background-color: #0069d9;
+}
+
+
+/*user_show*/
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-bottom: 2rem;
+}
+
+.profile-info,
+.repository-info,
+.conversation-info {
+  flex: 1;
+  margin: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .profile-info,
+  .repository-info,
+  .conversation-info {
+    flex-basis: 100%;
+    margin: 1rem 0;
+  }
+}
+
+/*user_show*/
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.profile-info,
+.repository-info,
+.conversation-info {
+  flex: 1;
+  margin: 0 0 0 2rem;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .profile-info,
+  .repository-info,
+  .conversation-info {
+    flex-basis: 100%;
+    margin: 1rem 0;
+  }
+}
+
+/*user_show_table*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+  
+table th {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+@media (min-width: 768px) {
+  .profile-info,
+  .repository-info,
+  .conversation-info {
+    margin-right: 2rem;
+  }
+  .conversation-container .conversation-info:last-child {
+    margin-right: 0;
+  }
 }

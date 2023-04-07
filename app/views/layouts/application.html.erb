@@ -10,6 +10,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/1V7Uz8Sxm2J6U/R7vusJ/7kbd8e1UIE7CGDwNv" crossorigin="anonymous">
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
@@ -19,9 +21,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'header_scroll', 'data-turbolinks-track': 'reload' %>
-
-
-    <%#= javascript_pack_tag 'dropdown', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'dropdown', 'data-turbolinks-track': 'reload' %>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3W5speXa1NTwwcZeBk5l/5W6Yg/Slf" crossorigin="anonymous">
     <style>
@@ -50,6 +50,12 @@
               <% end %>
             </div>    
           </nav>
+        </div>
+
+        <div class="current-user">
+          <% if current_user.present? %>
+            <h3>現在のユーザー: <%= "#{current_user.name}さん" %></h3>
+          <% end %>
         </div>
 
         <% if notice %>
@@ -123,6 +129,12 @@
               あなたの「書く」が加速する&nbsp;&nbsp;&nbsp; みんなの「書く」が結びつく<br>
               <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">
                 Copyright &copy; This Website 2023
+              </a>
+            </div>
+            <!--Blue_Mysticボタン-->
+            <div class="footer-icon">
+              <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
+                <%= image_tag 'blue_mystic.JPG', alt: 'Blue_Mystic', class: 'Blue_Mystic-icon', width: 24, height: 24 %>
               </a>
             </div>
           </div>

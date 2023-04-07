@@ -1,3 +1,71 @@
-// Place all the styles related to the conversations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.conversation-fun-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.conversation-list-container,
+.fun-links-container {
+  flex: 1;
+  margin: 0 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .conversation-list-container,
+  .fun-links-container {
+    flex-basis: 100%;
+    margin: 1rem 0;
+  }
+}
+
+/*table*/
+.table-container {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  margin-bottom: 2rem;
+  width: 50%;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+
+.table thead th {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.message-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.message-link:hover {
+  color: #0056b3;
+}
+
+.box-container {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
