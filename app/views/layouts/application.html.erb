@@ -18,7 +18,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'dropdown', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_pack_tag 'dropdown', 'data-turbolinks-track': 'reload' %>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3W5speXa1NTwwcZeBk5l/5W6Yg/Slf" crossorigin="anonymous">
     <style>
@@ -38,48 +38,50 @@
       <div class="nav-container">
         <div class="nav-left">
           <nav class="nav-item">
-            <div class="dropdown">
-              <button class="dropbtn">メニュー</button>
-              <div class="dropdown-content">
-                <% if current_user&.admin? %>
-                <%# if current_user.try!admin?は上記と意味は同じ。 %>
-                  <h1><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
-                <% else %>
-                  <h1>  <%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
-                <% end %>
-
-                <% if user_signed_in? %>
-                  <% if current_user&.admin? %>
-                    <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
-                  <% end %>
-                    <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
-                    <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user) %>
-                    <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
-                    <%# followerとfollowをindexアクション内で条件分岐したらOK %>
-                    <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
-                    <%= link_to raw('<i class="material-icons">chat</i> チャット'), conversations_path %>
-                    <%= link_to raw('<i class="material-icons">folder</i> リポジトリ一覧'), repositories_path %>
-                    <%= link_to raw('<i class="material-icons">favorite</i> お気に入りリポジトリ'), favorite_repositories_path %>
-                    <%= link_to raw('<i class="material-icons">error</i> イシュー'), issues_path(user_id: current_user.id) %>
-                    <%= link_to raw('<i class="material-icons">logout</i> ログアウト'), destroy_user_session_path, method: :delete %>
-                <% else %>
-                    <%= link_to raw('<i class="material-icons">person_add</i> 新規登録'), new_user_registration_path %>
-                    <%= link_to raw('<i class="material-icons">login</i> ログイン'), new_user_session_path %>
-                    <%= link_to raw('<i class="material-icons">person_outline</i> ゲスト管理者ログイン'), guest_admin_sign_in_path %>
-                    <%= link_to raw('<i class="material-icons">person_outline</i> ゲストログイン'), guest_sign_in_path %>
-                <% end %>
-              </div>
+            <div class="website-name">
+              <% if current_user&.admin? %>
+              <%# if current_user.try!admin?は上記と意味は同じ。 %>
+                <h1><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
+              <% else %>
+                <h1>  <%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
+              <% end %>
             </div>    
           </nav>
         </div>
 
+        <% if notice %>
+          <p class="alert alert-notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-error"><%= alert %></p>
+        <% end %>
+
         <div class="nav-right">
-          <% if notice %>
-            <p class="alert alert-notice"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="alert alert-error"><%= alert %></p>
-          <% end %>
+          <div class="dropdown">
+            <button><i class="material-icons dropbtn">menu</i> </button>
+            <div class="dropdown-content">
+              <% if user_signed_in? %>
+                <% if current_user&.admin? %>
+                  <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
+                <% end %>
+                  <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
+                  <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user) %>
+                  <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
+                  <%# followerとfollowをindexアクション内で条件分岐したらOK %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">chat</i> チャット'), conversations_path %>
+                  <%= link_to raw('<i class="material-icons">folder</i> リポジトリ一覧'), repositories_path %>
+                  <%= link_to raw('<i class="material-icons">favorite</i> お気に入りリポジトリ'), favorite_repositories_path %>
+                  <%= link_to raw('<i class="material-icons">error</i> イシュー'), issues_path(user_id: current_user.id) %>
+                  <%= link_to raw('<i class="material-icons">logout</i> ログアウト'), destroy_user_session_path, method: :delete %>
+              <% else %>
+                  <%= link_to raw('<i class="material-icons">person_add</i> 新規登録'), new_user_registration_path %>
+                  <%= link_to raw('<i class="material-icons">login</i> ログイン'), new_user_session_path %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i> ゲスト管理者ログイン'), guest_admin_sign_in_path %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i> ゲストログイン'), guest_sign_in_path %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -122,6 +124,22 @@
       </div>
     </footer>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script>
+      document.querySelector('.dropbtn').addEventListener('click', function() {
+        document.querySelector('.dropdown-content').classList.toggle('show');
+      });
+
+      window.addEventListener('click', function(event) {
+        if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName('dropdown-content');
+          for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>
