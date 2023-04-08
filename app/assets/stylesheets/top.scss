@@ -20,6 +20,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 76px;
 }
 
 .top-content {
@@ -61,4 +62,8 @@ li {
   font-size: 5rem;
   margin: 30px;
   color: #333;
+}
+
+.spacing {
+  margin: 20px;
 }
