@@ -23,5 +23,5 @@
   <%= @issue.repository_id %>
 </p>
 
-<%= link_to 'Edit', edit_issue_path(@issue, repository_id: @repository) %> |
-<%= link_to 'Back', issues_path(repository_id: @issue.repository.id) %>
+<%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_issue_path(@issue, repository_id: @repository) %> |
+<%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, issues_path(repository_id: @issue.repository.id) %>
