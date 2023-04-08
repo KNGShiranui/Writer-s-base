@@ -28,7 +28,6 @@ gem 'paper_trail'
 gem 'truncate_html'
 gem 'ransack'
 
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
