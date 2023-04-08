@@ -1,27 +1,30 @@
-<p>
-  <strong>Name:</strong>
-  <%= @issue.name %>
-</p>
+<div class="container">
+  <div class="issue-show">
+    <h1><i class="fas fa-clipboard"></i>&nbsp;<%= @issue.name %></h1>
+    <hr>
 
-<p>
-  <strong>Description:</strong>
-  <%= @issue.description %>
-</p>
+    <div class="issue-details panel">
+      <h3><i class="fas fa-info-circle"></i> Description</h3>
+      <p><%= @issue.description %></p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @issue.status %>
-</p>
+      <h3><i class="fas fa-tasks"></i> Status</h3>
+      <p><%= @issue.status %></p>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @issue.priority %>
-</p>
+      <h3><i class="fas fa-exclamation-circle"></i> Priority</h3>
+      <p><%= @issue.priority %></p>
 
-<p>
-  <strong>Repository:</strong>
-  <%= @issue.repository_id %>
-</p>
+      <h3><i class="fas fa-archive"></i> Repository</h3>
+      <p><%= @issue.repository_id %></p>
+    </div>
 
-<%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_issue_path(@issue, repository_id: @repository) %> |
-<%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, issues_path(repository_id: @issue.repository.id) %>
+    <div class="issue-actions">
+      <%= link_to edit_issue_path(@issue, repository_id: @repository), class: 'btn btn-primary' do %>
+        <i class="fas fa-edit"></i> Edit
+      <% end %>
+
+      <%= link_to issues_path(repository_id: @issue.repository.id), class: 'btn btn-secondary' do %>
+        <i class="fas fa-arrow-left"></i> Back
+      <% end %>
+    </div>
+  </div>
+</div>

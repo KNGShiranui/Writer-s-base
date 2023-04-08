@@ -1,52 +1,50 @@
 <% if params[:repository_id].present? %>
-  <h1>Repositoryにぶら下がっているIssues</h1>
-<% else %>
-  <h1>Userにぶら下がっているIssues</h1>
-<% end %>
+    <h1 class="issue-page-title"><i class="fas fa-archive"></i> &nbsp Repository Related Issues</h1>
+  <% else %>
+    <h1><i class="fas fa-user"></i> User Related Issues</h1>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Priority</th>
-      <th>Repository</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @issues.present? %>
-      <% @issues.each do |issue| %>
+  <div class="index-container"> <!-- 追加: index-containerクラスを適用 -->
+    <table>
+      <thead>
         <tr>
-          <td><%= issue.name %></td>
-          <td><%= issue.description %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.repository_id %></td>
-          <td><%= link_to 'Show', issue_path(issue) %></td>
-          <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
-          <td><%= link_to 'Destroy', issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
-          <%#= link_to 'Destroy', issue_path(repository_id: issue.repository.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-          <%# 上記だとshowアクションにとぶ・・・ %>
-          <td>
-            <% if current_user.id == issue.user_id %>
-              <% if issue.assignees.present? %>
-                <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
-                <%# issue.idが必要な理由は、どのidのissueのassign削除するか指定するため %>
-              <% else %>
-                <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
-              <% end %>
-            <% end %>
-          </td>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Repository</th>
+          <th>show</th>
+          <th>edit</th>
+          <th>destroy</th>
+          <th>assign</th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
-<%#= paginate @issues %>
-<%= link_to 'New Issue', new_issue_path(repository_id: @repository) %>
-<%# 上記のパラメータを用いてnew issueを作成するとリポジトリに結びついたissue作成がコントローラでできるようになる %>
+      <tbody>
+        <% if @issues.present? %>
+          <% @issues.each do |issue| %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository_id %></td>
+              <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i> Destroy'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to '<i class="fas fa-fire"></i> Fire!'.html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <% else %>
+                    <%= link_to '<i class="fas fa-user-plus"></i> Assign'.html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to '<i class="fas fa-plus"></i> New Issue'.html_safe, new_issue_path(repository_id: @repository) %>
+  </div>
