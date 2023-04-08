@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', () => {
       header.style.display = 'none';
     } else {
       // スクロールアップ時
-      header.style.display = 'block';
+      header.style.display = 'flex'; // ここを 'block' から 'flex' に変更
     }
 
     lastScrollTop = currentScrollTop;

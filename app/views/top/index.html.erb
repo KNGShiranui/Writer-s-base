@@ -1,33 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5z7X9z5l/5VQU8IdjwD5Vbj9UfjcB7VW5Z8X3xV9" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      background-image: url(<%= asset_url 'coffee_pen.JPG' %>);
+      /* 背景画像の表示方法を指定する場合は、background-size, background-positionなどのプロパティを追加することができます */
+      background-size: cover; /* 画面いっぱいに表示 */
+      background-position: center center; /* 画像を中央に表示 */
+      /* その他のスタイルを追加 */
+      min-height: 100vh; /* 追加 */
+    }
+  </style>
+  <title>Writer's Base</title>
 </head>
-  <body>
-    <div id="top" class="big-bg">
-
-      <div class="top-content_title">
-        <br>
-        <h2>Writer's Base へようこそ</h2>
-        <hr>
-      </div>
-      <div class="top-content">
-        <p>Writer's Baseは、文章を書く人のためのバージョン管理サービスとコミュニティ支援サービスを提供しています。</p>
-        <p>執筆途中で複数の描写方法を比較対照する際、変更箇所や他のバージョンとの違いがわからなくなって困ったことはありませんか？</p>
-        <p>Writer's Baseの力を借りれば、バージョンを複製・保存することで、変更履歴や箇所を手軽に比較できます。</p>
-        <p>さらに、自分の作品や世界観を仲間と共同編集し、アップデートすることが可能です。</p>
-        <p>当サイトは、共同創作のためのコミュニティの場として機能し、あなたの創造力を最大限に引き出します。</p>
-        <p>Writer's Baseで、一緒に素晴らしい作品を生み出しましょう！</p>
-      </div>
-
-      <div class="top-content">
-        <h3>アプリケーションの機能</h3>
-        <ol>
-          <li>文章のバージョン管理・差分表示</li>
-          <li>イシューの設定が可能</li>
-        </ol>
-      </div>
-      <!--------未記述 追記修正予定------------>
-      </div>
+<body>
+  <div id="top" class="big-bg">
+    <div class="top-content_title" data-aos="fade-up">
+      <br>
+      <h2>Writer's Base へようこそ</h2>
+      <hr>
     </div>
-  </body>
+    <div class="top-content" data-aos="fade-up" data-aos-delay="300">
+      <p>Writer's Baseは、文章を書く人のためのバージョン管理サービスとコミュニティ支援サービスを提供しています。</p>
+      <p>執筆途中で複数の描写方法を比較対照する際、変更箇所や他のバージョンとの違いがわからなくなって困ったことはありませんか？</p>
+      <p>Writer's Baseの力を借りれば、バージョンを複製・保存することで、変更履歴や箇所を手軽に比較できます。</p>
+      <p>さらに、自分の作品や世界観を仲間と共同編集し、アップデートすることが可能です。</p>
+      <p>当サイトは、共同創作のためのコミュニティの場として機能し、あなたの創造力を最大限に引き出します。</p>
+      <p>Writer's Baseで、一緒に素晴らしい作品を生み出しましょう！</p>
+    </div>
+    <div class="top-content" data-aos="fade-up" data-aos-delay="600">
+      <h3>アプリケーションの機能</h3>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+          <div>
+            <i class="fas fa-code-branch icon"></i>
+            <p>文章のバージョン管理・差分表示</p>
+          </div>
+          <div>
+            <i class="fas fa-tasks icon"></i>
+            <p>イシューの設定が可能</p>
+          </div>
+        </div>
+    </div>
+<!--------未記述 追記修正予定------------>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  </script>
+</body>
 </html>

@@ -1,85 +1,93 @@
-<p>
-  <strong>リポジトリオーナー:</strong>
-  <%= @repository.user_id %>
-</p>
+<div class="repository-show-container">
+  <h1>Repository: <%= @repository.name %></h1>
 
-<p>
-  <strong>リポジトリ名:</strong>
-  <%= @repository.name %>
-</p>
+  <p>
+    <strong>リポジトリオーナー:</strong>
+    <%= @repository.user_id %>
+  </p>
 
-<p>
-  <strong>リポジトリ説明:</strong>
-  <%= @repository.description %>
-</p>
+  <p>
+    <strong>リポジトリ名:</strong>
+    <%= @repository.name %>
+  </p>
 
-<p>
-  <strong>ブランチ作成:</strong>
-  <%= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
-  <%# (repository_id: @repository.id)を明示的に書く必要あり %>
-</p>
+  <p>
+    <strong>リポジトリ説明:</strong>
+    <%= @repository.description %>
+  </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>ブランチ名</th>
-      <th>リポジトリ名</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <p>
+    <strong>ブランチ作成:</strong>
+    <%= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
+    <%# (repository_id: @repository.id)を明示的に書く必要あり %>
+  </p>
 
-  <tbody>
-    <% @branches.each do |branch| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= branch.name %></td>
-        <td><%= branch.repository_id %></td>
-        <td><%= link_to 'Show', branch_path(branch, repository_id: branch.repository.id) %></td>
-        <td><%= link_to 'Edit', edit_branch_path(branch, repository_id: branch.repository.id) %></td>
-        <td><%= link_to 'Destroy', branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>branch</th>
+        <th>repository</th>
+        <th class="action">Show</th>
+        <th class="action">Edit</th>
+        <th class="action">Destroy</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @branches %>
+    </thead>
 
-<p>
-  <strong>イシュー作成:</strong>
-  <%= link_to 'イシュー作成', new_issue_path(repository_id: @repository.id) %>
-  <%# (repository_id: @repository.id)を明示的に書く必要あり %>
-</p>
+    <tbody>
+      <% @branches.each do |branch| %>
+        <tr>
+          <td><%= branch.name %></td>
+          <td><%= branch.repository_id %></td>
+          <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, branch_path(branch, repository_id: branch.repository.id) %></td>
+          <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_branch_path(branch, repository_id: branch.repository.id) %></td>
+          <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @branches %>
 
-<table>
-  <thead>
-    <tr>
-      <th>イシュー名</th>
-      <th>イシュー説明</th>
-      <th>ステータス（公開／非公開）</th>
-      <th>優先度</th>
-      <th>リポジトリ</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <p>
+    <strong>イシュー作成:</strong>
+    <%= link_to 'イシュー作成', new_issue_path(repository_id: @repository.id) %>
+    <%# (repository_id: @repository.id)を明示的に書く必要あり %>
+  </p>
 
-  <tbody>
-    <% @issues.each do |issue| %>
-      <% if current_user.present? %>
-        <% if !issue.status_closed? || issue.user_id == current_user.id %>
-          <%# unless issue.status_closed? && issue.user_id != current_user.id %>
-          <tr>
-            <td><%= issue.name %></td>
-            <td><%= issue.description %></td>
-            <td><%= issue.status %></td>
-            <td><%= issue.priority %></td>
-            <td><%= issue.repository_id %></td>
-            <td><%= link_to 'Show', issue_path(issue) %></td>
-            <td><%= link_to 'Edit', edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
-            <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
+  <table>
+    <thead>
+      <tr>
+        <th>issue</th>
+        <th>description</th>
+        <th>status</th>
+        <th>priority</th>
+        <th>repository</th>
+        <th class="action">Show</th>
+        <th class="action">Edit</th>
+        <th class="action">Destroy</th>
+        <th class="action">Assign</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @issues.each do |issue| %>
+        <% if current_user.present? %>
+          <% if !issue.status_closed? || issue.user_id == current_user.id %>
+            <%# unless issue.status_closed? && issue.user_id != current_user.id %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository_id %></td>
+              <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe,  issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
             <td>
               <% if current_user.id == issue.user_id %>
                 <% if issue.assignees.present? %>
-                  <%= link_to 'Fire!', assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <%= link_to '<i class="fas fa-times"></i>'.html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
                 <% else %>
-                  <%= link_to 'Assign', assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <%= link_to '<i class="fas fa-hand-paper"></i>'.html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
                 <% end %>
               <% end %>
             </td>
@@ -98,6 +106,7 @@
   </tbody>
 </table>
 <%= paginate @issues %>
-
 <%= link_to 'Edit', edit_repository_path(@repository) %> |
 <%= link_to 'Back', repositories_path %>
+
+</div>
