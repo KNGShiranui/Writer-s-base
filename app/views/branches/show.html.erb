@@ -1,30 +1,34 @@
 <% if @branch.present? %>
-  <p>
-    <strong>Name:</strong>
-    <%= @branch.name %>
-  </p>
+  <div class="table-container">
+    <table class="info-table">
+      <tr>
+        <th>Name:</th>
+        <td><%= @branch.name %></td>
+      </tr>
+      <tr>
+        <th>Repository:</th>
+        <td><%= @branch.repository_id %></td>
+      </tr>
+    </table>
+    <%= button_to create_from_existing_branch_path(@branch, repository_id: @repository.id), method: :post, class: "btn btn-primary" do %>
+      <i class="fas fa-code-branch"></i> branchを切る
+    <% end %>
 
-  <p>
-    <strong>Repository:</strong>
-    <%= @branch.repository_id %>
-  </p>
 
-  <p>
-    <%= button_to 'branchを切る', create_from_existing_branch_path(@branch, repository_id: @repository.id), method: :post %>
-  </p>
+    <%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to 'Back', branches_path(repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
 
-  <%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id) %> |
-  <%= link_to 'Back', branches_path(repository_id: @branch.repository.id) %> |
-  <%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id) %> |
-
-<% elsif @new_branch.present? %>
-  <p>
-    <strong>Name:</strong>
-    <%= @new_branch.name %>
-  </p>
-
-  <p>
-    <strong>Repository:</strong>
-    <%= @new_branch.repository_id %>
-  </p>
+  <% elsif @new_branch.present? %>
+    <table class="info-table">
+      <tr>
+        <th>Name:</th>
+        <td><%= @new_branch.name %></td>
+      </tr>
+      <tr>
+        <th>Repository:</th>
+        <td><%= @new_branch.repository_id %></td>
+      </tr>
+    </table>
+  </div >
 <% end %>
