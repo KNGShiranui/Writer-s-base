@@ -11,6 +11,7 @@
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/1V7Uz8Sxm2J6U/R7vusJ/7kbd8e1UIE7CGDwNv" crossorigin="anonymous">
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
@@ -44,9 +45,9 @@
             <div class="website-name">
               <% if current_user&.admin? %>
               <%# if current_user.try!admin?は上記と意味は同じ。 %>
-                <h1><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
+                <h1 class="header-title"><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
               <% else %>
-                <h1><%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
+                <h1 class="header-title"><%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
               <% end %>
             </div>    
           </nav>
@@ -54,7 +55,7 @@
 
         <div class="current-user">
           <% if current_user.present? %>
-            <h3>現在のユーザー: <%= "#{current_user.name}さん" %></h3>
+            <h3 class="header-current-user">現在のユーザー: <%= "#{current_user.name}さん" %></h3>
           <% end %>
         </div>
 

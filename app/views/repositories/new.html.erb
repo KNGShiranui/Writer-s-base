@@ -1,5 +1,5 @@
-<h1>New Repository</h1>
-
-<%= render 'form', repository: @repository %>
-
-<%= link_to 'Back', repositories_path %>
+<div class="repository-form-container">
+  <h1><i class="fas fa-plus-circle"></i> New Repository</h1>
+  <%= render 'form', repository: @repository %>
+  <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, repositories_path %>
+</div>
