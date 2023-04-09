@@ -1,8 +1,7 @@
 <%= form_with(model: commit) do |form| %>
   <% if commit.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(commit.errors.count, "error") %> prohibited this commit from being saved:</h2>
-
+      <h2><%= t("helpers.pluralize.other", count: commit.errors.count) %></h2>
       <ul>
         <% commit.errors.each do |error| %>
           <li><%= error.full_message %></li>
