@@ -31,6 +31,11 @@ class ApplicationController < ActionController::Base
   #   @current_issue ||= Issue.find_by(id: @repository[:id])
   # end
 
+  def after_sign_in_path_for(resource)
+    # binding.pry
+    user_path(resource)
+  end
+
   helper_method :current_repository, :current_branch
   # helper_method :current_userを記載しないとapplication_controllerに記載していてもcurrent_userメソッドをローカル変数の
   # ようにuserのshowページで用いることはできない。
