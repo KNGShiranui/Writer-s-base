@@ -2,11 +2,10 @@
 <%= form_with(model: branch) do |form| %>
   <% if branch.errors.any? %>
     <div id="error_explanation" class="error-messages">
-      <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
-
+      <h2><%= t("helpers.pluralize.other", count: branch.errors.count) %></h2>
       <ul>
         <% branch.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
