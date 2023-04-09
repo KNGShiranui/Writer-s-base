@@ -4,7 +4,7 @@
       <h2><%= t("helpers.pluralize.other", count: issue.errors.count) %></h2>
       <ul>
         <% issue.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
