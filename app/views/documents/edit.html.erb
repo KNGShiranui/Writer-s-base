@@ -1,6 +1,6 @@
-<h1>Editing Document</h1>
-
-<%= render 'form', document: @document, repository_id: params[:repository_id], branch_id: params[:branch_id] %>
-
-<%= link_to 'Show', document_path(@document, repository_id: @repository.id, branch_id: @branch.id) %> |
-<%= link_to 'Back', documents_path(@document, repository_id: @repository.id, branch_id: @branch.id) %>
+<div class="repository-form-container">
+  <h1><i class="fas fa-edit"></i>&nbsp;Editing Document</h1>
+  <%= render 'form', document: @document, repository_id: params[:repository_id], branch_id: params[:branch_id] %>
+  <%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, document_path(@document, repository_id: @repository.id, branch_id: @branch.id) %> |
+  <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, documents_path(@document, repository_id: @repository.id, branch_id: @branch.id) %>
+</div>
