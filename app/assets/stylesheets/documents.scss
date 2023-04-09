@@ -15,7 +15,7 @@ a:hover {
 
 button, a.button {
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: transparent;
   color: #ffffff;
   text-decoration: none;
   border: none;
@@ -25,7 +25,7 @@ button, a.button {
 }
 
 button:hover, a.button:hover {
-  background-color: #0056b3;
+  background-color: transparent;
 }
 
 button i, a.button i {
@@ -104,6 +104,9 @@ button i, a.button i {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  border: 2px solid #e0e0e0; /* 枠の色と太さを指定 */
+  border-radius: 5px; /* 枠の角を丸める */
+  background-color: #FFFFFF;
 }
 
 h1 {
