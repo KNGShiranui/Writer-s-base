@@ -15,8 +15,8 @@
     <% end %>
 
 
-    <%= link_to 'Edit', edit_branch_path(@branch, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
-    <%= link_to 'Back', branches_path(repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to '<i class="fas fa-edit"></i>Edit'.html_safe, edit_branch_path(@branch, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to '<i class="fas fa-arrow-left"></i>Back'.html_safe, branches_path(repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
     <%= link_to 'Document#index', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
 
   <% elsif @new_branch.present? %>

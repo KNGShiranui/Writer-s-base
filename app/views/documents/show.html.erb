@@ -1,57 +1,114 @@
-<%= link_to 'Edit', edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id] ), class: 'btn btn-outline-dark' %>
-<%= link_to 'Back', documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id] ) %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Document View</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      padding: 30px;
+    }
 
-<p> <strong>User:</strong> <%= @document.user_id %> </p>
-<p> <strong>Branch:</strong> <%= @document.branch_id %> </p>
+    .content-wrapper {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+    }
 
-<p> <strong>Commit message:</strong>
-  <% if @document.commit.present? && @document.commit.message.present? %>
-    <%= @document.commit.message %>
-  <% else %>
-    No commit message provided.
-  <% end %>
-</p>
+    .btn {
+      display: inline-block;
+      background-color: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li.mb-2 {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      margin-bottom: 10px;
+    }
+
+    li.mb-2:last-child {
+      border-bottom: none;
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <p> <strong>User:</strong> <%= @document.user_id %> </p>    
+  <p> <strong>Branch:</strong> <%= @document.branch_id %> </p>
+  <p> <strong>Commit message:</strong>
+    <% if @document.commit.present? && @document.commit.message.present? %>
+      <%= @document.commit.message %>
+    <% else %>
+      No commit message provided.
+    <% end %>
+  </p>
 
 
-<div class="row justify-content-md-center">
-  <div class="col-8 p-4">
-    <div class="d-flex justify-content-between mb-3">
-    </div>
-    <h1 class="font-weight-bold mb-4">
-      <%= @document.name %>
-    </h1>
-
-    <div>
-      <%= simple_format(@document.content) %>
-    </div>
-    
-    <hr>
-
-    <div>
-      <%= PaperTrail::Version.model_name.human %>
-    </div>
-    <ul>
-    <%# binding.pry %>
-      <% @document.versions.each do |version| %>
-        <li class="mb-2">
-          <div>
-            <span>
-              <%= version.created_at %>
-            </span>
-            <span>
-              <%= t("events.#{version.event}", model: version.item.model_name.human) %>
-            </span>
+  <div class="content-wrapper">
+    <div class="row justify-content-md-center">
+      <div class="col-8 p-4">
+        <div class="content">
+          <div class="d-flex justify-content-between mb-3">
           </div>
+          <h2 class="font-weight-bold mb-4">
+            <%= @document.name %>
+          </h2>
+          <%= link_to '<i class="fas fa-edit"></i>Edit'.html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
+          <%= link_to '<i class="fas fa-arrow-left"></i>Back'.html_safe, documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <div>
-            <span>
-              <%= link_to 'このバージョンを表示する', document_version_path(version.item, version) %>
-            </span>
-            <span>
-              <%= link_to '差分を表示する', document_change_path(version.item, version) %>
-            </span>
+            <%= simple_format(@document.content) %>
           </div>
-        </li>
-      <% end %>
-    </ul>
+          
+          <hr>
+
+          <div>
+            <%= PaperTrail::Version.model_name.human %>
+          </div>
+          <ul>
+            <% @document.versions.each do |version| %>
+              <li class="mb-2">
+                <div>
+                  <span>
+                    <%= version.created_at %>
+                  </span>
+                  <span>
+                    <%= t("events.#{version.event}", model: version.item.model_name.human) %>
+                  </span>
+                </div>
+                <div>
+                  <span>
+                    <%= link_to '<i class="fas fa-edit"></i>このバージョンを表示する'.html_safe, document_version_path(version.item, version) %>
+                  </span>
+                  <span>
+                    <%= link_to '<i class="fas fa-exchange-alt"></i>差分を表示する'.html_safe, document_change_path(version.item, version) %>
+                  </span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</body>
+</html>
