@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_04_042208) do
+ActiveRecord::Schema.define(version: 2023_04_10_085441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,9 @@ ActiveRecord::Schema.define(version: 2023_04_04_042208) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
+    t.bigint "user_id", default: 2
     t.index ["repository_id"], name: "index_branches_on_repository_id"
+    t.index ["user_id"], name: "index_branches_on_user_id"
   end
 
   create_table "commits", force: :cascade do |t|
@@ -190,6 +192,7 @@ ActiveRecord::Schema.define(version: 2023_04_04_042208) do
   add_foreign_key "assignees", "issues"
   add_foreign_key "assignees", "users"
   add_foreign_key "branches", "repositories"
+  add_foreign_key "branches", "users"
   add_foreign_key "commits", "branches"
   add_foreign_key "commits", "documents"
   add_foreign_key "commits", "users"

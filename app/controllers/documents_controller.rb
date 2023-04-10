@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_document, only: %i(show edit update destroy)
+  load_and_authorize_resource
 
   def index
     @repository = Repository.find(params[:repository_id])

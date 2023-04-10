@@ -1,4 +1,6 @@
 class FavoriteRepositoriesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @favorite_repositories = current_user.favorited_repositories
   end
@@ -15,3 +17,7 @@ class FavoriteRepositoriesController < ApplicationController
     redirect_to repositories_path
   end
 end
+
+
+## ネストしていないルーティングのindexの場合、各ユーザーのindexアクションのURLが同じなので、なりすましで閲覧はできない。
+# つまり、authorize不要。ログインしてるか否かで弾けたら問題なし

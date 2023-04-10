@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     @conversation = Conversation.find(params[:conversation_id])
     # どの会話（チャットルーム）でなされているメッセージなのか？を取得する処理
   end
+  before_action :authorized_user, only: [:index, :create]
 
   def index
     # 一つ一つの部分で何をしているかの理解をわかりやすくするために
@@ -54,5 +55,13 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content, :user_id)
+  end
+  ## 以下のコードとbefore_action :authorized_user, only: [:index, :create]で当事者しか
+  # 閲覧と送信ができなくなっている。
+  def authorized_user
+    unless @conversation.sender_id == current_user.id || @conversation.recipient_id == current_user.id
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_to root_path
+    end
   end
 end
