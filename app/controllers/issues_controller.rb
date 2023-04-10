@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_issue, only: %i(show edit update destroy)
+  load_and_authorize_resource
 
   def index
     if params[:repository_id].present?
@@ -32,8 +32,10 @@ class IssuesController < ApplicationController
   end
 
   def new
+    params[:user_id] = current_user.id
     @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
     @issue = @repository.issues.build
+    # binding.pry
   end
 
   def edit

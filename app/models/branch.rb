@@ -4,6 +4,6 @@ class Branch < ApplicationRecord
   has_many :commits
   has_many :documents, dependent: :destroy
   # has_many :objects # 機能拡張時に使うかも
-
+  belongs_to :user
   validates :name, presence: true, uniqueness: { scope: :repository_id }
 end

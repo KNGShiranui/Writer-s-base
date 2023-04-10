@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # 現在のコントローラーがDeviseのコントローラーである場合にtrueを返す。
   # before_action フィルターに if: :devise_controller? を指定することで、
   # Deviseのコントローラーでのみ configure_permitted_parameters メソッドが実行されるようになる。
+  before_action :set_current_repository_id
 
   protected
 
@@ -35,6 +36,17 @@ class ApplicationController < ActionController::Base
     # binding.pry
     user_path(resource)
   end
+
+  ## 以下2メソッドはcancancan関係のための記述（issues_controller、ability.rb、application_controllerに記載あり
+  ## ややこしいので気を付けて！
+  def set_current_repository_id
+    Thread.current[:current_repository_id] = params[:repository_id]
+  end
+
+  def current_repository_id
+    Thread.current[:current_repository_id]
+  end
+
 
   helper_method :current_repository, :current_branch
   # helper_method :current_userを記載しないとapplication_controllerに記載していてもcurrent_userメソッドをローカル変数の
