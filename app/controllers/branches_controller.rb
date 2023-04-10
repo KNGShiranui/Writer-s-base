@@ -19,10 +19,11 @@ class BranchesController < ApplicationController
     end
   end
 
-  def new
-    @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
-    @branch = @repository.branches.build
-  end
+  ## newアクションを使用しないためコメントアウト
+  # def new
+  #   @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+  #   @branch = @repository.branches.build
+  # end
 
   def edit
     @repository = Repository.find(params[:repository_id])

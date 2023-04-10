@@ -11,9 +11,13 @@ Rails.application.routes.draw do
   end
 
   resources :assignees
-  resources :branches do
+  ## newアクションは使わないので書き換え。
+  # resources :branches do
+  #   post 'create_from_existing', on: :member
+  # end
+  resources :branches, except: :new do
     post 'create_from_existing', on: :member
-  end
+  end  
   resources :commits
   resources :conversations do
     resources :messages

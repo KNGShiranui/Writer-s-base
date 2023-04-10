@@ -13,6 +13,11 @@ ja:
           open: "公開中"
           semi_closed: "メンバー限定公開"
           closed: "非公開"
+      repositories:
+        statuses:
+          open: "公開中"
+          semi_closed: "メンバー限定公開"
+          closed: "非公開"
   date:
     abbr_day_names:
     - 日
@@ -132,9 +137,19 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+    errors:
+      header:
+        other: "%{count}件のエラーが発生しました:"
     pluralize:
       one: "%{count}個のエラーが発生しました:"
       other: "%{count}個のエラーが発生しました:"
+    form:
+      name: "名前"
+      description: "説明"
+      status: "ステータス"
+      priority: "優先度"
+      user_id: "ユーザーID"
+      submit: "送信"
   number:
     currency:
       format:
