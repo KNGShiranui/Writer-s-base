@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_issue, only: %i(show edit update destroy)
 

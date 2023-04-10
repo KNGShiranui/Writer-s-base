@@ -11,47 +11,51 @@ class Ability
       can :access, :rails_admin
       can :manage, :all
     end
+    ## リポジトリ
+    can [:create, :read], Repository
+    can :update, Repository, user_id: user.id
+    can :destroy, Repository, user_id: user.id
+  
+    ## ブランチ
+    can [:read], Branch
+    can [:create, :update], Branch, repository: { user_id: user.id }
+    can :destroy, Branch do |branch|
+      branch.repository.user_id == user.id || branch.user_id == user.id
+    end
+  
+    ## ドキュメント
+    can :create, Document do |document|
+      user_id == user.id || @branch.repository.user_id == user.id
+    end
+    can :read, Document
+    can [:update, :destroy], Document do |document|
+      document.user_id == user.id || document.branch.repository.user_id == user.id
+      ## 以下はブランチ作成者以外にもブランチ作成者が許可を出した場合も可能とするという手順を仕様とし始めたもの
+      # 2023.4.10現在は不採用
+      # document.branch.user_id == user.id || user.allowed_users.include?(document.user)
+    end
+
+    ## イシュー
+    can :read, Issue, repository: { user_id: user.id }
+    can [:create, :update, :destroy], Issue, repository: { user_id: user.id }
+
+    ## コミット
+
   end
 
-## 以下参考
-# class Ability
-#   include CanCan::Ability
+  ## 以下参考
+  # class Ability
+  #   include CanCan::Ability
 
-#   def initialize(user)
-#     can :read, Post, public: true
+  #   def initialize(user)
+  #     can :read, Post, public: true
 
-#     return unless user.present?  # additional permissions for logged in users (they can read their own posts)
-#     can :read, Post, user: user
+  #     return unless user.present?  # additional permissions for logged in users (they can read their own posts)
+  #     can :read, Post, user: user
 
-#     return unless user.admin?  # additional permissions for administrators
-#     can :read, Post
-#   end
-# end
+  #     return unless user.admin?  # additional permissions for administrators
+  #     can :read, Post
+  #   end
+  # end
 
-
-
-    # Define abilities for the user here. For example:
-    #
-    #   return unless user.present?
-    #   can :read, :all
-    #   return unless user.admin?
-    #   can :manage, :all
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, published: true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 end
