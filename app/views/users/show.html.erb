@@ -1,18 +1,30 @@
 <div class="profile-container">
 <div class="profile-info">
-  <p><strong><%= current_user.name %>のプロフィール:</strong></p>
-  <p><strong>Name:</strong> <%= current_user.name %></p>
-  <p><strong>Email:</strong> <%= current_user.email %></p>
-  <p><strong>Content:</strong> <%= current_user.content %></p>
-  <p><strong>Icon:</strong> <%= current_user.icon %></p>
+  <% if current_user == @user %>
+    <p><strong><%= current_user.name %>のプロフィール:</strong></p>
+    <p><strong>Name:</strong> <%= current_user.name %></p>
+    <p><strong>Email:</strong> <%= current_user.email %></p>
+    <p><strong>Content:</strong> <%= current_user.content %></p>
+    <p><strong>Icon:</strong> <%= current_user.icon %></p>
+  <% elsif current_user != @user %>
+    <p><strong><%= @user.name %>のプロフィール:</strong></p>
+    <p><strong>Name:</strong> <%= @user.name %></p>
+    <p><strong>Content:</strong> <%= @user.content %></p>
+    <p><strong>Icon:</strong> <%= @user.icon %></p>
+  <% end %>
+ 
   <div class="profile-actions">
     <%= link_to '<i class="fas fa-pencil-alt"></i> Edit'.html_safe, edit_user_registration_path, class: "profile-action-btn" %>
     <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, users_path, class: "profile-action-btn" %>
   </div>
 </div>
 
-  <div class="repository-info">
+<div class="repository-info">
+  <% if current_user == @user %>
     <p> <strong><%= current_user.name %>のRepository:</strong> </p>
+  <% elsif current_user != @user %>
+    <p> <strong><%= @user.name %>のRepository:</strong> </p>
+  <% end %>
     <table>
       <thead>
         <tr>
@@ -38,18 +50,20 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-
-<div class="conversation-container">
-  <div class="conversation-info">
-    <p> <strong><%= current_user.name %>のConversation:</strong> </p>
-    <% @conversations.each do |conversation| %>
-      <div>
-        <% if conversation.target_user(current_user).present? %>
-          <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
 </div>
+
+<% if @conversations.present? %>
+  <div class="conversation-container">
+    <div class="conversation-info">
+      <p><strong><%= current_user.name %>のConversation:</strong> </p>
+      <% @conversations.each do |conversation| %>
+        <div>
+          <% if conversation.target_user(current_user).present? %>
+            <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 

@@ -26,9 +26,14 @@ class UsersController < ApplicationController
 #   end
 
   def show
-    @repositories = current_user.repositories
-    @conversations = Conversation.all
-    redirect_to(repositories_path, danger:"権限がありません") unless current_user == @user
+    if current_user == @user
+      @repositories = current_user.repositories
+      @conversations = Conversation.all
+    elsif current_user != @user
+      @repositories = @user.repositories
+      ## 以下、ユーザが非公開設定している場合のリダイレクト先
+      # redirect_to(repositories_path, danger:"権限がありません") if @user.status == closed
+    end
     # set_userで定義した@user = User.find(params[:id])のこと
     # ログインしているユーザーが他のユーザーのページを表示しようとした場合、
     # current_user != @user となり、redirect_to(tasks_path, danger:"権限がありません")
