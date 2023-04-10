@@ -13,18 +13,20 @@ class Ability
     end
     ## リポジトリ
     can [:create, :read], Repository
-    can [:update], Repository, user_id: user.id
+    can :update, Repository, user_id: user.id
     can :destroy, Repository, user_id: user.id
   
     ## ブランチ
-    can [:create, :read], Branch, user_id: user.id
-    can [:update], Branch, repository: { user_id: user.id }
+    can [:read], Branch
+    can [:create, :update], Branch, repository: { user_id: user.id }
     can :destroy, Branch do |branch|
       branch.repository.user_id == user.id || branch.user_id == user.id
     end
   
     ## ドキュメント
-    can :create, Document, user_id: user.id
+    can :create, Document do |document|
+      user_id == user.id || @branch.repository.user_id == user.id
+    end
     can :read, Document
     can [:update, :destroy], Document do |document|
       document.user_id == user.id || document.branch.repository.user_id == user.id
@@ -34,6 +36,10 @@ class Ability
     end
 
     ## イシュー
+    can :read, Issue, repository: { user_id: user.id }
+    can [:create, :update, :destroy], Issue, repository: { user_id: user.id }
+
+    ## コミット
 
   end
 
