@@ -7,7 +7,9 @@
 <div class="user-list">
   <% @users.each do |user| %>
     <% if user.id != current_user.id %>
-      <div class="user-item">
+      <%# <div class="user-item"> %>
+      <%# テスト用に上記のコードを以下のように書き換え %>
+      <div class="user-item" data-user-name="<%= user.name %>">
         <div class="user-info">
           <%= link_to "#{user.name}さん", user, class: "user-name" %>
           <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %>

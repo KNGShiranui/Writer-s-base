@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :repositories, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :assignees, dependent: :destroy
-  has_many :branches
+  has_many :branches, dependent: :destroy
   has_many :issues, through: :assignees
   has_many :documents, dependent: :destroy
   # has_many :team_members, dependent: :destroy  # 機能拡張時に使うかも
