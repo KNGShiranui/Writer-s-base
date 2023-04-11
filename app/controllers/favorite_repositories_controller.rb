@@ -18,6 +18,5 @@ class FavoriteRepositoriesController < ApplicationController
   end
 end
 
-
 ## ネストしていないルーティングのindexの場合、各ユーザーのindexアクションのURLが同じなので、なりすましで閲覧はできない。
 # つまり、authorize不要。ログインしてるか否かで弾けたら問題なし
