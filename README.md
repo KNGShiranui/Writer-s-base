@@ -36,3 +36,12 @@
   https://drive.google.com/drive/folders/10IG6nYSs7ahhPLE9sYMJM020ar3YJcC7
 ## 画面遷移図
   ![画面遷移図](https://github.com/KNGShiranui/Writer-s-base/blob/introduction_of_devise/image/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png)
+
+
+## 開発時の補足
+  # テスト実施時に以下のエラー
+    Webpacker can't find application.js
+    Webpacker::Manifest::MissingEntryError at /users/sign_up
+    Webpacker can't find application.js in /home/kengo/workspace/Writer-s-base/public/packs-test/manifest.json. Possible causes:
+  # 原因：テスト環境においてasset:precompileがなされておらず、packs-testディレクトリ以下の必要なファイルが存在しなかった。
+  # 解決策：rails assets:precompile RAILS_ENV=testを実行
