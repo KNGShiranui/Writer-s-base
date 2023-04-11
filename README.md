@@ -51,3 +51,7 @@
     　export EDITOR="code --wait"
       export BETTER_ERRORS_EDITOR="$EDITOR"
     source ~/.zshrc
+
+## テスト実施時の不具合
+  # bundle exec rspecとbin/rspecの違い
+    基本はbundle exec rspecの方がいい。余計なバージョン間の衝突を回避できる。
