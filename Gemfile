@@ -22,7 +22,6 @@ gem 'kaminari', '~> 0.17.0'
 # gem 'jquery-rails'
 gem 'markdiff'
 gem 'paper_trail'
-# gem 'turbolinks', '~> 5'
 # gem 'uglifier', '>= 1.3.0'
 # gem 'nokogiri'
 gem 'truncate_html'
@@ -33,13 +32,18 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'spring'
+  gem 'rspec-rails'
+  gem 'spring-commands-rspec'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'launchy'
 end
 
 group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-  gem 'spring'
   gem 'letter_opener_web'
 end
 
