@@ -45,3 +45,9 @@
     Webpacker can't find application.js in /home/kengo/workspace/Writer-s-base/public/packs-test/manifest.json. Possible causes:
   # 原因：テスト環境においてasset:precompileがなされておらず、packs-testディレクトリ以下の必要なファイルが存在しなかった。
   # 解決策：rails assets:precompile RAILS_ENV=testを実行
+  # 以下のコマンドも何か関係があるかも・・・？
+    echo $SHELL
+    vi ~/.zshrc（以下を追加）
+    　export EDITOR="code --wait"
+      export BETTER_ERRORS_EDITOR="$EDITOR"
+    source ~/.zshrc
