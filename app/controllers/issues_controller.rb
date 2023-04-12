@@ -104,9 +104,10 @@ class IssuesController < ApplicationController
       end
     else
       @repository_id = params[:repository_id] # 明示的に書く必要あり？
+      @repository = @issue.repository  # repository#showからissueを削除した後、元のrepository#showに戻るために必要な記述だった。苦労した！
       @issue.destroy
       respond_to do |format|
-        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
+        format.html { redirect_to repository_path(@repository, repository_id: @repository.id), notice: "Issue was successfully destroyed." }
         format.json { head :no_content }
       end
     end
