@@ -31,7 +31,7 @@ class BranchesController < ApplicationController
     @repository_id = @repository.id
   end
 
-  def create
+  def create  # createはrepositoryの新規作成時のみに同時に実行される。
     @repository = Repository.find(params[:branch][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
     @branch = Branch.new(branch_params)
