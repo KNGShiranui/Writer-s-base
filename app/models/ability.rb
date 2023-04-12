@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     ## 以下2行はcancancan関係のための記述（issues_controller、ability.rb、application_controllerに記載あり
     ## ややこしいので気を付けて！
-    user ||= User.new
+    user ||= current_user
     repository_id = Thread.current[:current_repository_id]
     # 以下のコードの意味の解説
     # ログイン中のユーザに管理者権限がある場合はrails_adminへのアクセスと、
@@ -46,21 +46,22 @@ class Ability
     ## favorite_repositoryについて
     # ネストしていないindexビューのみなので、ログインしているか否かでなりすましを弾ける
 
-    ## issueについて
+    ## TODO:issueについて どうしてもうまくいかないので後回し・・・
     can :read, Issue
     can :create, Issue do |issue|
-      repository = Repository.find_by(id: repository_id)
+      repository = Repository.find_by(id: issue.repository_id)
       # repository = Repository.find(params[:repository_id]) ←ability.rbではparamsは使えない
       # issue.new_record? && repository&.user_id == user.id
-      issue.new_record? && repository.user_id == user.id
+      issue.new_record? && issue.user == user
     end
     can [:update, :destroy], Issue, repository: { user_id: user.id }
+    # can [:create, :update, :destroy], Issue, repository: { user_id: user.id }
     
     ## messageについて
     # かえってややこしいのでconversations_controllerで制御。
 
     ## relationshipについて
-# 。とりあえず今はなくてOK
+    # とりあえず今はなくてOK
 
     ## repositoryについて
     can [:create, :read], Repository

@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_issue, only: %i(show edit update destroy)
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   def index
     if params[:repository_id].present?
@@ -32,9 +32,17 @@ class IssuesController < ApplicationController
   end
 
   def new
-    params[:user_id] = current_user.id
+    # binding.pry
     @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
     @issue = @repository.issues.build
+    params[:user_id] = current_user.id
+    if current_user == @repository.user
+      @issue = Issue.new(user_id: current_user.id, repository_id: params[:repository_id])
+    else
+      # リポジトリの作成者ではない場合、適切なエラーメッセージを表示してリダイレクト
+      flash[:alert] = "You are not authorized to create issues in this repository."
+      redirect_to repository_url(@repository)
+    end
     # binding.pry
   end
 
@@ -53,16 +61,24 @@ class IssuesController < ApplicationController
   def create
     @repository = Repository.find(params[:issue][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
-    @issue = Issue.new(issue_params.merge(user_id: current_user.id))
-    # .merge(user_id: current_user.id)が重要だった。他の書き方ない？
-    respond_to do |format|
-      if @issue.save
-        format.html { redirect_to issue_url(@issue), notice: "Issue was successfully created." }
-        format.json { render :show, status: :created, location: @issue }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
+
+    # リポジトリの作成者のみが新しいissueを作成できるように制御
+    if current_user.id == @repository.user_id
+      @issue = Issue.new(issue_params.merge(user_id: current_user.id))
+      # .merge(user_id: current_user.id)が重要だった。他の書き方ない？
+      respond_to do |format|
+        if @issue.save
+          format.html { redirect_to issue_url(@issue), notice: "Issue was successfully created." }
+          format.json { render :show, status: :created, location: @issue }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @issue.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      # リポジトリの作成者ではない場合、適切なエラーメッセージを表示してリダイレクト
+      flash[:alert] = "You are not authorized to create issues in this repository."
+      redirect_to repository_url(@repository)
     end
   end
 
