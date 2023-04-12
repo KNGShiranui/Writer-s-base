@@ -82,7 +82,25 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #   end
   # end
 
-  # ## TODO:branch#create_from_existing
+  # ## TODO:branch#create_from_existingその1
+  # describe 'ブランチの複製' do
+  #   context 'ブランチの複製' do
+  #     it 'ブランチを複製できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'branchを切る'
+  #       binding.pry
+  #       expect(page).to have_content 'Branch_1'
+  #     end
+  #   end
+  # end
+
+  # ## TODO:branch#create_from_existingその2
   # ## createはrepositoryの新規作成時のみに同時に実行されるのでテストなし。
   # describe 'ブランチ複製' do
   #   context 'ブランチ複製' do
@@ -99,13 +117,15 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #       # fill_in "repository_status", with: "open"
   #       # fill_in "repository_priority", with: "high"
   #       # binding.pry
-  #       fill_in "repository_user_id", with: "#{user}"
+  #       fill_in "repository_user_id", with: "#{user.id}"
+  #       # binding.pry
   #       # association :user, factory: :user
   #       click_on '登録する'
   #       sleep 1
+  #       binding.pry
   #       new_repository = Repository.find_by(name: "repository_1")
   #       expect(new_repository).to be_present
-  #       binding.pry
+  #       # binding.pry
   #       new_branch = Branch.find_by(repository: new_repository)
   #       expect(new_branch).to be_present
   #       find('.fa-eye', match: :first).click

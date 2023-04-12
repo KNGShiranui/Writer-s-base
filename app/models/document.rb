@@ -1,7 +1,7 @@
 class Document < ApplicationRecord
   belongs_to :user
   belongs_to :branch
-  has_one :commit
+  has_one :commit, dependent: :destroy
   accepts_nested_attributes_for :commit, allow_destroy: true, reject_if: :all_blank
   # , update_only: true  # commitかcommitsかどっち？
 

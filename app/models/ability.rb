@@ -32,13 +32,13 @@ class Ability
     ## conversationについて
     # かえってややこしいのでconversations_controllerで制御。
   
-    ## documentについて
-    can :read, Document
-    can :create, Document do |document|
-      repository = Repository.find_by(id: repository_id)
-      document.new_record? && branch.user_id == user.id || document.new_record? && repository.user_id == user.id
-    end
-    can [:update, :destroy], Document, branch: { user_id: user.id }
+    ## documentについて（結局controllerで制御。以下、コメントアウト）
+    # can :read, Document
+    # can :create, Document do |document|
+    #   repository = Repository.find_by(id: repository_id)
+    #   (document.new_record? && branch.user_id == user.id) || (document.new_record? && repository.user_id == user.id)
+    # end
+    # can [:update, :destroy], Document, branch: { user_id: user.id }
       ## 以下はブランチ作成者以外にもブランチ作成者が許可を出した場合も可能とするという手順を仕様とし始めたもの
       # 2023.4.10現在は不採用
       # document.branch.user_id == user.id || user.allowed_users.include?(document.user)
@@ -46,16 +46,15 @@ class Ability
     ## favorite_repositoryについて
     # ネストしていないindexビューのみなので、ログインしているか否かでなりすましを弾ける
 
-    ## TODO:issueについて どうしてもうまくいかないので後回し・・・
-    can :read, Issue
-    can :create, Issue do |issue|
-      repository = Repository.find_by(id: issue.repository_id)
-      # repository = Repository.find(params[:repository_id]) ←ability.rbではparamsは使えない
-      # issue.new_record? && repository&.user_id == user.id
-      issue.new_record? && issue.user == user
-    end
-    can [:update, :destroy], Issue, repository: { user_id: user.id }
-    # can [:create, :update, :destroy], Issue, repository: { user_id: user.id }
+    ## issueについて（結局controllerで制御。以下、コメントアウト）
+    # can :read, Issue
+    # can :create, Issue do |issue|
+    #   repository = Repository.find_by(id: issue.repository_id)
+    #   # repository = Repository.find(params[:repository_id]) ←ability.rbではparamsは使えない
+    #   # issue.new_record? && repository&.user_id == user.id
+    #   issue.new_record? && issue.user == user
+    # end
+    # can [:update, :destroy], Issue, repository: { user_id: user.id }
     
     ## messageについて
     # かえってややこしいのでconversations_controllerで制御。
