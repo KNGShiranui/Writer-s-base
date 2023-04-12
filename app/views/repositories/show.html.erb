@@ -82,15 +82,15 @@
               <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe,  issue_path(issue) %></td>
               <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
               <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
-            <td>
-              <% if current_user.id == issue.user_id %>
-                <% if issue.assignees.present? %>
-                  <%= link_to '<i class="fas fa-times"></i>'.html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
-                <% else %>
-                  <%= link_to '<i class="fas fa-hand-paper"></i>'.html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to '<i class="fas fa-times"></i>'.html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <% else %>
+                    <%= link_to '<i class="fas fa-hand-paper"></i>'.html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </td>
+              </td>
           </tr>
         <% end %>
       <% elsif current_user.present? == false %>
@@ -106,7 +106,8 @@
   </tbody>
 </table>
 <%= paginate @issues %>
-<%= link_to 'Edit', edit_repository_path(@repository) %> |
-<%= link_to 'Back', repositories_path %>
-
+<div class="Edit-RSpec">
+  <%= link_to 'Edit', edit_repository_path(@repository) %> |
+  <%= link_to 'Back', repositories_path %>
+</div>
 </div>
