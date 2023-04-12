@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'ユーザー管理機能', type: :system do
+RSpec.describe 'イシュー管理機能', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:second_user) { FactoryBot.create(:second_user) }
   let!(:third_user) { FactoryBot.create(:third_user) }
