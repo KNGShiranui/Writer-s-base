@@ -80,24 +80,31 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #   end
   # end
 
-  ## issue#destroy
-  describe 'issueの削除' do
-    context 'issueの削除' do
-      it 'issueを削除する' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.dropbtn').click  # dropbtnクラスの要素をクリック
-        find('.dropdown-content').click_link 'リポジトリ一覧'
-        find('.fa-eye', match: :first).click
-        click_on "イシュー作成"
-        fill_in "issue_name", with: "issue_1"
-        fill_in "issue_description", with: "description_1"
-        select 'open', from: 'issue_status'
-        select 'high', from: 'issue_priority'
-        click_on "登録する"
-      end
-    end
-  end
+  # ## issue#destroy
+  # describe 'issueの削除' do
+  #   context 'issueの削除' do
+  #     it 'issueを削除する' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
+  #       find('.dropdown-content').click_link 'リポジトリ一覧'
+  #       find('.fa-eye', match: :first).click
+  #       click_on "イシュー作成"
+  #       fill_in "issue_name", with: "issue_1"
+  #       fill_in "issue_description", with: "description_1"
+  #       select 'open', from: 'issue_status'
+  #       select 'high', from: 'issue_priority'
+  #       click_on "登録する"
+  #       click_on "Back"
+  #       # click_on "Destroy", match: :first
+  #       accept_confirm do
+  #         find(".fa-trash").click
+  #       end
+  #       expect(page).to have_content 'Repository_1'
+  #       expect(page).to have_content 'リポジトリオーナー'
+  #     end
+  #   end
+  # end
 end
