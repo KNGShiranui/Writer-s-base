@@ -106,7 +106,7 @@ class IssuesController < ApplicationController
       @repository_id = params[:repository_id] # 明示的に書く必要あり？
       @issue.destroy
       respond_to do |format|
-        format.html { redirect_to issues_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: "Issue was successfully destroyed." }
         format.json { head :no_content }
       end
     end
