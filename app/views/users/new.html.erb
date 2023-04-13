@@ -1,3 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Example</title>
+  <style>
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    .field {
+      width: 400px;
+      max-width: 550px;
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 5px 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    .actions input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 3px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .actions input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
 <h1>ユーザー新規作成</h1>
-<%= render 'form', user: @user %>
-<%= link_to 'ログイン', new_user_session_path %> |
+    <div class="form-container">
+        <form action="" method="post">
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" autofocus autocomplete="name">
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" autocomplete="email">
+            </div>
+            <div class="field">
+                <label for="content">Content</label>
+                <input type="text" name="content" id="content" autocomplete="content">
+            </div>
+            <div class="field">
+                <label for="icon">Icon</label>
+                <input type="text" name="icon" id="icon" autocomplete="icon">
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" autocomplete="new-password">
+            </div>
+            <div class="field">
+                <label for="password_confirmation">Password Confirmation</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password">
+            </div>
+            <div class="actions">
+                <input type="submit" value="アカウント登録・更新">
+            </div>
+        </form>
+        <%= link_to 'ログイン', new_user_session_path, class: 'login-button' %>
+    </div>
+</body>
+</html>

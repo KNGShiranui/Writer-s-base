@@ -15,21 +15,25 @@ class UsersController < ApplicationController
     @user = User.new # 上記以外の場合はこっち
   end
 
-#   def create
-#     @user = User.new(user_params)
-#     if @user.save
-#       session[:user_id] = @user.id  # log_inメソッドでもいいかも？
-#       redirect_to user_path(@user.id), notice: "ユーザー登録が完了しました" 
-#       # redirect_to user_path(session[:user_id])でもOK
-#     else
-#       render :new, status: :unprocessable_entity 
-#     end
-#   end
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      current_user = @user
+      # log_inメソッドでもいいかも？
+      redirect_to new_user_session_path, notice: "ユーザー登録が完了しました" 
+      # redirect_to user_path(current_user), notice: "ユーザー登録が完了しました" 
+      # redirect_to user_path(session[:user_id])でもOK
+    else
+      render :new, status: :unprocessable_entity 
+    end
+  end
 
   def show
     if current_user == @user
       @repositories = current_user.repositories
       @conversations = Conversation.all
+      current_user = @user
     elsif current_user != @user
       @repositories = @user.repositories
       ## 以下、ユーザが非公開設定している場合のリダイレクト先
