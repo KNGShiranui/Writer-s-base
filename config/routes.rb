@@ -6,14 +6,14 @@ Rails.application.routes.draw do
     # ↓deviseで更新しようとすると、なぜかupdateがdestroyになる・・・
     # registrations: 'users/registrations' # user#update用ルーティング
     # ↑users_controllerで制御することにしたので使わない
-    registrations: 'users' # user#update用ルーティング
+    # registrations: 'users' # user#update用ルーティング
   }  
   ## deviseを使う場合は以下のようにブロックでゲストログインルーティングの記載をする必要あり
   devise_scope :user do
     get 'guest_sign_in', to: 'sessions#guest_sign_in'
     get 'guest_admin_sign_in', to: 'sessions#guest_admin_sign_in'
-    # get 'users/edit', to: 'users#edit', as: 'edit_user_registration' # users_controllerでupdateを制御することにしたので追記
-    # put 'users', to: 'users#update', as: 'user_registration' # users_controllerでupdateを制御することにしたので追記
+    get 'users/edit', to: 'users#edit' # users_controllerでupdateを制御することにしたので追記
+    put 'users', to: 'users#update' # users_controllerでupdateを制御することにしたので追記
   end
 
   resources :assignees

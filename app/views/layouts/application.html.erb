@@ -95,7 +95,7 @@
                   <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
                 <% end %>
                   <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
-                  <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user) %>
+                  <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user.id) %>
                   <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
                   <%# followerとfollowをindexアクション内で条件分岐したらOK %>
                   <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
