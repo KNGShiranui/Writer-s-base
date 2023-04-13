@@ -19,6 +19,7 @@ class Ability
     ## assigneeについて（なくていいかも）
 
     ## branchについて
+    ## TODO:とりあえず一度権限制約外した
     can [:read], Branch
     ## TODO:現状、branchはrepositoryの持ち主しか切ることができない。
     # 今後、「チームの一員ならば切れる」「公開されていて誰にでも切れる」なども選択できるようにすること
