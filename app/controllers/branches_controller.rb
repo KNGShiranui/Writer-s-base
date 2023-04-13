@@ -1,5 +1,5 @@
 class BranchesController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   before_action :authenticate_user!, only: %i(new create edit update destroy)
   before_action :set_branch, only: %i(show edit update destroy)
 
