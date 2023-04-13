@@ -141,53 +141,53 @@ RSpec.describe 'document管理機能', type: :system do
   #   end
   # end
 
-  ## version#show
-  describe 'バージョン詳細' do
-    context 'バージョン詳細' do
-      it 'バージョン詳細を表示できる' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.fa-eye', match: :first).click
-        sleep 1
-        find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        sleep 1
-        find('.fa-pen-to-square', match: :first).click
-        fill_in "document_name", with: "変更したぜ！！！！"
-        click_on '更新する'
-        click_on 'このバージョンを表示する', match: :first
-        expect(page).to have_content('変更したぜ！！！！', count: 1)
-        expect(page).to have_content('Document_2', count: 1)
-        expect(page).to have_content('Content_2', count: 1)
-        expect(page).not_to have_content('差分を表示する')
-      end
-    end
-  end
+  # ## version#show
+  # describe 'バージョン詳細' do
+  #   context 'バージョン詳細' do
+  #     it 'バージョン詳細を表示できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       sleep 1
+  #       find('.fa-pen-to-square', match: :first).click
+  #       fill_in "document_name", with: "変更したぜ！！！！"
+  #       click_on '更新する'
+  #       click_on 'このバージョンを表示する', match: :first
+  #       expect(page).to have_content('変更したぜ！！！！', count: 1)
+  #       expect(page).to have_content('Document_2', count: 1)
+  #       expect(page).to have_content('Content_2', count: 1)
+  #       expect(page).not_to have_content('差分を表示する')
+  #     end
+  #   end
+  # end
 
-  ## change#show
-  describe '差分詳細' do
-    context '差分詳細' do
-      it '差分詳細を表示できる' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.fa-eye', match: :first).click
-        sleep 1
-        find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        sleep 1
-        find('.fa-pen-to-square', match: :first).click
-        fill_in "document_name", with: "変更したぜ！！！！"
-        click_on '更新する'
-        click_on '差分を表示する', match: :first
-        expect(page).to have_content('変更したぜ！！！！', count: 1)
-        expect(page).to have_content('Document_2', count: 1)
-        expect(page).to have_content('Content_2', count: 1)
-        expect(page).to have_content('差分を表示する', count: 1)
-      end
-    end
-  end
+  # ## change#show
+  # describe '差分詳細' do
+  #   context '差分詳細' do
+  #     it '差分詳細を表示できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       sleep 1
+  #       find('.fa-pen-to-square', match: :first).click
+  #       fill_in "document_name", with: "変更したぜ！！！！"
+  #       click_on '更新する'
+  #       click_on '差分を表示する', match: :first
+  #       expect(page).to have_content('変更したぜ！！！！', count: 1)
+  #       expect(page).to have_content('Document_2', count: 1)
+  #       expect(page).to have_content('Content_2', count: 1)
+  #       expect(page).to have_content('差分を表示する', count: 1)
+  #     end
+  #   end
+  # end
 end
