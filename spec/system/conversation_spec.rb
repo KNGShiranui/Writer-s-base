@@ -3,10 +3,9 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:second_user) { FactoryBot.create(:second_user) }
   let!(:third_user) { FactoryBot.create(:third_user) }
-  # let!(:conversation) { FactoryBot.create(:conversation, user: user) }
-  # let!(:second_conversation) { FactoryBot.create(:second_conversation, user: second_user) }
-  # let!(:third_conversation) { FactoryBot.create(:third_conversation) }
-  # let!(:task) { FactoryBot.create(:task, user: user) }
+  let!(:conversation) { FactoryBot.create(:conversation, sender: user, recipient: second_user) }
+  let!(:second_conversation) { FactoryBot.create(:second_conversation, sender: second_user, recipient: third_user) }
+
 
   ## conversation#create and message#index
   describe 'チャットルーム作成' do

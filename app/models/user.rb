@@ -22,7 +22,9 @@ class User < ApplicationRecord
 
   ## 以下でconversationsのassociationを定義
   # ....
-  has_many :conversations, dependent: :destroy
+  # has_many :conversations, dependent: :destroy
+  has_many :sent_conversations, foreign_key: :sender_id, class_name: 'Conversation', dependent: :destroy
+  has_many :received_conversations, foreign_key: :recipient_id, class_name: 'Conversation', dependent: :destroy
 
   ## 以下でリポジトリのお気に入りを定義
   has_many :favorite_repositories

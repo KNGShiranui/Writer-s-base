@@ -1,13 +1,13 @@
-# require 'rails_helper'
-# RSpec.describe 'document管理機能', type: :system do
-#   let!(:user) { FactoryBot.create(:user) }
-#   let!(:second_user) { FactoryBot.create(:second_user) }
-#   let!(:third_user) { FactoryBot.create(:third_user) }
-#   let!(:repository) { FactoryBot.create(:repository, user: user) }
-#   let!(:branch) { FactoryBot.create(:branch, user: user, repository: repository) }
-#   let!(:issue) { FactoryBot.create(:issue, user: user, repository: repository) }
-#   let!(:document) { FactoryBot.create(:document, user: user, branch: branch) }
-#   let!(:second_document) { FactoryBot.create(:second_document, user: user, branch: branch) }
+require 'rails_helper'
+RSpec.describe 'document管理機能', type: :system do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:second_user) { FactoryBot.create(:second_user) }
+  let!(:third_user) { FactoryBot.create(:third_user) }
+  let!(:repository) { FactoryBot.create(:repository, user: user) }
+  let!(:branch) { FactoryBot.create(:branch, user: user, repository: repository) }
+  let!(:issue) { FactoryBot.create(:issue, user: user, repository: repository) }
+  let!(:document) { FactoryBot.create(:document, user: user, branch: branch) }
+  let!(:second_document) { FactoryBot.create(:second_document, user: user, branch: branch) }
 
 #   ## document#create & commit#create
 #   describe 'documentの作成' do
@@ -73,29 +73,40 @@
 #     end
 #   end
 
-#   ## document#update
-#   describe 'document更新' do
-#     context 'document更新' do
-#       it 'documentを更新できる' do
-#         visit new_user_session_path
-#         fill_in "user_email", with: "KNG1@example.com"
-#         fill_in "user_password", with: "11101252"
-#         click_on "ログイン"
-#         find('.fa-eye', match: :first).click
-#         sleep 1
-#         find('.fa-eye', match: :first).click
-#         click_on 'Document一覧'
-#         sleep 1
-#         # binding.pry
-#         find('.fa-pen-to-square', match: :first).click
-#         fill_in "document_name", with: "変更したぜ！！！！"
-#         click_on '更新する'
-#         expect(page).to have_content '変更したぜ！！！！'
-#       end
-#     end
-#   end
+  # ## document#update &commit#update
+  # describe 'document更新' do
+  #   context 'document更新' do
+  #     it 'documentを更新できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       click_on 'New Document'
+  #       fill_in "document_name", with: "KNGのいたずら日記"
+  #       trix_editor = find(".trix-content")
+  #       # trix_input = find("document_content")
+  #       execute_script("arguments[0].editor.insertString('KNGのいたずら日記')", trix_editor.native)
+  #       # fill_in "document_user_id", with: "KNGのいたずら日記"
+  #       # fill_in "document_branch_id", with: "KNGのいたずら日記"
+  #       # fill_in "document_repository_id", with: "KNGのいたずら日記"
+  #       fill_in "document_commit_attributes_message", with: "いたずらにコミットする"
+  #       click_on '登録する'
+  #       find('.fa-pen-to-square', match: :first).click
+  #       fill_in "document_name", with: "変更したぜ！！！！"
+  #       fill_in "document_commit_attributes_message", with: "いたずらにコミットする。その2"
+  #       click_on '更新する'
+  #       binding.pry
+  #       expect(page).to have_content '変更したぜ！！！！'
+  #       expect(page).to have_content 'いたずらにコミットする。その2'
+  #     end
+  #   end
+  # end
 
-#   ## document#update
+#   ## document#destroy
 #   describe 'document削除' do
 #     context 'document削除' do
 #       it 'documentを削除できる' do
@@ -190,4 +201,4 @@
 #       end
 #     end
 #   end
-# end
+end

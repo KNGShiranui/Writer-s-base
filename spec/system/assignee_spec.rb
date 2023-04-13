@@ -28,7 +28,7 @@
 #     end
 #   end
 
-#   ## assignee#create
+#   ## assignee#destroy
 #   describe 'issueから外れる' do
 #     context 'issueから外れる' do
 #       it 'issueから外れる' do
