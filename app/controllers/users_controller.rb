@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i(edit update show destroy)
-  # before_action :ensure_correct_user, only: %i(show)
+  # before_action :ensure_correct_user, only: %i(show)  
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :current_user
   
   def index
@@ -9,10 +10,10 @@ class UsersController < ApplicationController
     # binding.pry
   end
 
-#   def new
-#     redirect_to user_path(current_user) if logged_in?
-#     @user = User.new # 上記以外の場合はこっち
-#   end
+  def new
+    redirect_to user_path(current_user) if user_signed_in?
+    @user = User.new # 上記以外の場合はこっち
+  end
 
 #   def create
 #     @user = User.new(user_params)
@@ -40,16 +41,17 @@ class UsersController < ApplicationController
     # によってタスク一覧ページにリダイレクトされます。
   end
 
-#   def edit
-#   end
+  def edit
+    @user = current_user
+  end
   
-#   def update
-#     if @user.update(user_params)
-#       redirect_to user_path(@user), notice: "ユーザー情報が更新されました。"
-#     else
-#       render :edit, status: :unprocessable_entity
-#     end
-#   end
+  def update
+    if @user.update(user_params)
+      redirect_to new_user_session_path, notice: "ユーザー情報が更新されました。"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
 #   def destroy
 #     @user.destroy
@@ -62,7 +64,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # def user_params
-  #   params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  # end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :content, :icon)
+  end
+
+  def account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :password, :password_confirmation, :current_password, :content, :icon])
+  end
 end

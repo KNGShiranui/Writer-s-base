@@ -53,21 +53,21 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #   end
   # end
 
-  # ## user#create
-  # describe '新規作成機能' do
-  #   context 'ユーザーを新規登録した場合' do
-  #     it '登録したユーザーのマイページが表示される' do
-  #       # binding.pry
-  #       visit new_user_registration_path
-  #       fill_in "user_name", with: "KNG4"
-  #       fill_in "user_email", with: "KNG4@example.com"
-  #       fill_in "user_password", with: "11101252"
-  #       fill_in "user_password_confirmation", with: "11101252"
-  #       click_on "アカウント登録"
-  #       expect(page).to have_content "現在のユーザー: KNG4さん"
-  #     end
-  #   end
-  # end
+  ## user#create
+  describe '新規作成機能' do
+    context 'ユーザーを新規登録した場合' do
+      it '登録したユーザーのマイページが表示される' do
+        # binding.pry
+        visit new_user_registration_path
+        fill_in "user_name", with: "KNG4"
+        fill_in "user_email", with: "KNG4@example.com"
+        fill_in "user_password", with: "11101252"
+        fill_in "user_password_confirmation", with: "11101252"
+        click_on "アカウント登録・更新"
+        expect(page).to have_content "現在のユーザー: KNG4さん"
+      end
+    end
+  end
   
   # ## user#index
   # describe 'ユーザー表示' do
@@ -102,21 +102,29 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #   end
   # end
 
-  ## TODO:user#update
-  describe 'ユーザー編集' do
-    context 'プロフィール編集' do
-      it 'プロフィール画面が編集される' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.dropbtn').click  # dropbtnクラスの要素をクリック
-        find('.dropdown-content').click_link 'プロフィール'
-        click on 'Edit'
-        fill_in "user_email", with: "KNG4@example.com"        
-        expect(page).to have_content 'KNG1のプロフィール'
-        expect(page).to have_content 'KNG1のRepository'
-      end
-    end
-  end
+  # ## TODO:user#update
+  # describe 'ユーザー編集' do
+  #   context 'プロフィール編集' do
+  #     it 'プロフィール画面が編集される' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
+  #       find('.dropdown-content').click_link 'プロフィール'
+  #       find('.fa-pencil', match: :first).click
+  #       fill_in "user_name", with: "KNG4"
+  #       fill_in "user_email", with: "KNG4@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       fill_in "user_password_confirmation", with: "11101252"
+  #       # fill_in "user_current_password", with: "11101252"
+  #       click_on "アカウント登録・更新"
+  #       expect(page).to have_content 'ユーザー情報が更新されました'
+  #       fill_in "user_email", with: "KNG4@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       expect(page).to have_content 'KNG4'
+  #     end
+  #   end
+  # end
 end

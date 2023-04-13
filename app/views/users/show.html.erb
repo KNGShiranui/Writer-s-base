@@ -12,9 +12,9 @@
     <p><strong>Content:</strong> <%= @user.content %></p>
     <p><strong>Icon:</strong> <%= @user.icon %></p>
   <% end %>
- 
+
   <div class="profile-actions">
-    <%= link_to '<i class="fas fa-pencil-alt"></i> Edit'.html_safe, edit_user_registration_path, class: "profile-action-btn" %>
+    <%= link_to '<i class="fas fa-pencil-alt"></i> Edit'.html_safe, edit_user_registration_path(id: current_user.id), class: "profile-action-btn" %>
     <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, users_path, class: "profile-action-btn" %>
   </div>
 </div>
