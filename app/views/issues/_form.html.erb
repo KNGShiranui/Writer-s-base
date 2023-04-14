@@ -30,15 +30,8 @@
     <%= form.select :priority, Issue.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
   </div>
 
-  <%# <div class="field"> %>
-    <%#= form.label :repository_id %>
-    <%#= form.text_field :repository_id %>
-  <%# </div> %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+  <%= form.hidden_field :repository_id %>
+  <%= form.hidden_field :user_id %>
 
   <div class="actions">
     <%= form.submit %>

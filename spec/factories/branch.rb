@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :branch do
     name { "Branch_1" }
-    status { "0" }
+    status { "1" }
     association :repository, factory: :repository
     association :user, factory: :user
   end

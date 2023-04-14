@@ -21,23 +21,12 @@
     <trix-editor input="document_content" class="trix-content">
   </div>
 
-  <%# <div class="field"> %>
-    <%#= form.label :user_id %>
-    <%#= form.text_field :user_id, value: current_user.id %>
-    <%## TODO:受け渡されているデータをhidden_fieldに入力するにはvalueを使う %>
-    <%## TODO: value: current_user.idを使うとデータ更新できる人が作成者と異なる場合、user_idが
-    書き換えられてしまうのではないか %>
-  <%# </div> %>
-
-  <%# <div class="field"> %>
-    <%#= form.label :branch_id %>
-    <%#= form.text_field :branch_id, value: @branch.id %>
-  <%# </div> %>
-
-  <%# <div class="field"> %>
-    <%#= form.label :repository_id %>
-    <%#= form.text_field :repository_id, value: @repository.id %>
-  <%# </div> %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%## TODO:受け渡されているデータをhidden_fieldに入力するにはvalueを使う %>
+  <%## TODO: value: current_user.idを使うとデータ更新できる人が作成者と異なる場合、user_idが
+  書き換えられてしまうのではないか %>
+  <%= form.hidden_field :branch_id, value: @branch.id %>
+  <%= form.hidden_field :repository_id, value: @repository.id %>
   
   <%## hidden_fieldにデータを持たせる %>
   <div class="field">
@@ -50,7 +39,7 @@
   </div>
   
   <div class="actions">
-    <%= form.submit "投稿" %>
+    <%= form.submit %>
     <%= form.submit "下書き保存", name: "save_draft" %>
   </div>
 <% end %>

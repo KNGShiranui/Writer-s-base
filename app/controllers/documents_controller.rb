@@ -52,8 +52,9 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    @document.user = current_user  # いらんかも
-    @repository = Repository.find(params[:document][:repository_id])
+    # @document.user = current_user  # いらんかも
+    @repository = Repository.find(params[:document][:repository_id])  # ひとつ前のページであるnewアクションの
+    # _formからhidden_fieldでRepository_id渡さないとkokoganilになるはず。んで、次のページ遷移でIDがない旨エラーが出る
     @branch = Branch.find(params[:document][:branch_id])
     # ActiveRecord::Base.transaction do
     # @commit = Commit.create(document_id: @document.id, message: 'Your commit message', user_id: current_user.id, branch_id: @document.branch_id)

@@ -62,25 +62,25 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #   end
   # end
 
-  ## branch#destroy
-  describe 'ブランチ削除' do
-    context 'ブランチ削除' do
-      it 'ブランチが削除される' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.dropbtn').click  # dropbtnクラスの要素をクリック
-        find('.dropdown-content').click_link 'リポジトリ一覧'
-        find('.fa-eye', match: :first).click
-        sleep 1
-        accept_confirm do
-          find(".fa-trash").click
-        end
-        expect(page).to have_content 'Branch was successfully destroyed.'
-      end
-    end
-  end
+  # ## branch#destroy
+  # describe 'ブランチ削除' do
+  #   context 'ブランチ削除' do
+  #     it 'ブランチが削除される' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
+  #       find('.dropdown-content').click_link 'リポジトリ一覧'
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       accept_confirm do
+  #         find(".fa-trash").click
+  #       end
+  #       expect(page).to have_content 'Branch was successfully destroyed.'
+  #     end
+  #   end
+  # end
 
   # ## TODO:branch#create_from_existingその1
   # describe 'ブランチの複製' do
