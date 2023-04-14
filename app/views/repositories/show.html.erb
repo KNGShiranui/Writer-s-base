@@ -27,6 +27,7 @@
       <tr>
         <th>branch</th>
         <th>repository</th>
+        <th>Descendant status</th>
         <th class="action">Show</th>
         <th class="action">Edit</th>
         <th class="action">Destroy</th>
@@ -38,6 +39,7 @@
         <tr>
           <td><%= branch.name %></td>
           <td><%= branch.repository_id %></td>
+          <td><%= branch.status %></td>
           <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, branch_path(branch, repository_id: branch.repository.id) %></td>
           <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_branch_path(branch, repository_id: branch.repository.id) %></td>
           <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
