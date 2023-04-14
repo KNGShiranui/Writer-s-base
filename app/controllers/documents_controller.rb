@@ -14,6 +14,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @repository = params[:repository_id] 
     @branch = params[:branch_id]
+    @versions = @document.versions.page(params[:page]).per(5)    
   end
   
   def new

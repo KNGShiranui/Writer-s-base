@@ -2,7 +2,7 @@ class FavoriteRepositoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favorite_repositories = current_user.favorited_repositories
+    @favorite_repositories = current_user.favorited_repositories.page(params[:page])
   end
 
   def create

@@ -1,18 +1,31 @@
 <div class="favorite-repositories-wrapper">
   <h1>お気に入りリポジトリ一覧</h1>
   <div class="favorite-repositories-container">
-    <% @favorite_repositories.each do |favorite_repository| %>
-      <div class="repository-item">
-        <span class="repository-name">
-          <%= link_to favorite_repository.name, repository_path(favorite_repository), class: "repository-link" %>
-        </span>
-        <span class="unfavorite-button">
-          <%= link_to 'お気に入り解除', favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete, class: "unfavorite-link" %>
-        </span>
-      </div>
-    <% end %>
-  </div>
-  <div class="repositories-link">
-    <%= link_to 'リポジトリ一覧', repositories_path, class: "repository-link" %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>リポジトリ名</th>
+          <th class="text-center">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @favorite_repositories.each do |favorite_repository| %>
+          <tr>
+            <td>
+              <%= link_to favorite_repository.name, repository_path(favorite_repository), class: "repository-link" %>
+            </td>
+            <td class="text-center">
+              <%= link_to 'お気に入り解除', favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="repositories-link">
+      <%= link_to 'リポジトリ一覧', repositories_path, class: "btn btn-primary" %>
+    </div>
+    <div class="repositories-link">
+      <%= paginate @favorite_repositories %>
+    </div>
   </div>
 </div>

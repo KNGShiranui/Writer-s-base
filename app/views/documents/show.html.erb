@@ -85,7 +85,7 @@
             <%= PaperTrail::Version.model_name.human %>
           </div>
           <ul>
-            <% @document.versions.each do |version| %>
+            <% @versions.each do |version| %>
               <li class="mb-2">
                 <div>
                   <span>
@@ -106,6 +106,7 @@
               </li>
             <% end %>
           </ul>
+          <%= paginate @versions %>
         </div>
       </div>
     </div>
