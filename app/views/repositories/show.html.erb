@@ -47,7 +47,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= paginate @branches %>
+  <%= paginate @branches, param_name: 'branches_page' %>
 
   <p>
     <strong>イシュー作成:</strong>
@@ -109,7 +109,7 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @issues %>
+<%= paginate @issues, param_name: 'issues_page' %>
 <div class="Edit-RSpec">
   <%= link_to 'Edit', edit_repository_path(@repository) %> |
   <%= link_to 'Back', repositories_path %>
