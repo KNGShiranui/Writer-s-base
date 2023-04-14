@@ -56,16 +56,28 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:document][:repository_id])
     @branch = Branch.find(params[:document][:branch_id])
     # ActiveRecord::Base.transaction do
-      # @commit = Commit.create(document_id: @document.id, message: 'Your commit message', user_id: current_user.id, branch_id: @document.branch_id)
-      # binding.pry
+    # @commit = Commit.create(document_id: @document.id, message: 'Your commit message', user_id: current_user.id, branch_id: @document.branch_id)
+    # binding.pry
     if current_user.id == @repository.user_id || current_user.id == @branch.repository.user_id
       respond_to do |format|
-        if @document.save
-          format.html { redirect_to document_url(@document, repository_id: @repository.id, branch_id: @branch.id), notice: "Document was successfully created." }
-          format.json { render :show, status: :created, location: @document }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @document.errors, status: :unprocessable_entity }
+        if params[:save_draft] # 下書きボタンを押下した場合
+          @document.draft_content = @document.content
+          @document.draft = true
+          if @document.save
+            format.html { redirect_to document_url(@document, repository_id: @repository.id, branch_id: @branch.id), notice: "下書きが保存されました。" }
+            format.json { render :show, status: :created, location: @document }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @document.errors, status: :unprocessable_entity }
+          end
+        else # 通常の投稿ボタンを押下した場合
+          if @document.save
+            format.html { redirect_to document_url(@document, repository_id: @repository.id, branch_id: @branch.id), notice: "Document was successfully created." }
+            format.json { render :show, status: :created, location: @document }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @document.errors, status: :unprocessable_entity }
+          end
         end
       end
     else
