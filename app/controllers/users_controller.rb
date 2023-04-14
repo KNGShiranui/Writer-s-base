@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @users = Kaminari.paginate_array(@filtered_users).page(params[:page]).per(5) # per(5) の部分は、表示したいユーザー数に応じて調整
     # @users = @q.result(distinct: true).page(params[:page]).order("created_at desc")
     # binding.pry
+    @count = @users.total_count
   end
 
   def new

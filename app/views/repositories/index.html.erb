@@ -1,7 +1,13 @@
 <div class="repository-index-container">
   <div class="search-container">
     <h1 style="margin-bottom: 30px;">Repositories</h1>
-    <%= render 'search', q: @q, url: repositories_path %>
+    <div>
+      <%= render 'search', q: @q, url: repositories_path %>
+    </div>
+    <div style="font-size: 12px; display: flex; align-items: center;">
+      <p style="margin-right: 5px;">検索結果：</p>
+      <p><%= "#{@count}件" %></p>
+    </div>
   </div>
 
   <table>
@@ -60,6 +66,12 @@
     </tbody>
   </table>
   <br>
-  <%= paginate @repositories %>
-  <%= link_to 'New Repository', new_repository_path %>
+  <div class="pagination-container" style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="margin-left: 20px;">
+      <%= paginate @repositories %>
+    </div>
+    <div style="margin-right: 20px;">
+      <%= link_to '+ New Repository', new_repository_path %>
+    </div>
+  </div>
 </div>
