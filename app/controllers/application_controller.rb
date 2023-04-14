@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   # devise_controller? はDeviseが提供するヘルパーメソッド。
   # 現在のコントローラーがDeviseのコントローラーである場合にtrueを返す。
@@ -31,11 +32,6 @@ class ApplicationController < ActionController::Base
   # def current_issue
   #   @current_issue ||= Issue.find_by(id: @repository[:id])
   # end
-
-  def after_sign_in_path_for(resource)
-    # binding.pry
-    user_path(resource)
-  end
 
   ## 以下2メソッドはissue関係のcancancan関係のための記述（issues_controller、ability.rb、application_controllerに記載あり
   ## ややこしいので気を付けて！
