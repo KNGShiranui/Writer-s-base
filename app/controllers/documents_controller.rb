@@ -52,6 +52,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
+    @document.user = current_user  # いらんかも
     @repository = Repository.find(params[:document][:repository_id])
     @branch = Branch.find(params[:document][:branch_id])
     # ActiveRecord::Base.transaction do
