@@ -12,7 +12,13 @@
           <% if conversation.target_user(current_user).present? %>
             <tr>
               <td>
+              <%## 以下、未読通知機能 %>
                 <%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation) %>
+                <% unread_count = conversation.unread_messages_count(current_user) %>
+                <% if unread_count > 0 %>
+                  <span class="unread-notification"><%= unread_count %></span>
+                <% end %>
+              <%## ここまで %>
               </td>
             </tr>
           <% end %>
