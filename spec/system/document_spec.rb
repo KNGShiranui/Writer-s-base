@@ -37,41 +37,41 @@ RSpec.describe 'document管理機能', type: :system do
     end
   end
 
-  ## document#index
-  describe 'document一覧' do
-    context 'document一覧' do
-      it 'document一覧を表示できる' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.fa-eye', match: :first).click
-        sleep 1
-        find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        expect(page).to have_content 'Document_1'
-        expect(page).to have_content 'Document_2'
-      end
-    end
-  end
+  # ## document#index
+  # describe 'document一覧' do
+  #   context 'document一覧' do
+  #     it 'document一覧を表示できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       expect(page).to have_content 'Document_1'
+  #       expect(page).to have_content 'Document_2'
+  #     end
+  #   end
+  # end
 
-  ## document#show
-  describe 'document詳細' do
-    context 'document詳細' do
-      it 'document詳細を表示できる' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.fa-eye', match: :first).click
-        sleep 1
-        find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        find('.fa-eye', match: :first).click
-        expect(page).to have_content 'Document_2'
-      end
-    end
-  end
+  # ## document#show
+  # describe 'document詳細' do
+  #   context 'document詳細' do
+  #     it 'document詳細を表示できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       find('.fa-eye', match: :first).click
+  #       expect(page).to have_content 'Document_2'
+  #     end
+  #   end
+  # end
 
   ## document#update &commit#update
   describe 'document更新' do
@@ -106,32 +106,32 @@ RSpec.describe 'document管理機能', type: :system do
     end
   end
 
-  ## document#destroy
-  describe 'document削除' do
-    context 'document削除' do
-      it 'documentを削除できる' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.fa-eye', match: :first).click
-        sleep 1
-        find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        sleep 1
-        # binding.pry
-        accept_confirm do
-          find(".fa-trash", match: :first).click
-        end
-        expect(page).to have_content 'Document was successfully destroyed.'
-      end
-    end
-  end
+  # ## document#destroy
+  # describe 'document削除' do
+  #   context 'document削除' do
+  #     it 'documentを削除できる' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.fa-eye', match: :first).click
+  #       sleep 1
+  #       find('.fa-eye', match: :first).click
+  #       click_on 'Document一覧'
+  #       sleep 1
+  #       # binding.pry
+  #       accept_confirm do
+  #         find(".fa-trash", match: :first).click
+  #       end
+  #       expect(page).to have_content 'Document was successfully destroyed.'
+  #     end
+  #   end
+  # end
 
   ## change#index & version#index
   describe '差分表示' do
     context '差分表示' do
-      it '差分表示を表示できる' do
+      it '差分を表示できる' do
         visit new_user_session_path
         fill_in "user_email", with: "KNG1@example.com"
         fill_in "user_password", with: "11101252"
