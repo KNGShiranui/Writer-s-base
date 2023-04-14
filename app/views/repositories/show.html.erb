@@ -3,7 +3,7 @@
 
   <p>
     <strong>リポジトリオーナー:</strong>
-    <%= @repository.user_id %>
+    <%= @repository.user.name %>
   </p>
 
   <p>
@@ -27,7 +27,7 @@
       <tr>
         <th>branch</th>
         <th>repository</th>
-        <th>Descendant status</th>
+        <th>Descendance</th>
         <th class="action">Show</th>
         <th class="action">Edit</th>
         <th class="action">Destroy</th>
@@ -38,7 +38,7 @@
       <% @branches.each do |branch| %>
         <tr>
           <td><%= branch.name %></td>
-          <td><%= branch.repository_id %></td>
+          <td><%= branch.repository.name %></td>
           <td><%= branch.status %></td>
           <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, branch_path(branch, repository_id: branch.repository.id) %></td>
           <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_branch_path(branch, repository_id: branch.repository.id) %></td>
@@ -80,7 +80,7 @@
               <td><%= issue.description %></td>
               <td><%= issue.status %></td>
               <td><%= issue.priority %></td>
-              <td><%= issue.repository_id %></td>
+              <td><%= issue.repository.name %></td>
               <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe,  issue_path(issue) %></td>
               <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_issue_path(issue, repository_id: issue.repository.id) if issue.user_id == current_user.id %></td>
               <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue, method: :delete, data: { confirm: 'Are you sure?' } if issue.user_id == current_user.id %></td>
@@ -103,7 +103,7 @@
           <td><%= issue.description %></td>
           <td><%= issue.status %></td>
           <td><%= issue.priority %></td>
-          <td><%= issue.repository_id %></td>
+          <td><%= issue.repository.name %></td>
         </tr>
       <% end %>
     <% end %>

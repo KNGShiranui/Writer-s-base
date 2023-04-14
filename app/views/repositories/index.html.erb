@@ -28,7 +28,7 @@
               <td><%= repository.description %></td>
               <td><%= repository.status %></td>
               <td><%= repository.priority %></td>
-              <td><%= repository.user_id %></td>
+              <td><%= repository.user.name %></td>
               <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, repository %></td>
               <% if current_user.present? && repository.user_id == current_user.id %>
                 <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_repository_path(repository) %></td>

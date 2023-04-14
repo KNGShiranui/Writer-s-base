@@ -7,9 +7,9 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Repository ID</th>
+        <th>Repository</th>
         <th>Branch ID</th>
-        <th>Descendant status</th>
+        <th>Descendance</th>
         <th>show</th>
         <th>edit</th>
         <th>destroy</th>
@@ -20,7 +20,7 @@
       <% @branches.each do |branch| %>
         <tr>
           <td><%= branch.name %></td>
-          <td><%= branch.repository_id %></td>
+          <td><%= branch.repository.name %></td>
           <td><%= branch.id %></td>
           <td><%= branch.status %></td>
           <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, branch_path(branch) %></td>

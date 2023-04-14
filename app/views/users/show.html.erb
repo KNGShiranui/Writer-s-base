@@ -42,7 +42,7 @@
         <tr>
           <td><%= repository.name %></td>
           <td><%= repository.description %></td>
-          <td><%= repository.user_id %></td>
+          <td><%= repository.user.name %></td>
           <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, repository %></td>
           <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_repository_path(repository) %></td>
           <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
