@@ -9,6 +9,7 @@ class RepositoriesController < ApplicationController
     @q = Repository.ransack(params[:q])
     @filtered_repositories = @q.result(distinct: true)
     @repositories = Kaminari.paginate_array(@filtered_repositories).page(params[:page]).per(5)
+    @count = @repositories.total_count
   end
 
   def show

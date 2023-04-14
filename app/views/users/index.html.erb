@@ -1,25 +1,44 @@
-<div class="user-info">
-  <h2>ユーザー一覧</h2>
-</div>
+<div class="repository-index-container">
+  <div class="search-container">
+    <h2  style="margin-bottom: 30px;">ユーザー一覧</h2>
+  </div>
 
-<%= render 'search', q: @q, url: users_path %>
+  <div class="pagination-container" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <%= render 'search', q: @q, url: users_path %>
+    </div>
+    <div style="font-size: 12px; display: flex; align-items: center;">
+      <p style="margin-right: 5px;">検索結果：</p>
+      <p><%= "#{@count}件" %></p>
+    </div>
+  </div>
 
-<div class="user-list">
-  <% @users.each do |user| %>
-    <% if user.id != current_user.id %>
-      <%# <div class="user-item"> %>
-      <%# テスト用に上記のコードを以下のように書き換え %>
-      <div class="user-item" data-user-name="<%= user.name %>">
-        <div class="user-info">
-          <%= link_to "#{user.name}さん", user, class: "user-name" %>
-          <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %>
-        </div>
-        <%= render 'follow_form', user: user %> <!-- フォロー機能が実装されていればこの一文も必要 -->
-      </div>
-    <% end %>
-  <% end %>
-</div>
+  <div class="user-list">
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Profile</th>
+          <th>Send Message</th>
+          <th>Follow</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <% if user.id != current_user.id %>
+            <tr>
+              <td><%= link_to "#{user.name}さん", user, class: "user-name" %></td>
+              <td data-user-name="<%= user.name %>"></td>
+              <td><%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %></td>
+              <td><%= render 'follow_form', user: user %></td> <!-- フォロー機能が実装されていればこの一文も必要 -->
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div class="pagination-container">
-  <%= paginate @users %>
+  <div class="pagination-container">
+    <%= paginate @users %>
+  </div>
 </div>
