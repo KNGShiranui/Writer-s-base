@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true).page(params[:page]).order("created_at desc")
+    @filtered_users = @q.result(distinct: true).where.not(id: current_user.id)
+    @users = Kaminari.paginate_array(@filtered_users).page(params[:page]).per(5) # per(5) の部分は、表示したいユーザー数に応じて調整
+    # @users = @q.result(distinct: true).page(params[:page]).order("created_at desc")
     # binding.pry
   end
 
@@ -31,11 +33,14 @@ class UsersController < ApplicationController
 
   def show
     if current_user == @user
-      @repositories = current_user.repositories
-      @conversations = Conversation.all
-      current_user = @user
+      # リポジトリの表示とページネーション
+      @repositories = current_user.repositories.page(params[:repository_page]).per(5).order("created_at desc")
+      # 会話のページネーション
+      @conversations = Conversation.where("(sender_id = ?) OR (recipient_id = ?)", current_user.id, current_user.id).page(params[:conversation_page]).per(5)
+      # @conversations = Conversation.page(params[:conversation_page]).per(5)
+      current_user = @user  
     elsif current_user != @user
-      @repositories = @user.repositories
+      @repositories = @user.repositories.page(params[:repository_page]).per(5).order("created_at desc")
       ## 以下、ユーザが非公開設定している場合のリダイレクト先
       # redirect_to(repositories_path, danger:"権限がありません") if @user.status == closed
     end

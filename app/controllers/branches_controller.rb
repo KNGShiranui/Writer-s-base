@@ -85,17 +85,24 @@ class BranchesController < ApplicationController
   end
 
   def destroy
-    # TODO:owner以外削除できなくすること！
+    # TODO:owner以外削除できなくすること！  
     @repository_id = params[:repository_id] # 明示的に書く必要あり!
-    # これにより、以下のbranches_path(repository_id: @repository_id)でbranch#indexへrepository_id:
-    # を持っていけるようになる
-    @branch.destroy
-    respond_to do |format|
-      # binding.pry
-      format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Branch was successfully destroyed." }
-      # 以下のように書くと@Repositoryがnilなのでダメ！注意！
-      # format.html { redirect_to branches_path(repository_id: @repository), notice: "Branch was successfully destroyed." }
-      format.json { head :no_content }
+    if @branch.status == 0
+      respond_to do |format|
+        format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Master branch cannot be deleted destroyed." }
+        format.json { head :no_content }
+      end
+    elsif @branch.status != 0 
+      # これにより、以下のbranches_path(repository_id: @repository_id)でbranch#indexへrepository_id:
+      # を持っていけるようになる
+      @branch.destroy
+      respond_to do |format|
+        # binding.pry
+        format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Branch was successfully destroyed." }
+        # 以下のように書くと@Repositoryがnilなのでダメ！注意！
+        # format.html { redirect_to branches_path(repository_id: @repository), notice: "Branch was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 

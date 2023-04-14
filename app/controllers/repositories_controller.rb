@@ -7,7 +7,8 @@ class RepositoriesController < ApplicationController
     # @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
     #このよくある１文を下記2行に変換
     @q = Repository.ransack(params[:q])
-    @repositories = @q.result(distinct: true).includes(:user).page(params[:page]).order("created_at desc")
+    @filtered_repositories = @q.result(distinct: true)
+    @repositories = Kaminari.paginate_array(@filtered_repositories).page(params[:page]).per(5)
   end
 
   def show
@@ -16,9 +17,9 @@ class RepositoriesController < ApplicationController
         format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
       end
     else
-      @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
+      @branches = current_repository.branches.order(created_at: :desc).page(params[:branches_page])
       # @issues = Issue.all.order(created_at: :desc).page(params[:page])
-      @issues = current_repository.issues.all.order(created_at: :desc).page(params[:page])
+      @issues = current_repository.issues.all.order(created_at: :desc).page(params[:issues_page])
       # binding.pry
     end
   end

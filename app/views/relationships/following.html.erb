@@ -1,10 +1,25 @@
 <div class="follow-wrapper">
   <div class="following-container box-container">
     <h2>フォロー</h2>
-    <ul>
-      <% @user.following.each do |following| %>
-        <li><%= link_to following.name, following %></li>
-      <% end %>
-    </ul>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ユーザー名</th>
+          <th>プロフィール</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |following| %>
+        <%# @user.following.each do |following| %>
+        <%# ページネーション使うために書き換えた %>
+          <tr>
+            <td><%= following.name %></td>
+            <td><%= link_to 'プロフィールを見る', following %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @users %>
+    <%#= paginate @repositories, param_name: 'repository_page' %>
   </div>
 </div>

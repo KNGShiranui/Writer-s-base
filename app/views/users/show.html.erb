@@ -25,45 +25,60 @@
   <% elsif current_user != @user %>
     <p> <strong><%= @user.name %>のRepository:</strong> </p>
   <% end %>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Owner</th>
-          <th class="action">Show</th>
-          <th class="action">Edit</th>
-          <th class="action">Destroy</th>
-        </tr>
-      </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Owner</th>
+        <th class="action">Show</th>
+        <th class="action">Edit</th>
+        <th class="action">Destroy</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <% @repositories.each do |repository| %>
-          <tr>
-            <td><%= repository.name %></td>
-            <td><%= repository.description %></td>
-            <td><%= repository.user_id %></td>
-            <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, repository %></td>
-            <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_repository_path(repository) %></td>
-            <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <tbody>
+      <% @repositories.each do |repository| %>
+        <tr>
+          <td><%= repository.name %></td>
+          <td><%= repository.description %></td>
+          <td><%= repository.user_id %></td>
+          <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, repository %></td>
+          <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_repository_path(repository) %></td>
+          <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @repositories, param_name: 'repository_page' %>
 </div>
 
 <% if @conversations.present? %>
   <div class="conversation-container">
     <div class="conversation-info">
       <p><strong><%= current_user.name %>のConversation:</strong> </p>
-      <% @conversations.each do |conversation| %>
-        <div>
-          <% if conversation.target_user(current_user).present? %>
-            <%= link_to "#{conversation.target_user(current_user).name}との会話", conversation_messages_path(conversation)%>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">会話相手</th>
+            <th scope="col">リンク</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @conversations.each do |conversation| %>
+            <% if conversation.target_user(current_user).present? %>
+              <tr>
+                <td><%= conversation.target_user(current_user).name %></td>
+                <td><%= link_to "会話を見る", conversation_messages_path(conversation) %></td>
+              </tr>
+            <% end %>
           <% end %>
-        </div>
-      <% end %>
+        </tbody>
+      </table>
+      <%= paginate @conversations, param_name: 'conversation_page' %>
     </div>
   </div>
 <% end %>
+
+
 

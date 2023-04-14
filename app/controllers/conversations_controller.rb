@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
   # この修正により、sender_idまたはrecipient_idがログインユーザーのidと一致する会話を取得するように
   # なります。これで他のユーザー同士のconversationへのアクセスが制限されるはずです。
   def index
-    @conversations = Conversation.where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
+    @conversations = Conversation.where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id).page(params[:page]).per(5)    
     # この行では、Conversationモデルからデータを取得する際に、whereメソッドを使って特定の条件を満たす
     # レコードを絞り込んでいます。whereメソッドの引数には、条件式を含む文字列と、プレースホルダーに対応
     # する値を渡しています。条件式では、sender_idがログインユーザーのidと等しいか、またはrecipient_id

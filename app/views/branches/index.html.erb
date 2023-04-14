@@ -31,8 +31,6 @@
     </tbody>
   </table>
   <%= link_to 'Repository一覧', repositories_path(repository_id: @repository), class: 'new-branch-btn' %>
-</div>
-
-<div class="pagination-container">
   <%= paginate @branches %>
 </div>
+

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   # devise_controller? はDeviseが提供するヘルパーメソッド。
   # 現在のコントローラーがDeviseのコントローラーである場合にtrueを返す。
@@ -8,9 +9,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    user_path(current_user) # ユーザーページにリダイレクト
+  end
+
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name content icon])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name content icon])
     # deviseはdeviseが初期で作るカラムには自動でストロングパラメータの設定をしますが、独自実装したカラムには当然その設定はない
     # そのままそのカラムに値を保存しようとするとストロングパラメータで弾かれてしまう。
     # 上記のような記述をすることで、nameカラムがUserのストロングパラメータに加わり、保存ができるようになる。
@@ -31,11 +36,6 @@ class ApplicationController < ActionController::Base
   # def current_issue
   #   @current_issue ||= Issue.find_by(id: @repository[:id])
   # end
-
-  def after_sign_in_path_for(resource)
-    # binding.pry
-    user_path(resource)
-  end
 
   ## 以下2メソッドはissue関係のcancancan関係のための記述（issues_controller、ability.rb、application_controllerに記載あり
   ## ややこしいので気を付けて！

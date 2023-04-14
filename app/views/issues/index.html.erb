@@ -50,4 +50,5 @@
   <% if params[:repository_id].present? %>
     <%= link_to '<i class="fas fa-plus"></i> New Issue'.html_safe, new_issue_path(repository_id: @repository, user_id: @repository.user.id, user: current_user) %>
   <% end %>
+  <%= paginate @issues %>
 </div>
