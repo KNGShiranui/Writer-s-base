@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     # registrations: 'users/registrations' # user#update用ルーティング
     # ↑users_controllerで制御することにしたので使わない
     # registrations: 'users' # user#update用ルーティング
-  }  
+  }
   ## deviseを使う場合は以下のようにブロックでゲストログインルーティングの記載をする必要あり
   devise_scope :user do
     get 'guest_sign_in', to: 'sessions#guest_sign_in'

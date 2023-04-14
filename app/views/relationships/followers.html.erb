@@ -1,10 +1,22 @@
 <div class="follow-wrapper">
   <div class="followers-container box-container">
     <h2>フォロワー</h2>
-    <ul>
-      <% @followers.each do |follower| %>
-        <li><%= link_to follower.name, user_path(follower) %></li>
-      <% end %>
-    </ul>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ユーザー名</th>
+          <th>プロフィール</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @followers.each do |follower| %>
+          <tr>
+            <td><%= follower.name %></td>
+            <td><%= link_to 'プロフィールを見る', user_path(follower) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @followers %>
   </div>
 </div>

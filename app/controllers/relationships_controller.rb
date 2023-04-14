@@ -5,12 +5,12 @@ class RelationshipsController < ApplicationController
 
   def following
     @user = current_user
-    @users = @user.following
+    @users = @user.following.page(params[:page]).per(5)
   end
   
   def followers
     @user = current_user
-    @followers = @user.followers
+    @followers = @user.followers.page(params[:page]).per(5)
   end
   
   def create

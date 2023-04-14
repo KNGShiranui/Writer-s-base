@@ -2,6 +2,11 @@
   <div class="conversation-list-container box-container">
     <h2>メッセージ一覧</h2>
     <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>会話相手</th>
+        </tr>
+      </thead>
       <tbody>
         <% @conversations.each do |conversation| %>
           <% if conversation.target_user(current_user).present? %>
@@ -14,21 +19,32 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @conversations %>
   </div>
 
   <div class="fun-links-container box-container">
     <div class="topic-hints">
-      <h3>今日の話題ヒント:</h3>
-      <ul>
-        <% 3.times do %>
-          <% random_topics = ["映画", "音楽", "旅行", "スポーツ", "ファッション", "ゲーム", "料理", "ペット"] %>
-          <li><%= random_topics.sample %></li>
-        <% end %>
-      </ul>
+      <h2>今日の話題ヒント:</h2>
+      <table class="table table-hover">
+        <tbody>
+          <% 3.times do %>
+            <% random_topics = ["映画", "音楽", "旅行", "スポーツ", "ファッション", "ゲーム", "料理", "ペット"] %>
+            <tr>
+              <td><%= random_topics.sample %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div class="fun-link">
-      <h3>ジャスティス！！！！:</h3>
-      <a href="https://www.youtube.com/watch?v=cpQbrKuQuHw" target="_blank">ジャスティス！！！！</a>
+      <h2>ジャスティス！！！！:</h2>
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td><a href="https://www.youtube.com/watch?v=cpQbrKuQuHw" target="_blank">ジャスティス！！！！</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

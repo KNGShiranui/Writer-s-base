@@ -9,9 +9,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    user_path(current_user) # ユーザーページにリダイレクト
+  end
+
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name content icon])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name content icon])
     # deviseはdeviseが初期で作るカラムには自動でストロングパラメータの設定をしますが、独自実装したカラムには当然その設定はない
     # そのままそのカラムに値を保存しようとするとストロングパラメータで弾かれてしまう。
     # 上記のような記述をすることで、nameカラムがUserのストロングパラメータに加わり、保存ができるようになる。
