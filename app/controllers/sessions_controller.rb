@@ -4,12 +4,12 @@ class SessionsController < Devise::SessionsController
     sign_in User.guest
     # binding.pry
     user = User.guest
-    redirect_to after_sign_in_path_for(user), notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to after_sign_in_path_for(user), notice: 'ログインしました。'
   end
 
   def guest_admin_sign_in
     sign_in User.guest_admin
     user = User.guest_admin
-    redirect_to after_sign_in_path_for(user), notice: 'ゲスト管理者としてログインしました。'
+    redirect_to after_sign_in_path_for(user), notice: 'ログインしました。'
   end
 end

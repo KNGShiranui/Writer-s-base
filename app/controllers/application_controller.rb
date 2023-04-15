@@ -10,7 +10,19 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
+    # ランダムなログインボーナスを生成
+    login_bonus = generate_login_bonus
+    # ユーザーのポイントにログインボーナスを追加
+    resource.update(points: resource.points + login_bonus)
+    # ログインボーナスを通知
+    flash[:success] = "ログインボーナス#{login_bonus} ポイント獲得！"
+    # リダイレクト先を設定 (例: ユーザープロフィールページ)
     user_path(current_user) # ユーザーページにリダイレクト
+  end
+
+  def generate_login_bonus
+    # ランダムなログインボーナスを 1 から 5 の範囲で生成
+    rand(1..5)
   end
 
   def configure_permitted_parameters

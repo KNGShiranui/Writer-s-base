@@ -65,6 +65,9 @@
         <% if alert %>
           <p class="alert alert-error"><%= alert %></p>
         <% end %>
+        <% if flash[:success] %>
+          <p class="alert alert-success"><%= flash[:success] %></p>
+        <% end %>
 
         <div class="nav-right">
           <div class="header-icons">
