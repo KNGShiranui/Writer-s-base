@@ -6,6 +6,7 @@
     <p><strong>Email:</strong> <%= current_user.email %></p>
     <p><strong>Content:</strong> <%= current_user.content %></p>
     <p><strong>Icon:</strong> <%= current_user.icon %></p>
+    <p><strong>Point:</strong> <%= "#{@user.points}ポイント" %></p>
   <% elsif current_user != @user %>
     <p><strong><%= @user.name %>のプロフィール:</strong></p>
     <p><strong>Name:</strong> <%= @user.name %></p>

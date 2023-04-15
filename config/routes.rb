@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       get :followers 
     end
   end
+  resources :points, only: %i(new create) # point送信用
   resources :repositories
   resources :users, only: %i(index show update)
   resources :favorite_repositories, only: %i(index create destroy)

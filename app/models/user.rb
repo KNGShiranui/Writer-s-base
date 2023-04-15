@@ -80,4 +80,18 @@ class User < ApplicationRecord
       # 必要に応じて他の属性を設定
     end
   end
+
+  ## ポイントを他のユーザに渡すためのメソッド  #points_controllerと関係
+  def send_points(receiver, amount)
+    return false if self == receiver || self.points < amount || amount <=0
+    ActiveRecord::Base.transaction do
+      self.points -= amount
+      receiver.points += amount
+      self.save!
+      receiver.save!
+    end
+    true
+  rescue StandardError => e
+    false
+  end
 end
