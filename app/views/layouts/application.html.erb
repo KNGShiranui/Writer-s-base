@@ -102,6 +102,7 @@
                   <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
                   <%# followerとfollowをindexアクション内で条件分岐したらOK %>
                   <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">send</i> ポイント送信').html_safe, new_point_path %>
                   <%= link_to raw('<i class="material-icons">chat</i> チャット'), conversations_path %>
                   <%= link_to raw('<i class="material-icons">folder</i> リポジトリ一覧'), repositories_path %>
                   <%= link_to raw('<i class="material-icons">favorite</i> お気に入りリポジトリ'), favorite_repositories_path %>
