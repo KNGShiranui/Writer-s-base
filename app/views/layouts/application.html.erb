@@ -97,6 +97,8 @@
                 <% if current_user&.admin? %>
                   <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
                 <% end %>
+                
+
                   <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
                   <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user.id) %>
                   <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
@@ -164,5 +166,117 @@
         }
       });
     </script>
+    <%# 以下、ショートカットキー用の記載 %>
+    <% if user_signed_in? %>
+      <script>
+      // プルダウンメニュー
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 77) { // 77はMのキーコードです
+            var dropdown = document.querySelector(".dropdown-content");
+            dropdown.classList.toggle("show");
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // ユーザ一覧
+        document.addEventListener('keydown', function(event) {
+          if (event.shiftKey && event.keyCode === 85 ) { // 85はUのキーコード
+            window.location.href = '<%=j users_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // プロフィール
+        document.addEventListener('keydown', function(event) {
+          if (event.shiftKey && event.keyCode === 80 ) { // 80はPのキーコード
+            window.location.href = '<%=j user_path(current_user.id) %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // フォロー
+        document.addEventListener('keydown', function(event) {
+          if (event.shiftKey && event.keyCode === 70) { // 70はFのキーコード
+            window.location.href = '<%=j following_relationships_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // フォロワー
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 70) { // 70はFのキーコード
+            window.location.href = '<%=j followers_relationships_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // ポイント送信
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 80) { // 80はPのキーコード
+            window.location.href = '<%=j new_point_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // チャット
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 67) { // 67はCのキーコード
+            window.location.href = '<%=j conversations_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // リポジトリ一覧
+        document.addEventListener('keydown', function(event) {
+          if (event.shiftKey && event.keyCode === 82) { // 82はRのキーコード
+            window.location.href = '<%=j repositories_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // お気に入りリポジトリ一覧（リポジトリ一覧とショートカットキーを逆にしたらどっちのキーもお気に入りリポジトリ一覧が表示されるようになった。なんでだろう。）
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 82) { // 82はRのキーコード
+            window.location.href = '<%=j favorite_repositories_path %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // イシュー
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 73) { // 73はIのキーコード
+            window.location.href = '<%=j issues_path(user_id: current_user.id) %>';
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // Twitter
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.altKey && event.keyCode === 84) { // 84はTのキーコード
+            window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL) + '&text=' + encodeURIComponent(document.title));
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // Facebook
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.altKey && event.keyCode === 70) { // 70はFのキーコードです
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL));
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // LINE
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.altKey && event.keyCode === 76) { // 76はLのキーコードです
+            window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(document.URL));
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      // GitHub
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.altKey && event.keyCode === 71) { // 71はGのキーコードです
+            window.open('https://github.com/KNGShiranui/Writer-s-base');
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+
+        // 管理人twitter
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 65) { // 71はAのキーコードです
+            window.open('https://twitter.com/KNG_DIC_WEF2301');
+            event.preventDefault(); // デフォルトの動作をキャンセルする
+          }
+        });
+      </script>
+    <% end %>
   </body>
 </html>
