@@ -13,13 +13,13 @@ class Documents::ChangesController < ApplicationController
       @version = @document.versions.find(params[:id])
       # binding.pry
       # 以下のifの条件に合致していないのでこの経路は通っていない
-      if params[:before] && params[:after]
-        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-        html_before = markdown.render(params[:before])
-        html_after = markdown.render(params[:after])
-        p html_before
-        p html_after
-        @diff = Markdiff::Differ.new.render(html_before, html_after)
-      end
+      # if params[:before] && params[:after]
+      #   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+      #   html_before = markdown.render(params[:before])
+      #   html_after = markdown.render(params[:after])
+      #   p html_before
+      #   p html_after
+      #   @diff = Markdiff::Differ.new.render(html_before, html_after)
+      # end
     end
   end
