@@ -65,26 +65,24 @@
 
 .send-message:hover {
   background-color: #0077aa;
+  color: white;
 }
 
 /*follow*/
 .follow-button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 14px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  padding: 8px 16px;
-  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .follow-button:hover {
-  background-color: white;
-  color: #4CAF50;
+  background-color: #4CAF50;
+  color: white;
 }
 
 /*search 検索フォームのスタイル */
