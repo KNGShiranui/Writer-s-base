@@ -11,7 +11,7 @@ class Conversation < ApplicationRecord
   # validates_uniqueness_of("検証するフィールド名" [, "オプション"])
   # 同一のrecipient_idに対するsender_idは一意である（重複してはならない）。という制約
   scope :between, -> (sender_id,recipient_id) do
-    where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND  conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)
+    where("(conversations.sender_id = ? AND conversations.recipient_id = ? ) OR (conversations.sender_id = ? AND  conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)
   end
   # 以下のようにも書ける↓
   # scope :between, -> (sender_id,recipient_id) {where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND  conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)}
