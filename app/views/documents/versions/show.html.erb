@@ -4,7 +4,7 @@
     </div>
     <div class="version-info">
       <h1 class="font-weight-bold mb-4 version-title">
-        バージョン○○
+        バージョン<%= @version.index+1 %>
       </h1>
       <% if @version.next.present? %>
         <%= button_to document_version_path(@document, @version),

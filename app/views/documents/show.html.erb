@@ -71,11 +71,13 @@
           <div class="d-flex justify-content-between mb-3">
           </div>
           <h2 class="font-weight-bold mb-4">
-            <%= @document.name %>
+          <%= "タイトル：&nbsp;#{@document.name}".html_safe %>
+
           </h2>
           <%= link_to '<i class="fas fa-edit"></i>Edit'.html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <%= link_to '<i class="fas fa-arrow-left"></i>Back'.html_safe, documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <div>
+          <h3>本文：</h3>
             <%= simple_format(@document.content) %>
           </div>
           
