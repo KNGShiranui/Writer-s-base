@@ -1,0 +1,15 @@
+/*point送付ボタン*/
+.send-points-button {
+  display: inline-block;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.send-points-button:hover {
+  background-color: orangered;
+  }

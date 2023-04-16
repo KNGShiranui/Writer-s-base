@@ -12,6 +12,12 @@
     <p><strong>Name:</strong> <%= @user.name %></p>
     <p><strong>Content:</strong> <%= @user.content %></p>
     <p><strong>Icon:</strong> <%= @user.icon %></p>
+    <p>
+      <strong>point:</strong> <%= link_to new_point_path(receiver_id: @user.id) do %>
+        <%= "#{@user.name}さんにポイントを送る" %> <%= content_tag(:i, 'send', class: 'material-icons', style: 'font-size: 18px;') %>
+      <% end %>
+    </p>
+
   <% end %>
 
   <div class="profile-actions">

@@ -2,8 +2,10 @@
   <h1>Repository: <%= @repository.name %></h1>
 
   <p>
-    <strong>リポジトリオーナー:</strong>
-    <%= @repository.user.name %>
+    <strong>リポジトリオーナー:</strong>         
+    <%= link_to user_path(@repository.user.id) do %>
+      <%= content_tag(:i, '', class: 'fa fa-book') %> <%= @repository.user.name %>
+    <% end %>
   </p>
 
   <p>
@@ -14,6 +16,13 @@
   <p>
     <strong>リポジトリ説明:</strong>
     <%= @repository.description %>
+  </p>
+
+  <p>
+    <strong>リポジトリ作成者支援:</strong>
+    <%= link_to new_point_path(receiver_id: @repository.user.id) do %>
+      <%= content_tag(:i, '', class: 'fa fa-book') %> <%= "#{@repository.user.name}を支援する:" %>
+    <% end %>
   </p>
 
   <%# <p> %>
