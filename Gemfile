@@ -26,6 +26,7 @@ gem 'paper_trail'
 # gem 'nokogiri'
 gem 'truncate_html'
 gem 'ransack'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
