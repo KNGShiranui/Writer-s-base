@@ -18,12 +18,14 @@
 #         find('.dropbtn').click  # dropbtnクラスの要素をクリック
 #         find('.dropdown-content').click_link 'ユーザ一覧'
 #         target_user_name = "KNG1"
-#         find(".user-item[data-user-name='#{target_user_name}'] .send-message").click
+#         within "tbody" do
+#         click_link "メッセージを送る", match: :first
+#         end
 #         expect(page).to have_content 'KNG1さんとのメッセージ'
 #         # target_user_nameは、送りたい相手のユーザー名を指定します。
 #         # findメソッドは、指定されたCSSセレクタに一致する要素を探します。
 #         # .user-item[data-user-name='#{target_user_name}']は、data属性data-user-nameがtarget_user_nameと一致する要素を探すセレクタです。これにより、ユーザー名が一致する.user-item要素を見つけます。
-#         # .send-messageは、見つかった.user-itemの子要素でクラス名がsend-messageの要素を指定します。
+#         # .send-messageは、見つかった.user-itemの子要素でクラス 名がsend-messageの要素を指定します。
 #         # clickメソッドは、見つかった要素をクリックするために使用されます。
 #       end
 #     end

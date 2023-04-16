@@ -35,7 +35,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #       visit new_user_session_path
   #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
   #       find('.dropdown-content').click_link 'ゲストログイン'
-  #       expect(page).to have_content 'ゲストユーザーとしてログインしました。'
+  #       expect(page).to have_content '現在のユーザー: Guest Userさん'
   #     end
   #   end
   # end
@@ -47,7 +47,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #       visit new_user_session_path
   #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
   #       find('.dropdown-content').click_link 'ゲスト管理者ログイン'
-  #       expect(page).to have_content 'ゲスト管理者としてログインしました。'
+  #       expect(page).to have_content '現在のユーザー: Guest Adminさん'
   #     end
   #   end
   # end
@@ -112,7 +112,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         click_on "ログイン"
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'プロフィール'
-        binding.pry
+        # binding.pry
         find('.fa-pencil', match: :first).click
         fill_in "name", with: "KNG4"
         fill_in "email", with: "KNG4@example.com"
