@@ -1,13 +1,63 @@
-<h1>ポイント送信</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      /* height: 100vh; */
+      background-color: #f5f5f5;
+      margin: 0;
+    }
 
-<%= form_with url: points_path, method: :post, local: true do |f| %>
-  <div>
-    <%= f.label :receiver_id, "送信先ユーザー" %>
-    <%= f.select :receiver_id, @users.map { |u| [u.name, u.id] } %>
-  </div>
-  <div>
-    <%= f.label :amount, "送信ポイント" %>
-    <%= f.number_field :amount, min: 1 %>
-  </div>
-  <%= f.submit "ポイントを送信" %>
-<% end %>
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      margin-top: 100px; /* ヘッダーの高さに合わせて余白を追加 */
+    }
+
+    .point_sending_form {
+      margin-bottom: 20px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <%= form_with url: points_path, method: :post, local: true do |f| %>
+    <div class="point_sending_form">
+      <%= f.label :receiver_id, "送信先ユーザー" %>
+      <%= f.select :receiver_id, @users.map { |u| [u.name, u.id] } %>
+    </div>
+    <div class="point_sending_form">
+      <%= f.label :amount, "送信ポイント" %>
+      <%= f.number_field :amount, min: 1 %>
+    </div>
+    <%= f.submit "ポイントを送信" %>
+  <% end %>
+</body>
+</html>
