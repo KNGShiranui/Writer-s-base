@@ -14,7 +14,8 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @repository = params[:repository_id] 
     @branch = params[:branch_id]
-    @versions = @document.versions.page(params[:page]).per(5)    
+    @versions = @document.versions.reorder(created_at: :desc).page(params[:page]).per(5)
+    # orderはpapertrailでは使えないらしい。代わりにreorderを使うと成功
   end
   
   def new
