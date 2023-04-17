@@ -102,7 +102,9 @@
                     <%= link_to '<i class="fas fa-edit"></i>このバージョンを表示する'.html_safe, document_version_path(version.item, version) %>
                   </span>
                   <span>
+                  <% if version.item.present? && version.present? %>
                     <%= link_to '<i class="fas fa-exchange-alt"></i>差分を表示する'.html_safe, document_change_path(version.item, version) %>
+                  <% end %>
                   </span>
                 </div>
               </li>
