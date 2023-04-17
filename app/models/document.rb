@@ -32,6 +32,8 @@ class Document < ApplicationRecord
   # 保存（save）する前に、set_embedsメソッドを実行するように設定。  
   private
   
+  scope :official, -> { where(draft: false) } #正規版のみ抽出
+  scope :draft, -> { where(draft: true) } #下書きのみ抽出
   def set_embeds
     return if content.blank?
     nokogiri_html = Nokogiri::HTML.parse(content)

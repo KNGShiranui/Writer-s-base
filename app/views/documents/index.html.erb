@@ -1,40 +1,6 @@
 <div class="documents-container">
   <h1>Documents</h1>
 
-
-
-<h3>下書き</h3>
-<table class="documents-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Content</th>
-      <th>User</th>
-      <th>Branch</th>
-      <th>Show</th>
-      <th>Edit</th>
-      <th>Destroy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @documents.where(draft: true).each do |document| %>
-      <tr>
-        <td><%= document.name %></td>
-        <td><%= truncate_html(simple_format(document.content), length: 100) %>
-          <% if document.content.size >= 100 %>
-            <%= link_to document do %>続きを読む<% end %>
-          <% end %>
-        </td>
-        <td><%= document.user.name %></td>
-        <td><%= document.branch.name %></td>
-        <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, document_path(document, branch_id: @branch, repository_id: @repository) %></td>
-        <td><%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_document_path(document, branch_id: @branch, repository_id: @repository) %></td>
-        <td><%= link_to '<i class="fas fa-trash"></i> Destroy'.html_safe, document_path(document, branch_id: @branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <h3>公開済みドキュメント</h3>
 <table class="documents-table">
   <thead>
@@ -67,7 +33,37 @@
   </tbody>
 </table>
 
-
+<h3>下書き</h3>
+<table class="documents-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+      <th>User</th>
+      <th>Branch</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @document_drafts.each do |document| %>
+      <tr>
+        <td><%= document.name %></td>
+        <td><%= truncate_html(simple_format(document.content), length: 100) %>
+          <% if document.content.size >= 100 %>
+            <%= link_to document do %>続きを読む<% end %>
+          <% end %>
+        </td>
+        <td><%= document.user.name %></td>
+        <td><%= document.branch.name %></td>
+        <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, document_path(document, branch_id: @branch, repository_id: @repository) %></td>
+        <td><%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_document_path(document, branch_id: @branch, repository_id: @repository) %></td>
+        <td><%= link_to '<i class="fas fa-trash"></i> Destroy'.html_safe, document_path(document, branch_id: @branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
   <div class="action-bar">
     <div class="pagination-container">

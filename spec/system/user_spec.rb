@@ -114,12 +114,13 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         find('.dropdown-content').click_link 'プロフィール'
         # binding.pry
         find('.fa-pencil', match: :first).click
-        fill_in "name", with: "KNG4"
-        fill_in "email", with: "KNG4@example.com"
-        fill_in "password", with: "11101252"
-        fill_in "password_confirmation", with: "11101252"
+        fill_in "user_name", with: "KNG4"
+        fill_in "user_email", with: "KNG4@example.com"
+        fill_in "user_password", with: "11101252"
+        fill_in "user_password_confirmation", with: "11101252"
         # fill_in "user_current_password", with: "11101252"
-        click_on "アカウント登録・更新"
+        binding.pry
+        click_on "更新"
         expect(page).to have_content 'ユーザー情報が更新されました'
         fill_in "user_email", with: "KNG4@example.com"
         fill_in "user_password", with: "11101252"

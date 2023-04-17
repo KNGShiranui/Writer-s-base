@@ -7,6 +7,8 @@
 ## 就業Termの技術
 - devise
 - 1対1のメッセージ機能（もしくは友だち繋がり機能）
+- お気に入り機能
+- フォロー機能
 - cancancan
 - rails_admin
 
@@ -15,6 +17,12 @@
 - Trix
 - Active Storage
 - markdiff
+- truncate_html
+- ransack
+- diff_match_patch
+- メッセージのボタンアラート通知
+- ユーザー間のポイント送付システム
+- アプリ内ショートカットキー設定
 
 ## 実行手順
 - git clone git@github.com:KNGShiranui/repository_manager_1.git

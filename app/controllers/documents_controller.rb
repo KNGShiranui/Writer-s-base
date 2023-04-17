@@ -7,7 +7,8 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:repository_id])
     @branch = @repository.branches.find(params[:branch_id])
     # @documents = Document.all.includes(:user).order(created_at: :desc).page(params[:page])
-    @documents = @branch.documents.order(created_at: :desc).page(params[:page])
+    @documents = @branch.documents.official.order(created_at: :desc).page(params[:page])
+    @document_drafts = @branch.documents.draft.where(user: current_user).order(created_at: :desc).page(params[:page])
   end
   
   def show
