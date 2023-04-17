@@ -57,6 +57,7 @@
     </tbody>
   </table>
   <%= paginate @repositories, param_name: 'repository_page' %>
+  <%= link_to '+ New Repository', new_repository_path %>
 </div>
 
 <% if @conversations.present? %>
@@ -85,3 +86,4 @@
     </div>
   </div>
 <% end %>
+
