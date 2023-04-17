@@ -17,8 +17,7 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.hidden_field :content %>
-    <trix-editor input="document_content" class="trix-content">
+    <%= form.text_field :content %>
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id %>

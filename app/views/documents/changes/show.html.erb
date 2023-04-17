@@ -3,32 +3,74 @@
   <head>
     <meta charset="utf-8">
     <title>Markdiff</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+      }
+      .column {
+        flex: 1;
+        padding: 1rem;
+        width: 50%;
+      }
+      ins {
+        background-color: #e6ffe6;
+        text-decoration: none;
+      }
+      del {
+        background-color: #ffe6e6;
+        text-decoration: line-through;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        text-align: left;
+      }
+    </style>
   </head>
   <body>
-    <div class="row justify-content-md-center">
-      <div class="col-8 p-4">
-        <div class="content">
-          <div class="d-flex justify-content-between mb-3">
-            <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document) %>
-          </div>
-          <h1>差分を表示する</h1>
-          <%# binding.pry %>
+    <div class="d-flex justify-content-between mb-3">
+      <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document) %>
+    </div>
+    <h1>差分を表示する</h1>
+    <div class="container">
+      <div class="column">
+        <table>
           <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
-            <%# 参考：配列オブジェクト.select { |変数| ブロック処理 } %>
-            <%# %w[name content]は%i[name content]だとダメ！ %>
-            <%# 参考：ary = ["a", "b", "c"]においてary.include?("a") は順にtrue, false, falseを返す%>
-            <%# 万葉課題のタスク優先度実装のところで似た表記を使用したので参考に %>
-            <div class="mb-4">
-              <h3>
-                <%= Document.human_attribute_name(key) %>
-                <%#上記のコードはカラム名を示している  %>
-              </h3>
-              <div>
-                <%= raw Markdiff::Differ.new.render(*@version.changeset[key]) %>
-              </div>
-            </div>
+            <tr>
+              <th><%= Document.human_attribute_name(key) %> (古いバージョン)</th>
+            </tr>
+            <tr>
+              <td><%= raw @version.changeset[key][0] %></td>
+            </tr>
           <% end %>
-        </div>
+        </table>
+      </div>
+      <div class="column">
+        <table>
+          <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
+            <tr>
+              <th><%= Document.human_attribute_name(key) %> (新しいバージョン)</th>
+            </tr>
+            <tr>
+              <td>
+                <% old_version = @version.changeset[key][0].nil? ? '' : strip_tags(@version.changeset[key][0]) %>
+                <% new_version = @version.changeset[key][1].nil? ? '' : strip_tags(@version.changeset[key][1]) %>
+                <% diffs = @dmp.diff_main(old_version, new_version) %>
+                <% @dmp.diff_cleanupSemantic(diffs) %>
+                <%= raw @dmp.diff_prettyHtml(diffs).html_safe %>
+                
+                
+
+              </td>
+            </tr>
+          <% end %>
+        </table>
       </div>
     </div>
   </body>

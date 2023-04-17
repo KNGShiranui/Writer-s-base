@@ -100,40 +100,40 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     end
   end
 
-  # ## TODO:branch#create_from_existingその2
-  # ## createはrepositoryの新規作成時のみに同時に実行されるのでテストなし。
-  # describe 'ブランチ複製' do
-  #   context 'ブランチ複製' do
-  #     it 'ブランチが複製される' do
-  #       visit new_user_session_path
-  #       fill_in "user_email", with: "KNG1@example.com"
-  #       fill_in "user_password", with: "11101252"
-  #       click_on "ログイン"
-  #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
-  #       find('.dropdown-content').click_link 'リポジトリ一覧'
-  #       click_on 'New Repository'
-  #       fill_in "repository_name", with: "repository_1"
-  #       fill_in "repository_description", with: "description_1"
-  #       # fill_in "repository_status", with: "open"
-  #       # fill_in "repository_priority", with: "high"
-  #       # binding.pry
-  #       fill_in "repository_user_id", with: "#{user.id}"
-  #       # binding.pry
-  #       # association :user, factory: :user
-  #       click_on '登録する'
-  #       sleep 1
-  #       binding.pry
-  #       new_repository = Repository.find_by(name: "repository_1")
-  #       expect(new_repository).to be_present
-  #       # binding.pry
-  #       new_branch = Branch.find_by(repository: new_repository)
-  #       expect(new_branch).to be_present
-  #       find('.fa-eye', match: :first).click
-  #       click_on 'branchを切る'
-  #       click_on 'Back'
-  #       expect(page).to have_content 'Branch_1'
-  #       expect(page).to have_content 'Branch_1のbranch'
-  #     end
-  #   end
-  # end
+#   ## TODO:branch#create_from_existingその2
+#   ## createはrepositoryの新規作成時のみに同時に実行されるのでテストなし。
+#   describe 'ブランチ複製' do
+#     context 'ブランチ複製' do
+#       it 'ブランチが複製される' do
+#         visit new_user_session_path
+#         fill_in "user_email", with: "KNG1@example.com"
+#         fill_in "user_password", with: "11101252"
+#         click_on "ログイン"
+#         find('.dropbtn').click  # dropbtnクラスの要素をクリック
+#         find('.dropdown-content').click_link 'リポジトリ一覧'
+#         click_on 'New Repository'
+#         fill_in "repository_name", with: "repository_1"
+#         fill_in "repository_description", with: "description_1"
+#         # fill_in "repository_status", with: "open"
+#         # fill_in "repository_priority", with: "high"
+#         # binding.pry
+#         fill_in "repository_user_id", with: "#{user.id}"
+#         # binding.pry
+#         # association :user, factory: :user
+#         click_on '登録する'
+#         sleep 1
+#         binding.pry
+#         new_repository = Repository.find_by(name: "repository_1")
+#         expect(new_repository).to be_present
+#         # binding.pry
+#         new_branch = Branch.find_by(repository: new_repository)
+#         expect(new_branch).to be_present
+#         find('.fa-eye', match: :first).click
+#         click_on 'branchを切る'
+#         click_on 'Back'
+#         expect(page).to have_content 'Branch_1'
+#         expect(page).to have_content 'Branch_1のbranch'
+#       end
+#     end
+#   end
 end

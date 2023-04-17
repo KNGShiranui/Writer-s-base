@@ -18,12 +18,14 @@
     <%= @repository.description %>
   </p>
 
-  <p>
+  <% if current_user.id != @repository.user_id %>
+    <p>
     <strong>リポジトリ作成者支援:</strong>
-    <%= link_to new_point_path(receiver_id: @repository.user.id) do %>
-      <%= content_tag(:i, '', class: 'fa fa-book') %> <%= "#{@repository.user.name}を支援する:" %>
-    <% end %>
-  </p>
+      <%= link_to new_point_path(receiver_id: @repository.user.id) do %>
+        <%= content_tag(:i, '', class: 'fa fa-book') %> <%= "#{@repository.user.name}にポイントを送る:" %>
+      <% end %>
+    </p>
+  <% end %>
 
   <%# <p> %>
     <%# <strong>ブランチ作成:</strong> %>

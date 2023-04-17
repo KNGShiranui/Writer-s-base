@@ -23,9 +23,13 @@ RSpec.describe 'document管理機能', type: :system do
         click_on 'Document一覧'
         click_on 'New Document'
         fill_in "document_name", with: "KNGのいたずら日記"
-        trix_editor = find(".trix-content")
-        # trix_input = find("document_content")
-        execute_script("arguments[0].editor.insertString('KNGのいたずら日記')", trix_editor.native)
+        fill_in "document_content", with: "KNGのいたずら日記"
+          # trix_editor = find(".trix-content") # trixの不具合によりリッチテキスト使用せず。TODO:後日検証！
+          # trix_input = find("document_content")
+          # execute_script("arguments[0].editor.insertString('KNGのいたずら日記')", trix_editor.native)
+        # fill_in "document_user_id", with: "KNGのいたずら日記"
+        # fill_in "document_branch_id", with: "KNGのいたずら日記"
+        # fill_in "document_repository_id", with: "KNGのいたずら日記"
         # fill_in "document_user_id", with: "KNGのいたずら日記"
         # fill_in "document_branch_id", with: "KNGのいたずら日記"
         # fill_in "document_repository_id", with: "KNGのいたずら日記"
@@ -87,9 +91,10 @@ RSpec.describe 'document管理機能', type: :system do
         click_on 'Document一覧'
         click_on 'New Document'
         fill_in "document_name", with: "KNGのいたずら日記"
-        trix_editor = find(".trix-content")
-        # trix_input = find("document_content")
-        execute_script("arguments[0].editor.insertString('KNGのいたずら日記')", trix_editor.native)
+        fill_in "document_content", with: "KNGのいたずら日記"
+          # trix_editor = find(".trix-content") # trixの不具合によりリッチテキスト使用せず。TODO:後日検証！
+          # trix_input = find("document_content")
+          # execute_script("arguments[0].editor.insertString('KNGのいたずら日記')", trix_editor.native)
         # fill_in "document_user_id", with: "KNGのいたずら日記"
         # fill_in "document_branch_id", with: "KNGのいたずら日記"
         # fill_in "document_repository_id", with: "KNGのいたずら日記"
@@ -169,11 +174,11 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-pen-to-square', match: :first).click
         fill_in "document_name", with: "変更したぜ！！！！"
         click_on '更新する'
+        # binding.pry
         click_on 'このバージョンを表示する', match: :first
         expect(page).to have_content('変更したぜ！！！！', count: 1)
-        expect(page).to have_content('Document_2', count: 1)
-        expect(page).to have_content('Content_2', count: 1)
-        expect(page).not_to have_content('差分を表示する')
+        expect(page).to have_content('バージョン2')
+        expect(page).to have_content('最新版です')
       end
     end
   end
@@ -194,10 +199,10 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-pen-to-square', match: :first).click
         fill_in "document_name", with: "変更したぜ！！！！"
         click_on '更新する'
+        # binding.pry
         click_on '差分を表示する', match: :first
-        expect(page).to have_content('変更したぜ！！！！', count: 1)
-        expect(page).to have_content('Document_2', count: 1)
-        expect(page).to have_content('Content_2', count: 1)
+        expect(page).to have_content('変更したぜ！！！！')
+        expect(page).to have_content('Document_2', count: 2)
         expect(page).to have_content('差分を表示する', count: 1)
       end
     end

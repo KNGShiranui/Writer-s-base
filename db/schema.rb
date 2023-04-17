@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_15_031507) do
+ActiveRecord::Schema.define(version: 2023_04_17_045156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,8 +191,6 @@ ActiveRecord::Schema.define(version: 2023_04_15_031507) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignees", "issues"
   add_foreign_key "assignees", "users"
   add_foreign_key "branches", "repositories"
