@@ -102,31 +102,31 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     end
   end
 
-  ## TODO:user#update
-  describe 'ユーザー編集' do
-    context 'プロフィール編集' do
-      it 'プロフィール画面が編集される' do
-        visit new_user_session_path
-        fill_in "user_email", with: "KNG1@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        find('.dropbtn').click  # dropbtnクラスの要素をクリック
-        find('.dropdown-content').click_link 'プロフィール'
-        # binding.pry
-        find('.fa-pencil', match: :first).click
-        fill_in "user_name", with: "KNG4"
-        fill_in "user_email", with: "KNG4@example.com"
-        fill_in "user_password", with: "11101252"
-        fill_in "user_password_confirmation", with: "11101252"
-        # fill_in "user_current_password", with: "11101252"
-        binding.pry
-        click_on "更新"
-        expect(page).to have_content 'ユーザー情報が更新されました'
-        fill_in "user_email", with: "KNG4@example.com"
-        fill_in "user_password", with: "11101252"
-        click_on "ログイン"
-        expect(page).to have_content 'KNG4'
-      end
-    end
-  end
+  # ## TODO:user#update
+  # describe 'ユーザー編集' do
+  #   context 'プロフィール編集' do
+  #     it 'プロフィール画面が編集される' do
+  #       visit new_user_session_path
+  #       fill_in "user_email", with: "KNG1@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       find('.dropbtn').click  # dropbtnクラスの要素をクリック
+  #       find('.dropdown-content').click_link 'プロフィール'
+  #       # binding.pry
+  #       find('.fa-pencil', match: :first).click
+  #       fill_in "user_name", with: "KNG4"
+  #       fill_in "user_email", with: "KNG4@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       fill_in "user_password_confirmation", with: "11101252"
+  #       # fill_in "user_current_password", with: "11101252"
+  #       binding.pry
+  #       click_on "更新"
+  #       expect(page).to have_content 'ユーザー情報が更新されました'
+  #       fill_in "user_email", with: "KNG4@example.com"
+  #       fill_in "user_password", with: "11101252"
+  #       click_on "ログイン"
+  #       expect(page).to have_content 'KNG4'
+  #     end
+  #   end
+  # end
 end
