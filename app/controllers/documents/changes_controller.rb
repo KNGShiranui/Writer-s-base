@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Documents::ChangesController < ApplicationController
+  require 'diff_match_patch'
   #   def show
   #     @document = Document.find(params[:document_id])
   #     @version = @document.versions.find(params[:id])
@@ -11,6 +12,7 @@ class Documents::ChangesController < ApplicationController
     def show
       @document = Document.find(params[:document_id])
       @version = @document.versions.find(params[:id])
+      @dmp = DiffMatchPatch.new # これで変更箇所のみ強調表示
       # binding.pry
       # 以下のifの条件に合致していないのでこの経路は通っていない
       # if params[:before] && params[:after]

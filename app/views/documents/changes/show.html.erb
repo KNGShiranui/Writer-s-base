@@ -17,12 +17,10 @@
       ins {
         background-color: #e6ffe6;
         text-decoration: none;
-        display: block;
       }
       del {
         background-color: #ffe6e6;
         text-decoration: line-through;
-        display: block;
       }
       table {
         width: 100%;
@@ -60,7 +58,11 @@
               <th><%= Document.human_attribute_name(key) %> (新しいバージョン)</th>
             </tr>
             <tr>
-              <td><%= raw Markdiff::Differ.new.render(*@version.changeset[key]) %></td>
+              <td>
+                <% diffs = @dmp.diff_main(@version.changeset[key][0], @version.changeset[key][1]) %>
+                <% @dmp.diff_cleanupSemantic(diffs) %>
+                <%= raw @dmp.diff_prettyHtml(diffs).html_safe %>
+              </td>
             </tr>
           <% end %>
         </table>

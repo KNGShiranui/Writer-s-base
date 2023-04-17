@@ -27,6 +27,9 @@ gem 'paper_trail'
 gem 'truncate_html'
 gem 'ransack'
 gem 'redcarpet'
+gem 'diff_match_patch'
+
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

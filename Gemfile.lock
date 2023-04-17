@@ -102,6 +102,7 @@ GEM
     devise-i18n (1.11.0)
       devise (>= 4.9.0)
     diff-lcs (1.5.0)
+    diff_match_patch (0.1.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -328,6 +329,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   devise-i18n
+  diff_match_patch
   factory_bot_rails
   faker
   jbuilder (~> 2.7)
