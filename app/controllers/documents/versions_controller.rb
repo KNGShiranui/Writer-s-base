@@ -3,7 +3,7 @@
 class Documents::VersionsController < ApplicationController
   def show
     @document = Document.find(params[:document_id])
-    @version = @document.versions.find(params[:id]).order(created_at: :desc)
+    @version = @document.versions.find(params[:id])
   end
 
   def update  
