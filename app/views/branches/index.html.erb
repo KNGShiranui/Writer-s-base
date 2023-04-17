@@ -1,18 +1,18 @@
 
 <div class="table-container">
 <h1 class="heading">
-  Branches
+  <%= t('branches.branches') %>
 </h1>
   <table class="branches-table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Repository</th>
-        <th>Branch ID</th>
-        <th>Descendance</th>
-        <th>show</th>
-        <th>edit</th>
-        <th>destroy</th>
+        <th><%= t('branches.name') %></th>
+        <th><%= t('branches.repository') %></th>
+        <th><%= t('branches.branch_id') %></th>
+        <th><%= t('branches.descendance') %></th>
+        <th><%= t('common.show') %></th>
+        <th><%= t('common.edit') %></th>
+        <th><%= t('common.destroy') %></th>
       </tr>
     </thead>
 
@@ -23,14 +23,14 @@
           <td><%= branch.repository.name %></td>
           <td><%= branch.id %></td>
           <td><%= branch.status %></td>
-          <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, branch_path(branch) %></td>
-          <td><%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_branch_path(branch, repository_id: @repository) %></td>
-          <td><%= link_to '<i class="fas fa-trash"></i> Destroy'.html_safe, branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to ('<i class="fas fa-eye"></i>' + t('common.show')).html_safe, branch_path(branch) %></td>
+          <td><%= link_to ('<i class="fas fa-edit"></i>' + t('common.edit')).html_safe, edit_branch_path(branch, repository_id: @repository) %></td>
+          <td><%= link_to ('<i class="fas fa-trash"></i>' + t('common.destroy')).html_safe, branch_path(branch, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Repository一覧', repositories_path(repository_id: @repository), class: 'new-branch-btn' %>
+  <%= link_to t('branches.repositories'), repositories_path(repository_id: @repository), class: 'new-branch-btn' %>
   <%= paginate @branches %>
 </div>
 

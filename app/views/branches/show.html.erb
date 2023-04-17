@@ -2,31 +2,31 @@
   <div class="table-container">
     <table class="info-table">
       <tr>
-        <th>Name:</th>
+        <th><%= t('branches.name') %>: </th>
         <td><%= @branch.name %></td>
       </tr>
       <tr>
-        <th>Repository:</th>
+        <th><%= t('branches.repository') %>: </th>
         <td><%= @branch.repository.name %></td>
       </tr>
     </table>
     <%= button_to create_from_existing_branch_path(@branch, repository_id: @repository.id), method: :post, class: "btn btn-primary" do %>
-      <i class="fas fa-code-branch"></i> branchを切る
+      <i class="fas fa-code-branch"></i> <%= t('branches.copy_branch') %>:
     <% end %>
 
 
-    <%= link_to '<i class="fas fa-edit"></i>Edit'.html_safe, edit_branch_path(@branch, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
-    <%= link_to '<i class="fas fa-arrow-left"></i>Back'.html_safe, branches_path(repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
-    <%= link_to 'Document一覧', documents_path(branch_id: @branch.id, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to ('<i class="fas fa-eye"></i>' + t('common.show')).html_safe, edit_branch_path(@branch, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, branches_path(repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
+    <%= link_to t('documents.documents'), documents_path(branch_id: @branch.id, repository_id: @branch.repository.id), class: "btn btn-secondary" %> |
 
   <% elsif @new_branch.present? %>
     <table class="info-table">
       <tr>
-        <th>Name:</th>
+        <th><%= t('branches.name') %>: </th>
         <td><%= @new_branch.name %></td>
       </tr>
       <tr>
-        <th>Repository:</th>
+        <th><%= t('branches.repository') %>: </th>
         <td><%= @new_branch.repository_id %></td>
       </tr>
     </table>

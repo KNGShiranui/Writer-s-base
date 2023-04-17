@@ -37,13 +37,13 @@
     <div class="d-flex justify-content-between mb-3">
       <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document) %>
     </div>
-    <h1>差分を表示する</h1>
+    <h1><%= t('documents.show_diff') %></h1>
     <div class="container">
       <div class="column">
         <table>
           <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
             <tr>
-              <th><%= Document.human_attribute_name(key) %> (古いバージョン)</th>
+              <th><%= Document.human_attribute_name(key) %> <%= t('documents.old_version') %></th>
             </tr>
             <tr>
               <td><%= raw @version.changeset[key][0] %></td>
@@ -55,7 +55,7 @@
         <table>
           <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
             <tr>
-              <th><%= Document.human_attribute_name(key) %> (新しいバージョン)</th>
+              <th><%= Document.human_attribute_name(key) %> <%= t('documents.new_version') %></th>
             </tr>
             <tr>
               <td>

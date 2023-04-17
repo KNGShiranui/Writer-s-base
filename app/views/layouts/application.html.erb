@@ -55,8 +55,8 @@
 
         <div class="current-user">
           <% if current_user.present? %>
-            <h3 class="header-current-user">現在のユーザー: <%= "#{current_user.name}さん" %></h3>
-            <h3 class="header-current-user">現在のポイント: <%= "#{current_user.points}ポイント" %></h3>
+            <h3 class="header-current-user"><%= t('common.current user') %>: <%= "#{current_user.name}さん" %></h3>
+            <h3 class="header-current-user"><%= t('common.current points') %>: <%= "#{current_user.points}ポイント" %></h3>
           <% end %>
         </div>
 
@@ -96,26 +96,26 @@
             <div class="dropdown-content">
               <% if user_signed_in? %>
                 <% if current_user&.admin? %>
-                  <%= link_to raw('<i class="material-icons">security</i>管理者画面'), rails_admin_path %>
+                  <%= link_to raw('<i class="material-icons">security</i>' + t('common.administrator')), rails_admin_path %>
                 <% end %>
                 
 
-                  <%= link_to raw('<i class="material-icons">people</i> ユーザ一覧'), users_path %>
-                  <%= link_to raw('<i class="material-icons">person</i> プロフィール'), user_path(current_user.id) %>
-                  <%= link_to raw('<i class="material-icons">person_add</i> フォロー'), following_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">people</i>' + t('common.users')), users_path %>
+                  <%= link_to raw('<i class="material-icons">person</i>' + t('common.profile')), user_path(current_user.id) %>
+                  <%= link_to raw('<i class="material-icons">person_add</i>' +t('common.follow')), following_relationships_path %>
                   <%# followerとfollowをindexアクション内で条件分岐したらOK %>
-                  <%= link_to raw('<i class="material-icons">person_outline</i> フォロワー'), followers_relationships_path %>
-                  <%= link_to raw('<i class="material-icons">send</i> ポイント送信').html_safe, new_point_path %>
-                  <%= link_to raw('<i class="material-icons">chat</i> チャット'), conversations_path %>
-                  <%= link_to raw('<i class="material-icons">folder</i> リポジトリ一覧'), repositories_path %>
-                  <%= link_to raw('<i class="material-icons">favorite</i> お気に入りリポジトリ'), favorite_repositories_path %>
-                  <%= link_to raw('<i class="material-icons">error</i> イシュー'), issues_path(user_id: current_user.id) %>
-                  <%= link_to raw('<i class="material-icons">logout</i> ログアウト'), destroy_user_session_path, method: :delete %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.follower')), followers_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">send</i>' +t('common.send points')).html_safe, new_point_path %>
+                  <%= link_to raw('<i class="material-icons">chat</i>' +t('common.conversations')), conversations_path %>
+                  <%= link_to raw('<i class="material-icons">folder</i>' +t('common.repositories')), repositories_path %>
+                  <%= link_to raw('<i class="material-icons">favorite</i>' +t('common.favorite repositories')), favorite_repositories_path %>
+                  <%= link_to raw('<i class="material-icons">error</i>' +t('common.issues')), issues_path(user_id: current_user.id) %>
+                  <%= link_to raw('<i class="material-icons">logout</i>' +t('common.logout')), destroy_user_session_path, method: :delete %>
               <% else %>
-                  <%= link_to raw('<i class="material-icons">person_add</i> 新規登録'), new_user_registration_path %>
-                  <%= link_to raw('<i class="material-icons">login</i> ログイン'), new_user_session_path %>
-                  <%= link_to raw('<i class="material-icons">person_outline</i> ゲスト管理者ログイン'), guest_admin_sign_in_path %>
-                  <%= link_to raw('<i class="material-icons">person_outline</i> ゲストログイン'), guest_sign_in_path %>
+                  <%= link_to raw('<i class="material-icons">person_add</i>' +t('common.sign up')), new_user_registration_path %>
+                  <%= link_to raw('<i class="material-icons">login</i>' +t('common.login')), new_user_session_path %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.guest admin login')), guest_admin_sign_in_path %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.guest login')), guest_sign_in_path %>
               <% end %>
             </div>
           </div>
@@ -134,7 +134,7 @@
         <div class="row">
           <div class="col">
             <div class="footer-text">
-              あなたの「書く」が加速する&nbsp;&nbsp;&nbsp; みんなの「書く」が結びつく<br>
+              <%= t('common.Your writing accelerates') %>&nbsp;&nbsp;&nbsp; <%= t("common.everyone's writing connects") %><br>
               <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">
                 Copyright &copy; This Website 2023
               </a>

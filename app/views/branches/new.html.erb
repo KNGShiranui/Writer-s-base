@@ -1,5 +1,5 @@
-<h1>New Branch</h1>
+<h1><%= t('branches.new_branch') %></h1>
 
 <%= render 'form', branch: @branch %>
 
-<%= link_to 'Back', branches_path(@branch, repository_id: @repository) %>
+<%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, branches_path(@branch, repository_id: @repository) %>
