@@ -39,6 +39,7 @@
   
   <div class="actions">
     <%= form.submit %>
-    <%= form.submit "下書き保存", name: "save_draft" %>
+    <%= form.submit I18n.t('documents.save_draft'), name: "save_draft" %>
+
   </div>
 <% end %>

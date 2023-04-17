@@ -53,13 +53,13 @@
   </style>
 </head>
 <body>
-  <p> <strong>User:</strong> <%= @document.user.name %> </p>    
-  <p> <strong>Branch:</strong> <%= @document.branch.name %> </p>
-  <p> <strong>Commit message:</strong>
+  <p> <strong><%= t('users.user_name') %>:</strong> <%= @document.user.name %> </p>    
+  <p> <strong><%= t('branches.name') %>:</strong> <%= @document.branch.name %> </p>
+  <p> <strong><%= t('commits.message') %>:</strong>
     <% if @document.commit.present? && @document.commit.message.present? %>
       <%= @document.commit.message %>
     <% else %>
-      No commit message provided.
+      <%= t('commits.No commit message provided.') %>
     <% end %>
   </p>
 
@@ -74,17 +74,17 @@
           <%= "タイトル：&nbsp;#{@document.name}".html_safe %>
 
           </h2>
-          <%= link_to '<i class="fas fa-edit"></i>Edit'.html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
-          <%= link_to '<i class="fas fa-arrow-left"></i>Back'.html_safe, documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
+          <%= link_to ('<i class="fas fa-edit"></i>' + t('common.edit')).html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
+          <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <div>
-          <h3>本文：</h3>
+          <h3><%= t('documents.content') %>:</h3>
             <%= simple_format(@document.content) %>
           </div>
           
           <hr>
 
           <div>
-            <%= PaperTrail::Version.model_name.human %>
+            <h3><%= PaperTrail::Version.model_name.human %></h3>
           </div>
           <ul>
             <% @versions.each do |version| %>

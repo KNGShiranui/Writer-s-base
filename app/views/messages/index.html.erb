@@ -4,7 +4,7 @@
 
     <% if @over_ten %>
       <div class="previous-messages">
-        <%= link_to '以前のメッセージ', '?m=all' %>
+        <%= link_to t('messages.previous message'), '?m=all' %>
       </div>
     <% end %>
 
@@ -20,7 +20,7 @@
               <i class="right triangle icon"></i>
               <%= message.content %> /
               <% if message.user == current_user %>
-                <%= message.read ? '既読' : '未読' %>
+                <%= t(message.read ? 'messages.read' : 'messages.unread') %>
               <% end %>
             </div>
           </div>
@@ -34,7 +34,7 @@
       </div>
       <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
       <div class="submit-button">
-        <%= f.submit "メッセージを送る", class: "btn btn-primary" %>
+        <%= f.submit t("messages.send_message"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
