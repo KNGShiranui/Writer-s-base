@@ -1,6 +1,6 @@
 <div class="issue-form-container">
-  <h1><i class="fas fa-edit"></i> Editing Issue</h1>
+  <h1><i class="fas fa-edit"></i>&nbsp;<%= t('issues.editing issue') %></h1>
   <%= render 'form', issue: @issue %>
-  <%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, @issue %> |
-  <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, issues_path(@issue, repository_id: @repository)  %>
+  <%= link_to ('<i class="fas fa-eye"></i>' + t('common.show')).html_safe, @issue %> |
+  <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, issues_path(@issue, repository_id: @repository)  %>
 </div>

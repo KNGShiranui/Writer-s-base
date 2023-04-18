@@ -1,18 +1,18 @@
 <div class="follow-wrapper">
   <div class="followers-container box-container">
-    <h2>フォロワー</h2>
+    <h2><%= t('common.follower') %></h2>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>ユーザー名</th>
-          <th>プロフィール</th>
+          <th><%= t('common.user name') %></th>
+          <th><%= t('common.profile') %></th>
         </tr>
       </thead>
       <tbody>
         <% @followers.each do |follower| %>
           <tr>
             <td><%= follower.name %></td>
-            <td><%= link_to 'プロフィールを見る', user_path(follower) %></td>
+            <td><%= link_to ('<i class="fas fa-eye"></i>' + t('users.show profile')).html_safe, user_path(follower) %></td>
           </tr>
         <% end %>
       </tbody>

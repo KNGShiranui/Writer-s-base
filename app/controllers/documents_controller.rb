@@ -94,7 +94,7 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:document][:repository_id])
     @branch = Branch.find(params[:document][:branch_id])
     ActiveRecord::Base.transaction do
-      @commit = Commit.create(document_id: @document.id, message: 'Your commit message', user_id: current_user.id, branch_id: @document.branch_id)
+      @commit = Commit.create(document_id: @document.id, user_id: current_user.id, branch_id: @document.branch_id)
       # 上記の記述をifによる条件分岐以降に記載していたため、commitに関する情報がない（user_id, branch_id）と
       # いうエラーが出た。条件分岐の前に記述してやることで解消。
       if current_user.id == @repository.user_id || current_user.id == @branch.repository.user_id

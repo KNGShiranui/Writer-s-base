@@ -11,22 +11,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, t('issues.name')  %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, t('issues.description') %>
     <%= form.text_field :description %>
   </div>
 
   <div class="field">
-    <%= form.label :status %>
+    <%= form.label :status, t('issues.status') %>
     <%= form.select :status, Issue.statuses.keys, {prompt: "選択してください"}, class: "status_select" %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
+    <%= form.label :priority, t('issues.priority') %>
     <%= form.select :priority, Issue.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
   </div>
 

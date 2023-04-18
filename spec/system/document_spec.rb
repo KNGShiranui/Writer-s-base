@@ -20,8 +20,8 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        click_on 'New Document'
+        click_on 'ドキュメント一覧'
+        click_on '新規ドキュメント'
         fill_in "document_name", with: "KNGのいたずら日記"
         fill_in "document_content", with: "KNGのいたずら日記"
           # trix_editor = find(".trix-content") # trixの不具合によりリッチテキスト使用せず。TODO:後日検証！
@@ -52,7 +52,7 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
         expect(page).to have_content 'Document_1'
         expect(page).to have_content 'Document_2'
       end
@@ -70,9 +70,13 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
+        # binding.pry
+        sleep 1
         find('.fa-eye', match: :first).click
         expect(page).to have_content 'Document_2'
+        expect(page).to have_content 'コミットメッセージ'
+        expect(page).to have_content 'ドキュメント内容'
       end
     end
   end
@@ -88,8 +92,8 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
-        click_on 'New Document'
+        click_on 'ドキュメント一覧'
+        click_on '新規ドキュメント'
         fill_in "document_name", with: "KNGのいたずら日記"
         fill_in "document_content", with: "KNGのいたずら日記"
           # trix_editor = find(".trix-content") # trixの不具合によりリッチテキスト使用せず。TODO:後日検証！
@@ -103,9 +107,10 @@ RSpec.describe 'document管理機能', type: :system do
         # binding.pry
         find('.fa-pen-to-square', match: :first).click
         fill_in "document_name", with: "変更したぜ！！！！"
-        fill_in "document_commit_attributes_message", with: "いたずらにコミットする。その2"
-        click_on '更新する'
         # binding.pry
+        fill_in "document_commit_attributes_message", with: "コミットしない！"
+        click_on '更新する'
+        sleep 1
         expect(page).to have_content '変更したぜ！！！！'
         expect(page).to have_content 'いたずらにコミットする。その2'
       end
@@ -123,7 +128,7 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
         sleep 1
         # binding.pry
         accept_confirm do
@@ -145,7 +150,7 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
         sleep 1
         # binding.pry
         find('.fa-pen-to-square', match: :first).click
@@ -169,7 +174,7 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
         sleep 1
         find('.fa-pen-to-square', match: :first).click
         fill_in "document_name", with: "変更したぜ！！！！"
@@ -178,7 +183,7 @@ RSpec.describe 'document管理機能', type: :system do
         click_on 'このバージョンを表示する', match: :first
         expect(page).to have_content('変更したぜ！！！！', count: 1)
         expect(page).to have_content('バージョン2')
-        expect(page).to have_content('最新版です')
+        expect(page).to have_content('最新版')
       end
     end
   end
@@ -194,7 +199,7 @@ RSpec.describe 'document管理機能', type: :system do
         find('.fa-eye', match: :first).click
         sleep 1
         find('.fa-eye', match: :first).click
-        click_on 'Document一覧'
+        click_on 'ドキュメント一覧'
         sleep 1
         find('.fa-pen-to-square', match: :first).click
         fill_in "document_name", with: "変更したぜ！！！！"

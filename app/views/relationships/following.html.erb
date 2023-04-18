@@ -1,11 +1,11 @@
 <div class="follow-wrapper">
   <div class="following-container box-container">
-    <h2>フォロー</h2>
+    <h2><%= t('common.follow') %></h2>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>ユーザー名</th>
-          <th>プロフィール</th>
+          <th><%= t('common.user name') %></th>
+          <th><%= t('common.profile') %></th>
         </tr>
       </thead>
       <tbody>
@@ -14,7 +14,7 @@
         <%# ページネーション使うために書き換えた %>
           <tr>
             <td><%= following.name %></td>
-            <td><%= link_to 'プロフィールを見る', following %></td>
+            <td><%= link_to ('<i class="fas fa-eye"></i>' + t('users.show profile')).html_safe, following %></td>
           </tr>
         <% end %>
       </tbody>

@@ -1,7 +1,7 @@
 <h2><%= t('.title', resource: resource_name.to_s.humanize) %></h2>
 
 <%# Add class to the form element %>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, class: 'update-account-form' }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name, action: :update), html: { method: :patch, class: 'update-account-form' }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="field">
     <%= f.label :name %><br />
@@ -46,10 +46,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <%## FIXME:以下は成功例！  %>
   <div class="actions">
     <%= f.submit t('.update') %>
   </div>
 
+<% end %>
   <%# Wrap cancel account section in a div with the class "cancel-account" %>
   <div class="cancel-account">
     <div><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
@@ -59,6 +61,25 @@
   <div class="back-link">
     <%= link_to t('devise.shared.links.back'), :back %>
   </div>
-<% end %>
+
+
+<%# ------------------------------------------------------------------------ %>
+  <%## FIXME:以下は失敗例！ TODO:update以外のものもend内にいれるとだめらしい・・・%>
+  <%# <div class="actions"> %>
+    <%#= f.submit t('.update') %>
+  <%# </div> %>
+
+  <%## Wrap cancel account section in a div with the class "cancel-account" %>
+  <%# <div class="cancel-account"> %>
+    <%# <div> %>
+    <%#= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %>
+    <%# </div> %>
+  <%# </div> %>
+
+  <%## Add class to the back link %>
+  <%# <div class="back-link"> %>
+    <%#= link_to t('devise.shared.links.back'), :back %>
+  <%# </div> %>
+<%# end %>
 
 

@@ -36,7 +36,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         sleep 1
         find('.fa-eye', match: :first).click
         expect(page).to have_content 'Branch_1'
-        expect(page).to have_content 'branchを切る'
+        expect(page).to have_content 'ブランチを切る'
       end
     end
   end
@@ -57,7 +57,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in "branch_name", with: "DIC"
         click_on "更新する"
         expect(page).to have_content 'DIC'
-        expect(page).to have_content 'branchを切る'
+        expect(page).to have_content 'ブランチを切る'
       end
     end
   end
@@ -94,7 +94,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         sleep 1
         find('.fa-eye', match: :first).click
         # binding.pry
-        click_on 'branchを切る'
+        click_on 'ブランチを切る'
         expect(page).to have_content 'Branch_1'
       end
     end
