@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module WritersBase
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.time_zone = 'Tokyo'
     config.load_defaults 6.1
     config.i18n.default_locale = :ja
     # TODO:次の行の挿入で解決。ActiveSupport::TimeWithZone, ActiveSupport::TimeZoneが必要だったらしい。

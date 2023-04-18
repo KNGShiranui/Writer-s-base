@@ -47,6 +47,9 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     else
+      @messages = @conversation.messages
+      # これがないとバリデーションで弾かれた後,indexをレンダリングした際に、@messagesがnilになりeach do
+      # でエラーが出る。注意。
       render 'index'
     end
   end

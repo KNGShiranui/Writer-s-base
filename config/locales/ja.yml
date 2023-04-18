@@ -70,6 +70,12 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+        blank: "を入力してください"
+        required: "を入力してください"
+        prohibited: "このメッセージは保存できませんでした: "
+  helpers:
+    pluralize:
+      other: "%{count}件のエラーが発生しました:"
     attributes:
       commit:
         message: "コミットメッセージ"
