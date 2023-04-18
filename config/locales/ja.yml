@@ -58,6 +58,9 @@ ja:
     search: "検索"
     search word: "検索ワード"
     search results: "検索結果"
+    password: "パスワード"
+    password confirmation: "パスワード確認"
+    current password: "現在のパスワード"
   activerecord:
     models:
       paper_trail/version: "バージョン一覧"
@@ -199,6 +202,7 @@ ja:
     save_draft: "下書き保存"
     published document: "公開済みドキュメント"
     draft document: "下書き"
+    read more: "続きを読む"
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -270,6 +274,7 @@ ja:
     read: "既読"
     unread: "未読"
     send_message: "メッセージを送る"
+    please enter your message: "メッセージを入力してください"
   number:
     currency:
       format:
@@ -323,6 +328,7 @@ ja:
     receiver: "送信先"
     amount: "ポイント"
     submit: "送信"
+    Please decide the point to send: "ポイントを決定してください"
   repositories:
     name: "リポジトリ名"
     favorite: "お気に入り"

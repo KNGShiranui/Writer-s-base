@@ -11,13 +11,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, t('issues.name')  %>
-    <%= form.text_field :name %>
+    <%= form.label :name, t('issues.name') %>
+    <%= form.text_field :name, placeholder: t("issues.name") %>
   </div>
 
   <div class="field">
     <%= form.label :description, t('issues.description') %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, placeholder: t("issues.description") %>
   </div>
 
   <div class="field">

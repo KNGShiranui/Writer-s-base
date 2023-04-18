@@ -4,24 +4,19 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
+    <%= f.label :name, t('common.user name') %><br />
+    <%= f.text_field :name, autocomplete: "name", placeholder: t('common.user name') %>
     <!-- autofocus 属性を削除しました。1つのフォームには1つのautofocus属性だけが必要です。 -->
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.label :email, t('common.Email') %><br />
+    <%= f.email_field :email, autocomplete: "email", placeholder: t('common.Email')  %>
   </div>
 
   <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content, autocomplete: "content" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :icon %><br />
-    <%= f.text_field :icon, autocomplete: "icon" %>
+    <%= f.label :content, t('common.Content') %><br />
+    <%= f.text_field :content, autocomplete: "content", placeholder: t('common.Content') %>
   </div>
 
   <div class="field">
@@ -29,14 +24,14 @@
     <% if @minimum_password_length %>
     <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: t('common.password') %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t('common.password confirmation') %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit t('.sign_up') %>
   </div>

@@ -4,23 +4,18 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name, action: :update), html: { method: :patch, class: 'update-account-form' }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.label :name, t('common.user name') %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: t('common.user name') %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email, t('common.Email') %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: t('common.Email') %>
   </div>
 
   <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content, autofocus: true, autocomplete: "content" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :icon %><br />
-    <%= f.text_field :icon, autofocus: true, autocomplete: "icon" %>
+    <%= f.label :content, t('common.Content') %><br />
+    <%= f.text_field :content, autofocus: true, autocomplete: "content", placeholder: t('common.Content') %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -29,7 +24,7 @@
 
   <div class="field">
     <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: t('common.password')  %>
     <% if @minimum_password_length %>
       <br />
       <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
@@ -38,12 +33,12 @@
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t('common.password confirmation')  %>
   </div>
 
   <div class="field">
     <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", placeholder: t('common.current password')  %>
   </div>
 
   <%## FIXME:以下は成功例！  %>
@@ -54,12 +49,12 @@
 <% end %>
   <%# Wrap cancel account section in a div with the class "cancel-account" %>
   <div class="cancel-account">
-    <div><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
+    <div><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete, style: "width: 400px;" %></div>
   </div>
 
   <%# Add class to the back link %>
   <div class="back-link">
-    <%= link_to t('devise.shared.links.back'), :back %>
+    <%= link_to t('devise.shared.links.back'), :back, style: "width: 400px; text-align: center; display: inline-block;" %>
   </div>
 
 
