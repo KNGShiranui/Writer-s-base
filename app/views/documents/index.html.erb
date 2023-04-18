@@ -1,5 +1,5 @@
 <div class="documents-container">
-  <h1>Documents</h1>
+  <h1> <%= t('documents.documents') %></h1>
 
   <h3><%= t('documents.published document') %></h3>
   <table class="documents-table">
@@ -20,7 +20,7 @@
           <td><%= document.name %></td>
           <td><%= truncate_html(simple_format(document.content), length: 100) %>
             <% if document.content.size >= 100 %>
-              <%= link_to document do %>続きを読む<% end %>
+              <%= link_to document do %> <%= t('documents.read more') %> <% end %>
             <% end %>
           </td>
           <td><%= document.user.name %></td>

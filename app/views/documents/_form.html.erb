@@ -12,12 +12,12 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: t("documents.name") %>
   </div>
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, placeholder: t("documents.content") %>
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id %>
@@ -31,7 +31,7 @@
   <div class="field">
     <%= form.fields_for :commit do |commit| %>
       <%= commit.label :message %>
-      <%= commit.text_field :message, required: true %>
+      <%= commit.text_field :message, required: true, placeholder: t("commits.message")  %>
       <%= commit.hidden_field :user_id, value: current_user.id %>
       <%= commit.hidden_field :branch_id, value: @branch.id %>
     <% end %>
