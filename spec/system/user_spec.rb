@@ -12,7 +12,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in "user_email", with: "KNG1@example.com"
         fill_in "user_password", with: "11101252"
         click_on "ログイン"
-        expect(page).to have_content '現在のユーザー: KNG1さん'
+        expect(page).to have_content '現在のユーザ: KNG1さん'
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         visit new_user_session_path
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'ゲストログイン'
-        expect(page).to have_content '現在のユーザー: Guest Userさん'
+        expect(page).to have_content '現在のユーザ: Guest Userさん'
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         visit new_user_session_path
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'ゲスト管理者ログイン'
-        expect(page).to have_content '現在のユーザー: Guest Adminさん'
+        expect(page).to have_content '現在のユーザ: Guest Adminさん'
       end
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         click_on "ログイン"
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'ユーザ一覧'
-        expect(page).to have_content 'メッセージを送る'
+        expect(page).to have_content 'メッセージ'
         expect(page).to have_content 'KNG2さん'
         expect(page).to have_content 'KNG3さん'
       end
@@ -97,7 +97,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'プロフィール'
         expect(page).to have_content 'KNG1のプロフィール'
-        expect(page).to have_content 'KNG1のRepository'
+        expect(page).to have_content 'KNG1のリポジトリ一覧'
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   #       fill_in "user_password", with: "11101252"
   #       fill_in "user_password_confirmation", with: "11101252"
   #       # fill_in "user_current_password", with: "11101252"
-  #       binding.pry
+  #       # binding.pry
   #       click_on "更新"
   #       expect(page).to have_content 'ユーザー情報が更新されました'
   #       fill_in "user_email", with: "KNG4@example.com"

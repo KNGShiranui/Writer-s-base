@@ -24,8 +24,8 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         # source上ではfa-hand-paperだったが検証ツール上ではfa-handだった。
         # fa-handでないとエラーが出た。理由は分からないが、今後は検証ツール
         # をメインで使用するべきかも
-        expect(page).to have_content 'User Related Issues'
-        expect(page).to have_content 'Fire!'
+        expect(page).to have_content 'ユーザ関連イシュー'
+        expect(page).to have_content '脱退'
       end
     end
   end

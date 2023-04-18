@@ -16,7 +16,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         click_on "ログイン"
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'リポジトリ一覧'
-        click_on 'New Repository'
+        click_on '新しいリポジトリ'
         fill_in "repository_name", with: "repository_1"
         fill_in "repository_description", with: "description_1"
         # fill_in "repository_status", with: "open"
@@ -24,7 +24,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         # association :user, factory: :user
         click_on '登録する'
         expect(Repository.count).to eq(2)
-        expect(page).to have_content 'リポジトリオーナー'
+        expect(page).to have_content '所有者'
         expect(page).to have_content 'repository_1'
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'リポジトリ一覧'
         expect(Repository.count).to eq(1)
-        expect(page).to have_content 'Repositories'
+        expect(page).to have_content 'リポジトリ一覧'
       end
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         sleep 1
         # binding.pry
         within(".Edit-RSpec") do
-          click_link("Edit")
+          click_link("編集")
         end
         # リポジトリの更新を確認
         # binding.pry
@@ -109,7 +109,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
           find(".fa-trash").click
         end
         # リポジトリの削除を確認
-        expect(page).to have_content 'Repositories'      
+        expect(page).to have_content 'リポジトリ一覧'      
         expect(Repository.count).to eq(0)
         expect(page).not_to have_content 'Repository_1'
       end

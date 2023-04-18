@@ -19,7 +19,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         find('.dropdown-content').click_link 'ユーザ一覧'
         target_user_name = "KNG1"
         within "tbody" do
-        click_link "メッセージを送る", match: :first
+        click_link "メッセージ", match: :first
         end
         expect(page).to have_content 'KNG1さんとのメッセージ'
         # target_user_nameは、送りたい相手のユーザー名を指定します。

@@ -264,7 +264,7 @@ ja:
     fire!: "脱退"
     editing issue: "イシュー編集"
     repository related issues: "リポジトリ関連イシュー"
-    user related issues: "ユーザ関連イシューｓ"
+    user related issues: "ユーザ関連イシュー"
   messages:
     previous message: "以前のメッセージ"
     read: "既読"

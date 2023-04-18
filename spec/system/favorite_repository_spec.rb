@@ -15,7 +15,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         click_on "ログイン"
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'リポジトリ一覧'
-        click_on 'お気に入り追加'
+        click_on 'お気に入り'
         expect(page).to have_content 'お気に入り解除'
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         click_on "ログイン"
         find('.dropbtn').click  # dropbtnクラスの要素をクリック
         find('.dropdown-content').click_link 'リポジトリ一覧'
-        click_on 'お気に入り追加'
+        click_on 'お気に入り'
         click_on 'お気に入り解除'
         expect(page).not_to have_content 'お気に入り解除'
       end

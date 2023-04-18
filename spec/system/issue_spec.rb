@@ -70,7 +70,7 @@ RSpec.describe 'イシュー管理機能', type: :system do
         select 'open', from: 'issue_status'
         select 'high', from: 'issue_priority'
         click_on "登録する"
-        click_on "Edit"
+        click_on "編集"
         fill_in "issue_name", with: "KNGのいたずら大作戦"
         click_on "更新する"
         expect(page).to have_content 'KNGのいたずら大作戦'
@@ -98,13 +98,13 @@ RSpec.describe 'イシュー管理機能', type: :system do
         select 'open', from: 'issue_status'
         select 'high', from: 'issue_priority'
         click_on "登録する"
-        click_on "Back"
+        click_on "戻る"
         # click_on "Destroy", match: :first
         accept_confirm do
           find(".fa-trash").click
         end
         expect(page).to have_content 'Repository_1'
-        expect(page).to have_content 'リポジトリオーナー'
+        expect(page).to have_content '所有者'
       end
     end
   end
