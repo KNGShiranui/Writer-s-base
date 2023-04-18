@@ -1,6 +1,6 @@
 <%= search_form_for @q, url: url, html: { class: 'search-form' } do |f| %>
   <div class="search-input-container">
-    <%= f.search_field :name_or_description_cont, class: 'form-control', placeholder: '検索ワード' %>
+    <%= f.search_field :name_or_description_cont, class: 'form-control', placeholder: t('common.search word') %>
   </div>
-  <%= f.submit '検索', class: 'btn btn-primary' %>
+  <%= f.submit  t('common.search'), class: 'btn btn-primary' %>
 <% end %>

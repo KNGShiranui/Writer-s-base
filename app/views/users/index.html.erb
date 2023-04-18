@@ -1,6 +1,6 @@
 <div class="repository-index-container">
   <div class="search-container">
-    <h2  style="margin-bottom: 30px;">ユーザー一覧</h2>
+    <h2  style="margin-bottom: 30px;"><%= t('common.users') %></h2>
   </div>
 
   <div class="pagination-container" style="display: flex; justify-content: space-between; align-items: center;">
@@ -8,7 +8,7 @@
       <%= render 'search', q: @q, url: users_path %>
     </div>
     <div style="font-size: 12px; display: flex; align-items: center;">
-      <p style="margin-right: 5px;">検索結果：</p>
+      <p style="margin-right: 5px;"><%= t('common.search results') %>: </p>
       <p><%= "#{@count}件" %></p>
     </div>
   </div>
@@ -17,10 +17,10 @@
     <table>
       <thead>
         <tr>
-          <th>User Name</th>
-          <th>Send Message</th>
-          <th>Follow</th>
-          <th>Send Point</th>
+          <th><%= t('common.user name') %></th>
+          <th><%= t('common.send message') %></th>
+          <th><%= t('common.follow') %></th>
+          <th><%= t('common.send points') %></th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +28,9 @@
           <% if user.id != current_user.id %>
             <tr>
               <td><%= link_to "#{user.name}さん", user, class: "user-name" %></td>
-              <td><%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %></td>
+              <td><%= link_to t('common.send message'), conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post, class: "send-message" %></td>
               <td><%= render 'follow_form', user: user %></td> <!-- フォロー機能が実装されていればこの一文も必要 -->
-              <td> <%= link_to 'ポイントを送る', new_point_path(receiver_id: user.id), class: 'send-points-button'%></td>
+              <td> <%= link_to t('common.send points'), new_point_path(receiver_id: user.id), class: 'send-points-button'%></td>
             </tr>
           <% end %>
         <% end %>

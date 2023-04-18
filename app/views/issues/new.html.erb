@@ -1,5 +1,5 @@
 <div class="issue-form-container">
-  <h1><i class="fas fa-plus-circle"></i> New Issue</h1>
+  <h1><i class="fas fa-plus-circle"></i>&nbsp;<%= t('issues.new issue') %></h1>
   <%= render 'form', issue: @issue, repository: @repository %>
-  <%= link_to '<i class="fas fa-arrow-left"></i> Back'.html_safe, issues_path(@issue, repository_id: @repository, user: current_user) %>
+  <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, issues_path(@issue, repository_id: @repository, user: current_user) %>
 </div>

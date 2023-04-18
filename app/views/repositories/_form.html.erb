@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, t('repositories.name') %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, t('repositories.description')  %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Repository.statuses.keys, {prompt: "選択してください"}, class: "status_select" %>
+    <%= form.label :status, t('repositories.status') %>
+    <%= form.select :status, Repository.statuses.keys.map { |status| [Repository.human_attribute_name("statuses.#{status}"), status] }, {prompt: t("repository.select_prompt")}, class: "status_select" %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
-    <%= form.select :priority, Repository.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
+    <%= form.label :priority, t('repositories.priority') %>
+    <%= form.select :priority, Repository.priorities.keys, {prompt: t("repository.select_prompt")}, class: "priority_select" %>
   </div>
 
   <%# <div class="field"> %>

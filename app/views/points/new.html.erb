@@ -51,24 +51,24 @@
   <%= form_with url: points_path, method: :post, local: true do |f| %>
     <% if params[:receiver_id] %>
       <div class="point_sending_form">
-        <%= f.label :receiver_id, "送信先ユーザー: #{@user.name}" %>
+        <%= f.label :receiver_id, "#{t('points.receiver', name: @user.name)}: #{@user.name}" %>
         <%= f.hidden_field :receiver_id, value: @user.id %>
       </div>
       <div class="point_sending_form">
-        <%= f.label :amount, "送信ポイント" %>
+        <%= f.label :amount, t('points.amount') %>
         <%= f.number_field :amount, min: 1 %>
       </div>
-      <%= f.submit "ポイントを送信" %>
+      <%= f.submit t('points.submit') %>
     <% else %>
       <div class="point_sending_form">
-        <%= f.label :receiver_id, "送信先ユーザー" %>
+        <%= f.label :receiver_id, t('points.receiver') %>
         <%= f.select :receiver_id, @users.map { |u| [u.name, u.id] } %>
       </div>
       <div class="point_sending_form">
-        <%= f.label :amount, "送信ポイント" %>
+        <%= f.label :amount, t('points.amount') %>
         <%= f.number_field :amount, min: 1 %>
       </div>
-      <%= f.submit "ポイントを送信" %>
+      <%= f.submit t('points.submit') %>
     <% end %>      
   <% end %>
 </body>

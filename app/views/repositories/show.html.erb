@@ -1,49 +1,51 @@
 <div class="repository-show-container">
 
   <p>
-    <strong>リポジトリ名:</strong>
+    <strong><%= t('repositories.name') %>:</strong>
     <%= @repository.name %>
   </p>
 
   <p>
-    <strong>リポジトリオーナー:</strong>         
+    <strong><%= t('repositories.owner') %>:</strong>         
     <%= link_to user_path(@repository.user.id) do %>
       <%= content_tag(:i, '', class: 'fa fa-book') %> <%= @repository.user.name %>
     <% end %>
   </p>
 
   <p>
-    <strong>リポジトリ説明:</strong>
+    <strong><%= t('repositories.description') %>:</strong>
     <%= @repository.description %>
   </p>
 
   <% if current_user.id != @repository.user_id %>
     <p>
-    <strong>リポジトリ作成者支援:</strong>
+    <strong><%= t('repositories.help the owner') %>:</strong>
       <%= link_to new_point_path(receiver_id: @repository.user.id) do %>
-        <%= content_tag(:i, '', class: 'fa fa-book') %> <%= "#{@repository.user.name}にポイントを送る:" %>
+        <%= content_tag(:i, '', class: 'fa fa-book') %> <%= "#{@repository.user.name}にポイントを送る" %>
       <% end %>
     </p>
   <% end %>
-
+  <hr>
   <%# <p> %>
     <%# <strong>ブランチ作成:</strong> %>
     <%#= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
     <%# ↑おそらく(repository_id: @repository.id)を明示的に書く必要あり %>
   <%# </p> %>
-
+  <p><strong>
+    <%= t('branches.branches') %>:
+    <%= @repository.description %>
+  </strong></p>
   <table>
     <thead>
       <tr>
-        <th>branch</th>
-        <th>repository</th>
-        <th>Descendance</th>
-        <th class="action">Show</th>
-        <th class="action">Edit</th>
-        <th class="action">Destroy</th>
+        <th><%= t('branches.name') %></th>
+        <th><%= t('branches.repository') %></th>
+        <th><%= t('branches.descendance') %></th>
+        <th class="action"><%= t('common.show') %></th>
+        <th class="action"><%= t('common.edit') %></th>
+        <th class="action"><%= t('common.destroy') %></th>
       </tr>
     </thead>
-
     <tbody>
       <% @branches.each do |branch| %>
         <tr>
@@ -59,24 +61,24 @@
   </table>
   <%= paginate @branches, param_name: 'branches_page' %>
 
-  <p>
-    <strong>イシュー作成:</strong>
-    <%= link_to 'イシュー作成', new_issue_path(repository_id: @repository.id, user_id: current_user.id) %>
+  <hr>
+  
+  <p><strong>
+    <%= t('issues.issues') %>:
     <%# (repository_id: @repository.id)を明示的に書く必要あり %>
-  </p>
-
+  </strong></p>
   <table>
     <thead>
       <tr>
-        <th>issue</th>
-        <th>description</th>
-        <th>status</th>
-        <th>priority</th>
-        <th>repository</th>
-        <th class="action">Show</th>
-        <th class="action">Edit</th>
-        <th class="action">Destroy</th>
-        <th class="action">Assign</th>
+        <th><%= t('issues.name') %></th>
+        <th><%= t('issues.description') %></th>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.repository') %></th>
+        <th class="action"><%= t('common.show') %></th>
+        <th class="action"><%= t('common.edit') %></th>
+        <th class="action"><%= t('common.destroy') %></th>
+        <th class="action"><%= t('common.assign') %></th>
       </tr>
     </thead>
 
@@ -121,7 +123,8 @@
 </table>
 <%= paginate @issues, param_name: 'issues_page' %>
 <div class="Edit-RSpec">
-  <%= link_to 'Edit', edit_repository_path(@repository) %> |
-  <%= link_to 'Back', repositories_path %>
+  <%= link_to t('common.edit'), edit_repository_path(@repository) %> |
+  <%= link_to t('common.back'), repositories_path %> |
+  <%= link_to t('issues.new issue'), new_issue_path(repository_id: @repository.id, user_id: current_user.id) %>
 </div>
 </div>

@@ -1,26 +1,30 @@
 ---
 ja:
   common:
-    User Name: "ユーザ名"
+    user name: "ユーザ名"
     users: "ユーザ一覧"
     current user: "現在のユーザ"
     administrator: "管理者画面"
     current points: "現在のポイント"
     conversations: "チャットルーム"
     profile: "プロフィール"
-    Send Message: "メッセージ"
+    send message: "メッセージ"
     follow: "フォロー"
     follower: "フォロワー"
+    non follow: "つながりを解除"
     send points: "ポイント送信"
     Name: "ユーザ名"
     Email: "Eメール"
     Content: "自己紹介"
-    Point: "ポイント"
+    icon: "プロフィール画像"
+    points: "ポイント"
     back: "戻る"
     Owner: "リポジトリ所有者"
     Conversation: "チャットルーム"
     Description: "説明"
-    Favorite: "お気に入り"
+    favorite: "お気に入り"
+    add favorite: "お気に入り"
+    remove favorite: "お気に入り解除"
     Status: "ステータス"
     branch: "ブランチ"
     issues: "イシュー"
@@ -42,13 +46,7 @@ ja:
     open: "公開"
     semi_closed: "限定公開"
     closed: "非公開"
-    very_low: "時間があれば"
-    low: "低"
-    medium: "中"
-    high: "高"
-    very_high: "非常に高い"
-    immediately: "最優先"
-    Editing Repository: "リポジトリ編集"
+    editing repository: "リポジトリ編集"
     Are you sure?: "本当によろしいですか？"
     Document: "ドキュメント"
     New Document: "ドキュメント新規作成"
@@ -57,6 +55,9 @@ ja:
     version: "バージョン"
     Your writing accelerates: "あなたの「書く」が加速する"
     everyone's writing connects: "みんなの「書く」が結びつく"
+    search: "検索"
+    search word: "検索ワード"
+    search results: "検索結果"
   activerecord:
     models:
       paper_trail/version: "バージョン一覧"
@@ -77,11 +78,18 @@ ja:
           open: "公開中"
           semi_closed: "メンバー限定公開"
           closed: "非公開"
-      repositories:
+      repository:
         statuses:
           open: "公開中"
           semi_closed: "メンバー限定公開"
           closed: "非公開"
+        priorities:
+          very_low: "時間があれば"
+          low: "低"
+          medium: "中"
+          high: "高"
+          very_high: "非常に高い"
+          immediately: "最優先"
   branches:
     name: "ブランチ名"
     editing_branch: "ブランチ編集"
@@ -244,6 +252,19 @@ ja:
       priority: "優先度"
       user_id: "ユーザーID"
       submit: "送信"
+  issues:
+    name: "イシュー名"
+    description: "イシュー概要"
+    issues: "イシュー一覧"
+    new issue: "イシュー作成"
+    status: "ステータス"
+    priority: "優先度"
+    repository: "リポジトリ名"
+    assign: "参加"
+    fire!: "脱退"
+    editing issue: "イシュー編集"
+    repository related issues: "リポジトリ関連イシュー"
+    user related issues: "ユーザ関連イシューｓ"
   messages:
     previous message: "以前のメッセージ"
     read: "既読"
@@ -308,6 +329,13 @@ ja:
     non favorite: "お気に入り解除"
     favorite repository: "お気に入りリポジトリ一覧"
     repositories: "リポジトリ一覧"
+    description: "概要"
+    owner: "所有者"
+    new repository: "新しいリポジトリ"
+    status: "ステータス"
+    priority: "優先度"
+    select_prompt: "選択してください"
+    help the owner: "オーナーを支援する"
   support:
     array:
       last_word_connector: "、"
@@ -322,6 +350,7 @@ ja:
     pm: 午後
   users:
     user_name: "ユーザ名"
+    show profile: "プロフィールを見る"
   views:
     pagination:
       first: "最初へ"

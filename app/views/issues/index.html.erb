@@ -1,22 +1,22 @@
 <% if params[:repository_id].present? %>
-  <h1 class="issue-page-title"><i class="fas fa-archive"></i> &nbsp Repository Related Issues</h1>
+  <h1 class="issue-page-title"><i class="fas fa-archive"></i> &nbsp; <%= t('issues.repository related issues') %></h1>
 <% else %>
-  <h1><i class="fas fa-user"></i> User Related Issues</h1>
+  <h1><i class="fas fa-user"></i> <%= t('issues.user related issues') %></h1>
 <% end %>
 
 <div class="index-container"> <!-- 追加: index-containerクラスを適用 -->
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Repository</th>
-        <th>show</th>
-        <th>edit</th>
-        <th>destroy</th>
-        <th>assign</th>
+        <th><%= t('issues.name') %></th>
+        <th><%= t('issues.description') %></th>
+        <th><%= t('issues.status') %></th>
+        <th><%= t('issues.priority') %></th>
+        <th><%= t('issues.repository') %></th>
+        <th><%= t('common.show') %></th>
+        <th><%= t('common.edit') %></th>
+        <th><%= t('common.destroy') %></th>
+        <th><%= t('issues.assign') %></th>
       </tr>
     </thead>
 
@@ -28,17 +28,17 @@
             <td><%= issue.description %></td>
             <td><%= issue.status %></td>
             <td><%= issue.priority %></td>
-            <td><%= issue.repository_id %></td>
+            <td><%= issue.repository.name %></td>
             
-            <td><%= link_to '<i class="fas fa-eye"></i> Show'.html_safe, issue_path(issue) %></td>
-            <td><%= link_to '<i class="fas fa-edit"></i> Edit'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
-            <td><%= link_to '<i class="fas fa-trash"></i> Destroy'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+            <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
+            <td><%= link_to '<i class="fas fa-edit"></i'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+            <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
             <td>
               <% if current_user.id == issue.user_id %>
                 <% if issue.assignees.present? %>
-                  <%= link_to '<i class="fas fa-fire"></i> Fire!'.html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <%= link_to ('<i class="fas fa-fire"&nbsp;></i>' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
                 <% else %>
-                  <%= link_to '<i class="fas fa-user-plus"></i> Assign'.html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <%= link_to ('<i class="fas fa-user-plus"&nbsp;></i>' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
                 <% end %>
               <% end %>
             </td>
@@ -48,7 +48,7 @@
     </tbody>
   </table>
   <% if params[:repository_id].present? %>
-    <%= link_to '<i class="fas fa-plus"></i> New Issue'.html_safe, new_issue_path(repository_id: @repository, user_id: @repository.user.id, user: current_user) %>
+    <%= link_to t('issues.new issue'), new_issue_path(repository_id: @repository, user_id: @repository.user.id, user: current_user) %>
   <% end %>
   <%= paginate @issues %>
 </div>

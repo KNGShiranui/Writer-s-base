@@ -4,26 +4,26 @@
     <hr>
 
     <div class="issue-details panel">
-      <h3><i class="fas fa-info-circle"></i> Description</h3>
+      <h3><i class="fas fa-info-circle"></i><%= t('issues.description') %></h3>
       <p><%= @issue.description %></p>
 
-      <h3><i class="fas fa-tasks"></i> Status</h3>
+      <h3><i class="fas fa-tasks"></i><%= t('issues.status') %></h3>
       <p><%= @issue.status %></p>
 
-      <h3><i class="fas fa-exclamation-circle"></i> Priority</h3>
+      <h3><i class="fas fa-exclamation-circle"></i><%= t('issues.priority') %></h3>
       <p><%= @issue.priority %></p>
 
-      <h3><i class="fas fa-archive"></i> Repository</h3>
-      <p><%= @issue.repository_id %></p>
+      <h3><i class="fas fa-archive"></i><%= t('issues.repository') %></h3>
+      <p><%= @issue.repository.name %></p>
     </div>
 
     <div class="issue-actions">
       <%= link_to edit_issue_path(@issue, repository_id: @repository), class: 'btn btn-primary' do %>
-        <i class="fas fa-edit"></i> Edit
+        <i class="fas fa-edit"></i> <%= t('common.edit') %>
       <% end %>
 
       <%= link_to issues_path(repository_id: @issue.repository.id), class: 'btn btn-secondary' do %>
-        <i class="fas fa-arrow-left"></i> Back
+        <i class="fas fa-arrow-left"></i> <%= t('common.back') %>
       <% end %>
     </div>
   </div>

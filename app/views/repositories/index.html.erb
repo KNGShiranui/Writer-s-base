@@ -1,11 +1,11 @@
 <div class="repository-index-container">
   <div class="search-container">
-    <h1 style="margin-bottom: 30px;">Repositories</h1>
+    <h1 style="margin-bottom: 30px;"><%= t('repositories.repositories') %></h1>
     <div>
       <%= render 'search', q: @q, url: repositories_path %>
     </div>
     <div style="font-size: 12px; display: flex; align-items: center;">
-      <p style="margin-right: 5px;">検索結果：</p>
+      <p style="margin-right: 5px;"><%= t('common.search results') %>:</p>
       <p><%= "#{@count}件" %></p>
     </div>
   </div>
@@ -13,15 +13,15 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Owner</th>
-        <th class="action">Show</th>
-        <th class="action">Edit</th>
-        <th class="action">Destroy</th>
-        <th class="action">Favorite</th>
+        <th><%= t('repositories.name') %></th>
+        <th><%= t('repositories.description') %></th>
+        <th><%= t('repositories.status') %></th>
+        <th><%= t('repositories.priority') %></th>
+        <th><%= t('repositories.owner') %></th>
+        <th class="action"><%= t('common.show') %></th>
+        <th class="action"><%= t('common.edit') %></th>
+        <th class="action"><%= t('common.destroy') %></th>
+        <th class="action"><%= t('common.favorite') %></th>
       </tr>
     </thead>
     <tbody>
@@ -48,9 +48,9 @@
                 <td></td>
               <% end %>
               <% if current_user.favorited_repositories.include?(repository) %>
-                <td><%= link_to '<i class="fas fa-star"></i> お気に入り解除'.html_safe, favorite_repository_path(repository, repository_id: repository.id), method: :delete %></td>
+                <td><%= link_to ('<i class="fas fa-star"></i>' + t('repositories.non favorite')).html_safe, favorite_repository_path(repository, repository_id: repository.id), method: :delete %></td>
               <% else %>
-                <td><%= link_to '<i class="far fa-star"></i> お気に入り追加'.html_safe, favorite_repositories_path(repository, repository_id: repository.id), method: :post %></td>
+                <td><%= link_to ('<i class="far fa-star"></i>' + t('repositories.favorite')).html_safe, favorite_repositories_path(repository, repository_id: repository.id), method: :post %></td>
               <% end %>
             </tr>
           <% end %>
@@ -75,7 +75,7 @@
       <%= paginate @repositories %>
     </div>
     <div style="margin-right: 20px;">
-      <%= link_to '+ New Repository', new_repository_path %>
+      <%= link_to t('repositories.new repository'), new_repository_path %>
     </div>
   </div>
 </div>
