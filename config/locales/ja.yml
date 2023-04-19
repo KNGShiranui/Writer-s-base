@@ -11,6 +11,7 @@ ja:
     send message: "メッセージ"
     follow: "フォロー"
     follower: "フォロワー"
+    display: "表示する"
     non follow: "つながりを解除"
     send points: "ポイント送信"
     Name: "ユーザ名"
