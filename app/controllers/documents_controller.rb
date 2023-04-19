@@ -36,7 +36,7 @@ class DocumentsController < ApplicationController
       # その後、nilに対してbuildメソッドを呼び出そうとしてNoMethodErrorが発生してしまう。
       # @document.build_commitを使用することで、Documentに関連する新しいCommitオブジェクトをビルドし、エラーを回避できるらしい。
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -47,7 +47,7 @@ class DocumentsController < ApplicationController
     if current_user.id == @repository.user_id || current_user.id == @branch.repository.user_id
       # @document.build_commit
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -75,7 +75,7 @@ class DocumentsController < ApplicationController
           end
         else # 通常の投稿ボタンを押下した場合
           if @document.save
-            format.html { redirect_to document_url(@document, repository_id: @repository.id, branch_id: @branch.id), notice: "Document was successfully created." }
+            format.html { redirect_to document_url(@document, repository_id: @repository.id, branch_id: @branch.id), notice: t("documents.Document was successfully created") }
             format.json { render :show, status: :created, location: @document }
           else
             format.html { render :new, status: :unprocessable_entity }
@@ -84,7 +84,7 @@ class DocumentsController < ApplicationController
         end
       end
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -102,7 +102,7 @@ class DocumentsController < ApplicationController
           # binding.pry
           if @document.update(document_params)
             # binding.pry
-            format.html { redirect_to document_url(@document, branch_id: @branch.id, repository_id: @repository.id), notice: "Document was successfully updated." }
+            format.html { redirect_to document_url(@document, branch_id: @branch.id, repository_id: @repository.id), notice: t("documents.Document was successfully updated") }
             format.json { render :show, status: :ok, location: @document }
           else
             # binding.pry
@@ -111,7 +111,7 @@ class DocumentsController < ApplicationController
           end
         end
       else
-        flash[:alert] = "You are not authorized to update documents in this repository."
+        flash[:alert] = t("documents.not_authorized")
         redirect_to repository_url(@repository)
       end
     end
@@ -123,7 +123,7 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_path(repository_id: @repository.id, branch_id: @branch.id), notice: "Document was successfully destroyed." }
+      format.html { redirect_to documents_path(repository_id: @repository.id, branch_id: @branch.id), notice: t("documents.Document was successfully destroyed") }
       format.json { head :no_content }
     end
   end

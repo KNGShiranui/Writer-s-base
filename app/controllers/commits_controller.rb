@@ -26,7 +26,7 @@ class CommitsController < ApplicationController
 
     respond_to do |format|
       if @commit.save
-        format.html { redirect_to commit_url(@commit), notice: "Commit was successfully created." }
+        format.html { redirect_to commit_url(@commit) }
         format.json { render :show, status: :created, location: @commit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class CommitsController < ApplicationController
   def update
     respond_to do |format|
       if @commit.update(commit_params)
-        format.html { redirect_to commit_url(@commit), notice: "Commit was successfully updated." }
+        format.html { redirect_to commit_url(@commit) }
         format.json { render :show, status: :ok, location: @commit }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class CommitsController < ApplicationController
     @commit.destroy
 
     respond_to do |format|
-      format.html { redirect_to commits_url, notice: "Commit was successfully destroyed." }
+      format.html { redirect_to commits_url }
       format.json { head :no_content }
     end
   end

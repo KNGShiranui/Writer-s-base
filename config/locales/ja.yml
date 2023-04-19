@@ -64,7 +64,20 @@ ja:
   activerecord:
     models:
       paper_trail/version: "バージョン一覧"
+      message: "メッセージ" # モデル名の翻訳を追加
+    attributes:
+      issue:
+        name: "イシュー名"
+        description: "イシュー概要"
+        status: "ステータス"
+        priority: "優先度"
+      message: # モデル名を追加
+        content: "メッセージ" # カラム名の翻訳を追加
+      repository:
+        name: "リポジトリ名"
     errors:
+      issues:
+        prohibited: "このイシューは保存できませんでした: "
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
@@ -73,12 +86,15 @@ ja:
         blank: "を入力してください"
         required: "を入力してください"
         prohibited: "このメッセージは保存できませんでした: "
+      repositories:
+        prohibited: "このリポジトリは保存できませんでした: "
   helpers:
     pluralize:
       other: "%{count}件のエラーが発生しました:"
     attributes:
       commit:
         message: "コミットメッセージ"
+        Content: "メッセージ"
       document:
         name: "ドキュメント名"
         content: "ドキュメント内容"
@@ -109,12 +125,17 @@ ja:
     repositories: "リポジトリ一覧"
     copy_branch: "ブランチを切る"
     new_branch: "新しいブランチ"
+    Branch was successfully created: "新しいブランチが作成されました"
+    Master branch cannot be deleted destroyed: "メインブランチは削除できません"
+    Branch was successfully updated: "ブランチが更新されました"
+    Branch was successfully destroyed: "ブランチが削除されました"
   commits:
     message: "コミットメッセージ"
     No commit message provided.: "コミットメッセージはありません"
   conversations:
     messages: "メッセージ一覧"
     talk_with: "チャット相手"
+    not_authorized: "チャットルーム作成権限がありません"
   date:
     abbr_day_names:
     - 日
@@ -210,6 +231,10 @@ ja:
     published document: "公開済みドキュメント"
     draft document: "下書き"
     read more: "続きを読む"
+    not_authorized: "このリポジトリのドキュメントを作成・編集する権限がありません"
+    Document was successfully created: "ドキュメントが作成されました"
+    Document was successfully updated: "ドキュメントが更新されました"
+    Document was successfully destroyed: "ドキュメントが削除されました"
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -241,8 +266,8 @@ ja:
     template:
       body: 次の項目を確認してください
       header:
-        one: "%{model}に1つのエラーがあります。"
-        other: "%{model}に%{count}個のエラーがあります。"
+        one: "%{model}に1つのエラーがあります"
+        other: "%{model}に%{count}個のエラーがあります"
   helpers:
     select:
       prompt: 選択してください
@@ -276,12 +301,17 @@ ja:
     editing issue: "イシュー編集"
     repository related issues: "リポジトリ関連イシュー"
     user related issues: "ユーザ関連イシュー"
+    not_authorized: "アクセス権限がありません"
+    Issue was successfully created: "イシューを作成しました"
+    Issue was successfully updated: "イシューを更新しました"
+    Issue was successfully destroyed: "イシューを削除しました"
   messages:
     previous message: "以前のメッセージ"
     read: "既読"
     unread: "未読"
     send_message: "メッセージを送る"
     please enter your message: "メッセージを入力してください"
+    not_authorized: "メッセージを閲覧する権限がありません"
   number:
     currency:
       format:
@@ -349,6 +379,10 @@ ja:
     priority: "優先度"
     select_prompt: "選択してください"
     help the owner: "オーナーを支援する"
+    not_authorized: "アクセス権限がありません"
+    Repository was successfully created: "リポジトリが作成されました"
+    Repository was successfully updated: "リポジトリが更新されました"
+    Repository was successfully destroyed: "リポジトリが削除されました"
   support:
     array:
       last_word_connector: "、"

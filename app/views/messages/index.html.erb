@@ -1,15 +1,16 @@
-<% if @message.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= t("helpers.pluralize.other", count: @message.errors.count) %></h2>
-    <h3><%= t("activerecord.errors.messages.prohibited") %></h3>
-    <ul>
-      <% @message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
+<div id="error_wrapper" style="display: flex; justify-content: center; align-items: center;">
+  <% if @message.errors.any? %>
+    <div id="error_explanation" style="padding_left: 30px; background-color: #ffcccc; border-radius: 10px; padding: 20px;">
+      <h2 style="color: #ffcccc;"><i class="fas fa-exclamation-triangle"></i><%= t("helpers.pluralize.other", count: @message.errors.count) %></h2>
+      <h3 style="color: #cc0000;"><i class="fas fa-ban"></i> <%= t("activerecord.errors.messages.prohibited") %></h3>
+      <ul style="list-style-type: none;">
+        <% @message.errors.full_messages.each do |msg| %>
+          <ul style="color: #990000;"><i class="fas fa-times-circle"></i> <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
 
 <div class="message-wrapper">
   <div class="message-container">

@@ -19,7 +19,7 @@ class IssuesController < ApplicationController
   def show
     if @issue.status_closed? && @issue.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: t("issues.not_authorized") }
       end
     else
     # TODO: elsif @issue.status_semi_closed? && ....
@@ -40,7 +40,7 @@ class IssuesController < ApplicationController
       @issue = Issue.new(user_id: current_user.id, repository_id: params[:repository_id])
     else
       # リポジトリの作成者ではない場合、適切なエラーメッセージを表示してリダイレクト
-      flash[:alert] = "You are not authorized to create issues in this repository."
+      flash[:alert] = t("issues.not_authorized")
       redirect_to repository_url(@repository)
     end
     # binding.pry
@@ -49,7 +49,7 @@ class IssuesController < ApplicationController
   def edit
     if @issue.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: t("issues.not_authorized") }
       end
     else
       @repository = Repository.find(params[:repository_id])
@@ -68,7 +68,7 @@ class IssuesController < ApplicationController
       # .merge(user_id: current_user.id)が重要だった。他の書き方ない？
       respond_to do |format|
         if @issue.save
-          format.html { redirect_to issue_url(@issue), notice: "Issue was successfully created." }
+          format.html { redirect_to issue_url(@issue), notice: t("issues.Issue was successfully created") }
           format.json { render :show, status: :created, location: @issue }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -77,7 +77,7 @@ class IssuesController < ApplicationController
       end
     else
       # リポジトリの作成者ではない場合、適切なエラーメッセージを表示してリダイレクト
-      flash[:alert] = "You are not authorized to create issues in this repository."
+      flash[:alert] = t("issues.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -88,7 +88,7 @@ class IssuesController < ApplicationController
     respond_to do |format|
       if @issue.update(issue_params) 
       # .merge(user_id: current_user.id)は不要？idは明示的には編集しないので不要かも
-        format.html { redirect_to issue_path(@issue), notice: "Issue was successfully updated." }
+        format.html { redirect_to issue_path(@issue), notice: t("issues.Issue was successfully updated") }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -100,14 +100,14 @@ class IssuesController < ApplicationController
   def destroy
     if @issue.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to issues_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to issues_path(repository_id: @repository_id), notice: t("issues.not_authorized") }
       end
     else
       @repository_id = params[:repository_id] # 明示的に書く必要あり？
       @repository = @issue.repository  # repository#showからissueを削除した後、元のrepository#showに戻るために必要な記述だった。苦労した！
       @issue.destroy
       respond_to do |format|
-        format.html { redirect_to repository_path(@repository, repository_id: @repository.id), notice: "Issue was successfully destroyed." }
+        format.html { redirect_to repository_path(@repository, repository_id: @repository.id), notice: t("issues.Issue was successfully destroyed") }
         format.json { head :no_content }
       end
     end

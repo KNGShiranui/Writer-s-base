@@ -1,15 +1,17 @@
 <%= form_with(model: repository, html: { autocomplete: "off", class: "repository-form"}) do |form| %>
+<div id="error_wrapper" style="display: flex; justify-content: center; align-items: center;">
   <% if repository.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(repository.errors.count, "error") %> prohibited this repository from being saved:</h2>
-
-      <ul>
-        <% repository.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div id="error_explanation" style="padding_left: 30px; background-color: #ffcccc; border-radius: 10px; padding: 20px;">
+      <h2 style="color: #ffcccc;"><i class="fas fa-exclamation-triangle"></i><%= t("helpers.pluralize.other", count: repository.errors.count) %></h2>
+      <h3 style="color: #cc0000;"><i class="fas fa-ban"></i> <%= t("activerecord.errors.repositories.prohibited") %></h3>
+      <ul style="list-style-type: none;">
+        <% repository.errors.full_messages.each do |msg| %>
+          <ul style="color: #990000;"><i class="fas fa-times-circle"></i> <%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+</div>
 
   <div class="field">
     <%= form.label :name, t('repositories.name') %>

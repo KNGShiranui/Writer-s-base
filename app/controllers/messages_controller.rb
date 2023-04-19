@@ -63,7 +63,7 @@ class MessagesController < ApplicationController
   # 閲覧と送信ができなくなっている。
   def authorized_user
     unless @conversation.sender_id == current_user.id || @conversation.recipient_id == current_user.id
-      flash[:alert] = "アクセス権限がありません。"
+      flash[:alert] = t("messages.not_authorized")
       redirect_to root_path
     end
   end

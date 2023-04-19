@@ -37,7 +37,7 @@ class BranchesController < ApplicationController
     @branch = Branch.new(branch_params)
     respond_to do |format|
       if @branch.save
-        format.html { redirect_to branch_url(@branch), notice: "Branch was successfully created." }
+        format.html { redirect_to branch_url(@branch), notice: t("branches.Branch was successfully created")}
         format.json { render :show, status: :created, location: @branch }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,7 +64,7 @@ class BranchesController < ApplicationController
         new_document.save
       end
       # 保存成功
-      redirect_to branch_path(@new_branch, branch: @new_branch), notice: 'Branch was successfully created.'
+      redirect_to branch_path(@new_branch, branch: @new_branch), notice: t("branches.Branch was successfully created")
     else
       # 保存失敗
       flash[:alert] = "Error: Failed to create a new branch."
@@ -75,7 +75,7 @@ class BranchesController < ApplicationController
   def update
     respond_to do |format|
       if @branch.update(branch_params)
-        format.html { redirect_to branch_url(@branch), notice: "Branch was successfully updated." }
+        format.html { redirect_to branch_url(@branch), notice: t("branches.Branch was successfully updated") }
         format.json { render :show, status: :ok, location: @branch }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -89,7 +89,7 @@ class BranchesController < ApplicationController
     @repository_id = params[:repository_id] # 明示的に書く必要あり!
     if @branch.status == 0
       respond_to do |format|
-        format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Master branch cannot be deleted destroyed." }
+        format.html { redirect_to branches_path(repository_id: @repository_id), notice: t("branches.Master branch cannot be deleted destroyed") }
         format.json { head :no_content }
       end
     elsif @branch.status != 0 
@@ -98,7 +98,7 @@ class BranchesController < ApplicationController
       @branch.destroy
       respond_to do |format|
         # binding.pry
-        format.html { redirect_to branches_path(repository_id: @repository_id), notice: "Branch was successfully destroyed." }
+        format.html { redirect_to branches_path(repository_id: @repository_id), notice: t("branches.Branch was successfully destroyed") }
         # 以下のように書くと@Repositoryがnilなのでダメ！注意！
         # format.html { redirect_to branches_path(repository_id: @repository), notice: "Branch was successfully destroyed." }
         format.json { head :no_content }
