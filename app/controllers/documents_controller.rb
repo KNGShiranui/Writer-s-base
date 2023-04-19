@@ -36,7 +36,7 @@ class DocumentsController < ApplicationController
       # その後、nilに対してbuildメソッドを呼び出そうとしてNoMethodErrorが発生してしまう。
       # @document.build_commitを使用することで、Documentに関連する新しいCommitオブジェクトをビルドし、エラーを回避できるらしい。
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -47,7 +47,7 @@ class DocumentsController < ApplicationController
     if current_user.id == @repository.user_id || current_user.id == @branch.repository.user_id
       # @document.build_commit
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -84,7 +84,7 @@ class DocumentsController < ApplicationController
         end
       end
     else
-      flash[:alert] = "You are not authorized to create documents in this repository."
+      flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
     end
   end
@@ -111,7 +111,7 @@ class DocumentsController < ApplicationController
           end
         end
       else
-        flash[:alert] = "You are not authorized to update documents in this repository."
+        flash[:alert] = t("documents.not_authorized")
         redirect_to repository_url(@repository)
       end
     end

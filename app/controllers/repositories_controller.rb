@@ -15,7 +15,7 @@ class RepositoriesController < ApplicationController
   def show
     if @repository.status_closed? && @repository.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: t("repositories.not_authorized") }
       end
     else
       @branches = current_repository.branches.order(created_at: :desc).page(params[:branches_page])
@@ -32,7 +32,7 @@ class RepositoriesController < ApplicationController
   def edit
     if @repository.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: t("repositories.not_authorized") }
       end
     else
     end
@@ -44,7 +44,7 @@ class RepositoriesController < ApplicationController
     respond_to do |format|
       if @repository.save
         @branch = @repository.branches.create(name: 'main', status: 0)
-        format.html { redirect_to repository_url(@repository), notice: "Repository was successfully created." }
+        format.html { redirect_to repository_url(@repository), notice: t("repositories.Repository was successfully created") }
         format.json { render :show, status: :created, location: @repository }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class RepositoriesController < ApplicationController
   def update
     respond_to do |format|
       if @repository.update(repository_params)
-        format.html { redirect_to repository_url(@repository), notice: "Repository was successfully updated." }
+        format.html { redirect_to repository_url(@repository), notice: t("repositories.Repository was successfully updated") }
         format.json { render :show, status: :ok, location: @repository }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -68,13 +68,13 @@ class RepositoriesController < ApplicationController
   def destroy
     if @repository.user_id != current_user.id
       respond_to do |format|
-        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: 'このページにはアクセスできません' }
+        format.html { redirect_to repositories_path(repository_id: @repository_id), notice: t("repositories.not_authorized") }
       end
     else
       @repository.destroy
 
       respond_to do |format|
-        format.html { redirect_to repositories_url, notice: "Repository was successfully destroyed." }
+        format.html { redirect_to repositories_url, notice: t("repositories.Repository was successfully destroyed") }
         format.json { head :no_content }
       end
     end

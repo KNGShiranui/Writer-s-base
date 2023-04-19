@@ -30,7 +30,7 @@ class ConversationsController < ApplicationController
     if authorized_user
       redirect_to conversation_messages_path(@conversation)
     else
-      flash[:alert] = "アクセス権限がありません。"
+      flash[:alert] = t("conversations.not_authorized")
       redirect_to root_path
     end
   end
