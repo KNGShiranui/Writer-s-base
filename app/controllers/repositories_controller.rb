@@ -7,7 +7,7 @@ class RepositoriesController < ApplicationController
     # @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
     #このよくある１文を下記2行に変換
     @q = Repository.ransack(params[:q])
-    @filtered_repositories = @q.result(distinct: true)
+    @filtered_repositories = @q.result(distinct: true).where.not(status: :closed)
     @repositories = Kaminari.paginate_array(@filtered_repositories).page(params[:page]).per(5)
     @count = @repositories.total_count
   end
