@@ -2,6 +2,19 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  ## TODO:以下、メール設定。いずれ実装すること。
+  # config.action_mailer.default_url_options = { host: 'still-hamlet-57996.herokuapp.com' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   port: 587,
+  #   domain: 'still-hamlet-57996.herokuapp.com',
+  #   user_name: ENV['GMAIL_USERNAME'],
+  #   password: ENV['GMAIL_PASSWORD'],
+  #   authentication: 'plain',
+  #   enable_starttls_auto: true
+  # }
 
   # Code is not reloaded between requests.
   config.cache_classes = true

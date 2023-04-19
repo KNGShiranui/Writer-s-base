@@ -28,8 +28,7 @@ gem 'truncate_html'
 gem 'ransack'
 gem 'redcarpet'
 gem 'diff_match_patch'
-
-
+gem 'dotenv-rails' #本番環境でもenvファイルを使用するためインストール
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
