@@ -201,6 +201,7 @@ ja:
     content: "ドキュメント内容"
     revert_to_this_version: "このバージョンへ戻す"
     show_diff: "差分を表示する"
+    diff: "差分"
     old_version: "（古いバージョン）"
     new_version: "（新しいバージョン）"
     editing_document: "ドキュメント編集"
