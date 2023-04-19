@@ -131,9 +131,9 @@
 
                   <%= link_to raw('<i class="material-icons">people</i>' + t('common.users')), users_path %>
                   <%= link_to raw('<i class="material-icons">person</i>' + t('common.profile')), user_path(current_user.id) %>
-                  <%= link_to raw('<i class="material-icons">person_add</i>' +t('common.follow')), following_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">person_add</i>' +t('common.follow')), following_relationships_path(user_id: current_user.id) %>
                   <%# followerとfollowをindexアクション内で条件分岐したらOK %>
-                  <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.follower')), followers_relationships_path %>
+                  <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.follower')), followers_relationships_path(user_id: current_user.id) %>
                   <%= link_to raw('<i class="material-icons">send</i>' +t('common.send points')).html_safe, new_point_path %>
                   <%= link_to raw('<i class="material-icons">chat</i>' +t('common.conversations')), conversations_path %>
                   <%= link_to raw('<i class="material-icons">folder</i>' +t('common.repositories')), repositories_path %>

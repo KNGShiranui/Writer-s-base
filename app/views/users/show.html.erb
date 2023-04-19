@@ -7,6 +7,8 @@
     <p><strong><%= t('common.Content') %>:</strong> <%= current_user.content %></p>
     <p><strong><%= t('common.icon') %>:</strong> <%= current_user.icon %></p>
     <p><strong><%= t('common.points') %>:</strong> <%= "#{@user.points}ポイント" %></p>
+    <p><strong><%= t('common.follow') %>:</strong> <%= "#{@followers.count}" %> <%= link_to t('common.display'), following_relationships_path(user_id: current_user.id) %></p>
+    <p><strong><%= t('common.follower') %>:</strong> <%= "#{@users.count}" %> <%= link_to t('common.display'), followers_relationships_path(user_id: current_user.id) %></p>
   <% elsif current_user != @user %>
     <p><strong><%= "#{@user.name}の#{t('common.profile')}:" %></strong> </p>
     <p><strong><%= t('common.user name') %>:</strong> <%= @user.name %></p>
@@ -17,6 +19,8 @@
         <%= "#{@user.name}さんにポイントを送る" %> <%= content_tag(:i, 'send', class: 'material-icons', style: 'font-size: 18px;') %>
       <% end %>
     </p>
+    <p><strong><%= t('common.follow') %>:</strong> <%= "#{@followers.count}" %> <%= link_to t('common.display'), following_relationships_path(user_id: @user.id) %></p>
+    <p><strong><%= t('common.follower') %>:</strong> <%= "#{@users.count}" %> <%= link_to t('common.display'), followers_relationships_path(user_id: @user.id) %></p>
   <% end %>
 
   <div class="profile-actions">

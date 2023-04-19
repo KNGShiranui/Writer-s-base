@@ -4,13 +4,24 @@ class RelationshipsController < ApplicationController
   respond_to? :js # 存在するアクションのrespondを全てjsで返す場合はこのような記述でも可能。
 
   def following
-    @user = current_user
-    @users = @user.following.page(params[:page]).per(5)
+    # binding.pry
+    if current_user.id == params[:user_id]
+      @user = current_user
+      @users = @user.following.page(params[:page]).per(5)
+    else  # current_user != @user  # 他のユーザのfollow情報
+      @user = User.find(params[:user_id])
+      @users = @user.following.page(params[:page]).per(5)
+    end
   end
-  
+
   def followers
-    @user = current_user
-    @followers = @user.followers.page(params[:page]).per(5)
+    if current_user.id == params[:user_id]
+      @user = current_user
+      @followers = @user.followers.page(params[:page]).per(5)
+    else  # current_user != @user  # 他のユーザのfollow情報
+      @user = User.find(params[:user_id])
+      @followers = @user.followers.page(params[:page]).per(5)
+    end
   end
   
   def create

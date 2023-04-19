@@ -1,6 +1,6 @@
 <div class="follow-wrapper">
   <div class="following-container box-container">
-    <h2><%= t('common.follow') %></h2>
+    <h2><%= "#{@user.name}の#{t('common.follow')}:#{@users.count}" %></h2>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>

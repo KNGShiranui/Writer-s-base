@@ -39,9 +39,17 @@ class UsersController < ApplicationController
       # 会話のページネーション
       @conversations = Conversation.where("(sender_id = ?) OR (recipient_id = ?)", current_user.id, current_user.id).page(params[:conversation_page]).per(5)
       # @conversations = Conversation.page(params[:conversation_page]).per(5)
-      current_user = @user  
+      current_user = @user
+      # follower情報
+      @followers = @user.followers.page(params[:page]).per(5)
+      # follow情報
+      @users = @user.following.page(params[:page]).per(5)
     elsif current_user != @user
       @repositories = @user.repositories.page(params[:repository_page]).per(5).order("created_at desc")
+      # follower情報
+      @followers = @user.followers.page(params[:page]).per(5)
+      # follow情報
+      @users = @user.following.page(params[:page]).per(5)
       ## 以下、ユーザが非公開設定している場合のリダイレクト先
       # redirect_to(repositories_path, danger:"権限がありません") if @user.status == closed
     end
