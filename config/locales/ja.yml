@@ -383,6 +383,7 @@ ja:
     new repository: "新しいリポジトリ"
     status: "ステータス"
     priority: "優先度"
+    label: "ラベル"
     select_prompt: "選択してください"
     help the owner: "オーナーを支援する"
     not_authorized: "アクセス権限がありません"

@@ -33,6 +33,18 @@
     <%= form.select :priority, Repository.priorities.keys, {prompt: t("repository.select_prompt")}, class: "priority_select" %>
   </div>
 
+<div class="field">
+  <%= form.label :ラベル %>
+  <div class="label-container">
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b| %>
+      <div class="label-item">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
   <%# <div class="field"> %>
     <%#= form.label :user_id %>
     <%#= form.text_field :user_id %>

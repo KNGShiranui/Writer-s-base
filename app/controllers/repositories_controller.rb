@@ -90,6 +90,6 @@ class RepositoriesController < ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:name, :description, :status, :priority, :user_id)
+    params.require(:repository).permit(:name, :description, :status, :priority, :user_id, { label_ids: [] })
   end
 end

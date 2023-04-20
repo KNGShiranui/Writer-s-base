@@ -1,7 +1,7 @@
 /* Common Styles */
 .repository-form-container {
   width: 80%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   background-color: #ffffff;
   border-radius: 5px;
@@ -138,7 +138,7 @@ h1 i {
 
 /* Index Page */
 .repository-index-container {
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1rem;
   background-color: #fff;
@@ -237,4 +237,12 @@ h1 i {
   border-color: #007bff;
   color: #fff;
   border-radius: 0;
+}
+
+/*ラベルの幅の上限設定*/
+.label-cell {
+  max-width: 200px; /* 好みの幅に設定 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

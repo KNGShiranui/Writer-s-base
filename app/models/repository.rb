@@ -15,7 +15,7 @@ class Repository < ApplicationRecord
   ## 以下でリポジトリのお気に入りを定義
   has_many :favorite_repositories
   has_many :favorited_by_users, through: :favorite_repositories, source: :user
-  has_many :repository_labels
+  has_many :repository_labels, dependent: :destroy
   has_many :labels, through: :repository_labels
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
