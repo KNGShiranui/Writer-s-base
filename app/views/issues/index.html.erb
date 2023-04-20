@@ -5,50 +5,231 @@
 <% end %>
 
 <div class="index-container"> <!-- 追加: index-containerクラスを適用 -->
-  <table>
-    <thead>
-      <tr>
-        <th><%= t('issues.name') %></th>
-        <th><%= t('issues.description') %></th>
-        <th><%= t('issues.status') %></th>
-        <th><%= t('issues.priority') %></th>
-        <th><%= t('issues.repository') %></th>
-        <th><%= t('common.show') %></th>
-        <th><%= t('common.edit') %></th>
-        <th><%= t('common.destroy') %></th>
-        <th><%= t('issues.assign') %></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% if @issues.present? %>
-        <% @issues.each do |issue| %>
-          <tr>
-            <td><%= issue.name %></td>
-            <td><%= issue.description %></td>
-            <td><%= issue.status %></td>
-            <td><%= issue.priority %></td>
-            <td><%= issue.repository.name %></td>
-            
-            <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
-            <td><%= link_to '<i class="fas fa-edit"></i'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
-            <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
-            <td>
-              <% if current_user.id == issue.user_id %>
-                <% if issue.assignees.present? %>
-                  <%= link_to ('<i class="fas fa-fire"&nbsp;></i>' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
-                <% else %>
-                  <%= link_to ('<i class="fas fa-user-plus"&nbsp;></i>' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
   <% if params[:repository_id].present? %>
+    <% if @in_progress_issues.present? %>
+      <table>
+        <h3><%= t('issues.issue in progress') %></h3>
+        <thead>
+          <tr>
+            <th><%= t('issues.name') %></th>
+            <th><%= t('issues.description') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.repository') %></th>
+            <th><%= t('common.show') %></th>
+            <th><%= t('common.edit') %></th>
+            <th><%= t('common.destroy') %></th>
+            <th><%= t('issues.assign') %></th>
+            <th><%= t('issues.progress') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @in_progress_issues.each do |issue| %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository.name %></td>
+              <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to ('<i class="fas fa-fire"></i>&nbsp;' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user.id, repository_id: issue.repository.id), method: :delete %>
+                  <% else %>
+                    <%= link_to ('<i class="fas fa-user-plus"&nbsp;></i>' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user.id, repository_id: issue.repository.id), method: :post %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if issue.progress %>
+                  <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-success" %>
+                <% else %>
+                  <%= link_to t('issues.reopen'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-warning" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @in_progress_issues %>
+    <% end %>
+
+    <% if @closed_issues.present? %>
+      <table>
+        <h3><%= t('issues.closed issue') %></h3>
+        <thead>
+          <tr>
+            <th><%= t('issues.name') %></th>
+            <th><%= t('issues.description') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.repository') %></th>
+            <th><%= t('common.show') %></th>
+            <th><%= t('common.edit') %></th>
+            <th><%= t('common.destroy') %></th>
+            <th><%= t('issues.assign') %></th>
+            <th><%= t('issues.progress') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @closed_issues.each do |issue| %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository.name %></td>
+              
+              <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to ('<i class="fas fa-fire"></i>&nbsp;' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user, repository_id: issue.repository.id), method: :delete %>
+                  <% else %>
+                    <%= link_to ('<i class="fas fa-user-plus"></i>&nbsp;' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user, repository_id: issue.repository.id), method: :post %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if issue.progress %>
+                  <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-success" %>
+                <% else %>
+                  <%= link_to t('issues.reopen'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-warning" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @closed_issues %>
+    <% end %>
     <%= link_to t('issues.new issue'), new_issue_path(repository_id: @repository, user_id: @repository.user.id, user: current_user) %>
   <% end %>
-  <%= paginate @issues %>
+
+  <% if params[:user_id].present? %>
+    <% if @in_progress_issues.present? %>
+      <table>
+        <h3><%= t('issues.issue in progress') %></h3>
+        <thead>
+          <tr>
+            <th><%= t('issues.name') %></th>
+            <th><%= t('issues.description') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.repository') %></th>
+            <th><%= t('common.show') %></th>
+            <th><%= t('common.edit') %></th>
+            <th><%= t('common.destroy') %></th>
+            <th><%= t('issues.assign') %></th>
+            <th><%= t('issues.progress') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @in_progress_issues.each do |issue| %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository.name %></td>
+              
+              <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-edit"></i'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to ('<i class="fas fa-fire"&nbsp;></i>' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <% else %>
+                    <%= link_to ('<i class="fas fa-user-plus"&nbsp;></i>' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if issue.repository.present? %>
+                  <% if issue.progress %>
+                    <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue, repository_id: issue.repository.id), method: :patch, class: "btn btn-success" %>
+                  <% else %>
+                    <%= link_to t('issues.reopen'), toggle_status_issue_path(issue, repository_id: issue.repository.id), method: :patch, class: "btn btn-warning" %>
+                  <% end %>
+                <% elsif params[:user_id].present?%>
+                  <% if issue.progress %>
+                    <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-success" %>
+                  <% else %>
+                    <%= link_to t('issues.reopen'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-warning" %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @in_progress_issues %>
+    <% end %>
+
+    <% if @closed_issues.present? %>
+      <table>
+        <h3><%= t('issues.issue in progress') %></h3>
+        <thead>
+          <tr>
+            <th><%= t('issues.name') %></th>
+            <th><%= t('issues.description') %></th>
+            <th><%= t('issues.status') %></th>
+            <th><%= t('issues.priority') %></th>
+            <th><%= t('issues.repository') %></th>
+            <th><%= t('common.show') %></th>
+            <th><%= t('common.edit') %></th>
+            <th><%= t('common.destroy') %></th>
+            <th><%= t('issues.assign') %></th>
+            <th><%= t('issues.progress') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @closed_issues.each do |issue| %>
+            <tr>
+              <td><%= issue.name %></td>
+              <td><%= issue.description %></td>
+              <td><%= issue.status %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.repository.name %></td>
+              
+              <td><%= link_to '<i class="fas fa-eye"></i>'.html_safe, issue_path(issue) %></td>
+              <td><%= link_to '<i class="fas fa-edit"></i'.html_safe, edit_issue_path(issue, repository_id: @repository) if issue.user_id == current_user.id %></td>
+              <td><%= link_to '<i class="fas fa-trash"></i>'.html_safe, issue_path(issue, repository_id: @repository), method: :delete, data: { confirm: 'Are you sure?' }  if issue.user_id == current_user.id %></td>
+              <td>
+                <% if current_user.id == issue.user_id %>
+                  <% if issue.assignees.present? %>
+                    <%= link_to ('<i class="fas fa-fire"&nbsp;></i>' + t('issues.fire!')).html_safe, assignee_path(issue.id, issue: issue, user_id: current_user), method: :delete %>
+                  <% else %>
+                    <%= link_to ('<i class="fas fa-user-plus"&nbsp;></i>' + t('issues.assign')).html_safe, assignees_path(issue: issue, user_id: current_user), method: :post %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if issue.repository.present? %>
+                  <% if issue.progress %>
+                    <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue, repository_id: issue.repository.id), method: :patch, class: "btn btn-success" %>
+                  <% else %>
+                    <%= link_to t('issues.reopen'), toggle_status_issue_path(issue, repository_id: issue.repository.id), method: :patch, class: "btn btn-warning" %>
+                  <% end %>
+                <% elsif params[:user_id].present?%>
+                  <% if issue.progress %>
+                    <%= link_to t('issues.to be closed'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-success" %>
+                  <% else %>
+                    <%= link_to t('issues.reopen'), toggle_status_issue_path(issue), method: :patch, class: "btn btn-warning" %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @closed_issues %>
+    <% end %>
+  <% end %>
 </div>

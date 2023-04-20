@@ -7,12 +7,17 @@ class IssuesController < ApplicationController
     if params[:repository_id].present?
       @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
       # @issue = Issue.find(params[:repository_id])
-      @issues = current_repository.issues.order(created_at: :desc).page(params[:page]) # issue全件
+      
+      # FIXME:この行は以下二行に差し替え@issues = current_repository.issues.order(created_at: :desc).page(params[:page]) # issue全件
+      @in_progress_issues = current_repository.issues.in_progress.order(created_at: :desc).page(params[:page])
+      @closed_issues = current_repository.issues.closed.order(created_at: :desc).page(params[:page])
       # binding.pry
       # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
       # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
     elsif params[:user_id].present?
-      @issues = current_user.issues.order(created_at: :desc).page(params[:page])
+      # @issues = current_user.issues.order(created_at: :desc).page(params[:page])
+      @in_progress_issues = current_user.issues.in_progress.order(created_at: :desc).page(params[:page])
+      @closed_issues = current_user.issues.closed.order(created_at: :desc).page(params[:page])
     end
   end
 
@@ -27,7 +32,6 @@ class IssuesController < ApplicationController
       @repository = @issue.repository # これでissueとそれに結び付いたrepositoryを呼び出す
     end
     # @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
-    # それにより
     # binding.pry
   end
 
@@ -96,6 +100,21 @@ class IssuesController < ApplicationController
       end
     end
   end
+
+  def toggle_status
+    # if params[:repository_id].present?
+      @issue = Issue.find(params[:id])
+      @issue.progress = !@issue.progress
+      @issue.save
+      redirect_to issues_path(repository_id: @issue.repository.id)
+    # elsif params[:user_id].present?
+    #   @issue = Issue.find(params[:id])
+    #   @issue.progress = !@issue.progress
+    #   @issue.save
+    #   redirect_to issues_path(user_id: current_user.id)
+    # end
+  end
+
 
   def destroy
     if @issue.user_id != current_user.id
