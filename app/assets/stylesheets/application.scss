@@ -731,3 +731,21 @@ input[type='password'] {
   background-color: #fff;
   border-color: #ddd;
 }
+
+/*labelについて*/
+.label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
+  margin-bottom: 0rem;
+}
+
+.label-item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap; // ラベルを1行に表示
+  margin-bottom: 0rem; // 行間を狭くする
+  padding-left: 1rem;
+  align-items: center;
+}
+

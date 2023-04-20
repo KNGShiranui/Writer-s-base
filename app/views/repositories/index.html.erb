@@ -17,6 +17,7 @@
         <th><%= t('repositories.description') %></th>
         <th><%= t('repositories.status') %></th>
         <th><%= t('repositories.priority') %></th>
+        <th><%= t('repositories.label') %></th>
         <th><%= t('repositories.owner') %></th>
         <th class="action"><%= t('common.show') %></th>
         <th class="action"><%= t('common.edit') %></th>
@@ -34,6 +35,12 @@
               <td><%= repository.description %></td>
               <td><%= repository.status %></td>
               <td><%= repository.priority %></td>
+              <td class="label-cell">
+                <% repository.labels.each_with_index do |label, index| %>
+                  <%= label.name %><%= ',' unless index == repository.labels.size - 1 %>
+                <% end %>
+              </td>
+
               <td>
                 <%= link_to user_path(repository.user.id) do %>
                   <%= content_tag(:i, '', class: 'fa fa-book') %> <%= repository.user.name %>
