@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     resources :versions, only: %i[show update], module: :documents
     resources :changes, only: %i[show], module: :documents
   end
-  resources :issues
+  resources :issues do
+    member do
+      patch :toggle_status
+    end
+  end
   resources :relationships, only: %i(create destroy) do
     collection do
       get :following

@@ -17,17 +17,34 @@ class AssigneesController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @issue = Issue.find(params[:issue])
-    @assignee = @issue.assignees.create(user: @user)
-    redirect_to issues_path(user_id: current_user.id)
+    # binding.pry
+    if params[:repository_id].present?
+      @user = User.find(params[:user_id])
+      @issue = Issue.find(params[:issue])
+      @repository = Repository.find(@issue.repository.id)
+      @assignee = @issue.assignees.create(user: @user)
+      redirect_to issues_path(repository_id: @issue.repository.id)
+    elsif params[:user_id].present? && !params[:repository_id].present?
+      @user = User.find(params[:user_id])
+      @issue = Issue.find(params[:issue])
+      @repository = Repository.find(@issue.repository.id)
+      @assignee = @issue.assignees.create(user: @user)
+      redirect_to issues_path(user_id: current_user.id)
+    end
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @issue = Issue.find(params[:issue])
-    @assignee.destroy if @assignee
-    redirect_to issues_path(user_id: current_user.id)
+    if params[:repository_id].present?
+      @user = User.find(params[:user_id])
+      @issue = Issue.find(params[:issue])
+      @assignee.destroy if @assignee
+      redirect_to issues_path(repository_id: @issue.repository.id)
+    elsif params[:user_id].present? && !params[:repository_id].present?
+      @user = User.find(params[:user_id])
+      @issue = Issue.find(params[:issue])
+      @assignee.destroy if @assignee
+      redirect_to issues_path(user_id: current_user.id)
+    end
   end
 
   private
