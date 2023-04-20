@@ -15,7 +15,7 @@ class IssuesController < ApplicationController
       # @issues = Issue.all.includes(:user).order(created_at: :desc).page(params[:page])
       # おいおいはincludesを使う方がいいと思う。とりあえず今は実装できていないのでコメントアウト。
     elsif params[:user_id].present?
-      @issues = current_user.issues.order(created_at: :desc).page(params[:page])
+      # @issues = current_user.issues.order(created_at: :desc).page(params[:page])
       @in_progress_issues = current_user.issues.in_progress.order(created_at: :desc).page(params[:page])
       @closed_issues = current_user.issues.closed.order(created_at: :desc).page(params[:page])
     end
