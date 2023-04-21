@@ -423,4 +423,5 @@ ja:
     title: 'アプリケーションの機能'
     version_control: '文章のバージョン管理'
     diff_display: '差分表示'
+    shortcutkey: "ショートカットキー一覧"
     issue_management: 'イシュー設定・管理'

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'game/index'
-  get 'game/maze'
-  get 'game/puzzle'
   root 'top#index'
   ## deviseを使う場合のゲストログイン実装には以下の記載が必要
   devise_for :users, controllers: {
@@ -27,6 +24,7 @@ Rails.application.routes.draw do
   get 'game', to: 'game#index'
   get 'game/maze', to: 'game#maze'
   get 'game/puzzle', to: 'game#puzzle'
+  get 'game/painting', to: 'game#painting'
 
   resources :assignees
   ## newアクションは使わないので書き換え。

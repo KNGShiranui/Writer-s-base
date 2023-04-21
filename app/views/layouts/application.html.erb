@@ -164,13 +164,13 @@
           <div class="col">
             <div class="footer-text">
               <%= link_to "#{t('common.Your writing accelerates')} #{'&nbsp;' * 3} #{t("common.everyone's writing connects")}".html_safe, top_thanks_path, style: "color: white;" %><br>
-              <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">
+              <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link" >
                 Copyright &copy; This Website 2023
               </a>
             </div>
             <div class="footer-icon">
               <!--labyrinthボタン-->
-              <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
+              <a href="<%= game_maze_path %>">
                 <%= image_tag 'labyrinth.JPG', alt: 'labyrinth', class: 'labyrinth-icon', width: 24, height: 24 %>
               </a>
               <!--Blue_Mysticボタン-->
@@ -305,7 +305,7 @@
 
         // 管理人twitter
         document.addEventListener('keydown', function(event) {
-          if (event.ctrlKey && event.shiftKey && event.keyCode === 65) { // 71はAのキーコードです
+          if (event.ctrlKey && event.shiftKey && event.keyCode === 65) { // 65はAのキーコードです
             window.open('https://twitter.com/KNG_DIC_WEF2301');
             event.preventDefault(); // デフォルトの動作をキャンセルする
           }

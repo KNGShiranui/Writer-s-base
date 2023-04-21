@@ -1,2 +1,115 @@
-<h1>Game#maze</h1>
-<p>Find me in app/views/game/maze.html.erb</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>迷宮ページ</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display&display=swap" rel="stylesheet">
+  <%= stylesheet_link_tag 'maze' %>
+</head>
+<body>
+  <div class="container">
+    <div class="mystery-element">
+      <%= link_to "", game_painting_path, class: "painting-link" %>
+    </div>
+
+    <p>
+      あなたは気づかぬうちに、謎に満ちた迷宮へと迷い込んでしまった。この場所を抜け出すためには、画面上に隠されたヒントを見つけ出し、次のパズルページへ進むことが必要だ。
+    </p>
+    <p>
+      さあ、目の前に広がる不思議な絵画や古びた宝物、そして奇妙な彫像をよく観察しよう。それらの中に、この迷宮からの脱出への手がかりが隠されているはずだ。
+    </p>
+
+    <!-- 以下に謎解き要素を配置 -->
+    <div class="mystery-elements">
+      <div class="mystery-element-1">
+        <%= image_tag 'strange_picture.jpg', alt: '奇妙な絵画' %>
+      </div>
+      <div class="mystery-element-2">
+        <%= image_tag 'strange_pattern.jpg', alt: '奇妙な模様' %>
+      </div>
+      <div class="mystery-element-3">
+        <%= image_tag 'strange_statue.jpg', alt: '奇妙な彫像' %>
+      </div>
+    </div>
+    <!-- 隠れたリンク -->
+    <div id="hidden-link" style="display: none;">
+      <%= link_to "パズルページへ", game_puzzle_path %>
+    </div>
+
+    <!-- 隠れたコマンド入力欄 -->
+    <div class="command-input" style="display: none;">
+      <label for="command">コマンドを入力:</label>
+      <input type="text" id="command" />
+      <button id="submit-command">送信</button>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="row">
+          <div class="col">
+            <div class="footer-text">
+              <%= link_to "#{t('common.Your writing accelerates')} #{'&nbsp;' * 3} #{t("common.everyone's writing connects")}".html_safe, top_thanks_path, style: "color: white;" %><br>
+              <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link" >
+                Copyright &copy; This Website 2023
+              </a>
+            </div>
+            <div class="footer-icon">
+              <!--transparentボタン-->
+              <a class= "answer-field">
+                <%= image_tag 'transparent.png', alt: 'answer', class: '.answer-field', width: 24, height: 24 %>
+              </a>
+              <!--labyrinthボタン-->
+              <a href="<%= game_maze_path %>">
+                <%= image_tag 'labyrinth.JPG', alt: 'labyrinth', class: 'labyrinth-icon', width: 24, height: 24 %>
+              </a>
+              <!--Blue_Mysticボタン-->
+              <a href="https://github.com/KNGShiranui/Writer-s-base" target="_blank" >
+                <%= image_tag 'blue_mystic.JPG', alt: 'Blue_Mystic', class: 'Blue_Mystic-icon', width: 24, height: 24 %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  <%#= javascript_pack_tag 'maze' %>
+  <script>
+  // JavaScriptでヒントが見つかったときにリンクを表示する処理
+    document.addEventListener('DOMContentLoaded', function() {
+      const mysteryElements = document.querySelectorAll('.mystery-elements img');
+
+      mysteryElements.forEach(function(element) {
+        element.addEventListener('click', function() {
+          // ここにヒントが見つかったときの処理を記述
+          // 例: ヒントが見つかったときにリンクを表示する
+          document.getElementById('hidden-link').style.display = 'block';
+        });
+      });
+    });
+    // JavaScriptでコマンド入力欄を表示し、正解なら脱出する処理
+    // ここにコマンド入力欄を表示する処理を記述
+    // 例: イベントリスナーを使って、何か特定の要素をクリックしたときにコマンド入力欄を表示する
+    document.querySelector('.answer-field').addEventListener('click', function() {
+      document.querySelector('.command-input').style.display = 'block';
+    });
+
+    // 送信ボタンがクリックされたときの処理
+    document.querySelector('#submit-command').addEventListener('click', function() {
+      // 入力されたコマンドを取得
+      var command = document.querySelector('#command').value;
+
+      // 正解のコマンドを定義
+      var correctCommand = 'SECRET';
+
+      // 入力されたコマンドが正解なら脱出
+      if (command === correctCommand) {
+        window.location.href = '<%= game_path %>'; // 元のトップページに戻る
+      } else {
+        alert('不正解です。再度考えてみてください。');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -177,6 +177,15 @@ nav.nav-item {
 }
 
 .footer-text {
+  text-align: center;
+  color: #DDD;
+  font-style: italic;
+  font-variant: small-caps;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.footer-text a{
+  background-color: transparent;
   font-size: smaller;
   text-align: center;
   color: #DDD;
@@ -244,6 +253,29 @@ nav.nav-item {
   color: #6cc644; /* GitHubの緑色 */
   background-color: transparent;
   filter: brightness(5.0);
+}
+
+
+/* labyrinthの回答欄を出すスイッチ */
+.answer-field {
+  background-color: transparent;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.answer-field:hover {
+  background-color: transparent;
+  filter: brightness(1.5);
+  transition: filter 0.2s;
+  border-radius: 5px;
+}
+
+.footer-icon a.answer-field { /* 修正: <a>タグにスタイルを適用 */
+  display: inline-block;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 /* labyrinth */

@@ -16,12 +16,44 @@
       /* 背景画像の表示方法を指定する場合は、background-size, background-positionなどのプロパティを追加することができます */
       background-size: cover; /* 画面いっぱいに表示 */
       background-position: center center; /* 画像を中央に表示 */
-      /* その他のスタイルを追加 */
+      background-attachment: fixed;
       min-height: 100vh; /* 追加 */
       padding-top: 100px; /* 追加 */
     }
-
     
+    .content-row {
+      display: flex;
+    }
+
+    .content-row .top-content {
+      flex: 1;
+      padding: 0 20px;
+    }
+    
+    .top-content_title {
+      top: 100%;
+      left: 100%;
+      transform: translate(-50%, -50%);
+    }
+
+    .shortcut-keys {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .shortcut-key {
+      display: flex;
+      align-items: center;
+      margin: 5px;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 5px;
+    }
+    .shortcut-key i {
+      margin-right: 5px;
+    }
+
   </style>
   <title>Writer's Base</title>
 </head>
@@ -40,19 +72,86 @@
       <p><%= t("writers_base.community") %></p>
       <p><%= t("writers_base.invitation") %></p>
     </div>
-    <div class="top-content" data-aos="fade-up" data-aos-delay="600">
-      <h3><%= t("app_features.title") %></h3>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-          <div class="spacing">
-            <i class="fas fa-code-branch icon"></i>
-            <p><%= t("app_features.version_control") %></p>
-            <p><%= t("app_features.diff_display") %></p>
+    <div class="content-row">
+      <div class="top-content" data-aos="fade-up" data-aos-delay="600">
+        <h3><%= t("app_features.title") %></h3>
+          <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <div class="spacing">
+              <i class="fas fa-code-branch icon"></i>
+              <p><%= t("app_features.version_control") %></p>
+              <p><%= t("app_features.diff_display") %></p>
+            </div>
+            <div class="spacing">
+              <i class="fas fa-tasks icon"></i>
+              <p><%= t("app_features.issue_management") %></p>
+            </div>
           </div>
-          <div class="spacing">
-            <i class="fas fa-tasks icon"></i>
-            <p><%= t("app_features.issue_management") %></p>
+      </div>
+      <div class="top-content" data-aos="fade-up" data-aos-delay="600">
+        <h3><%= t("app_features.shortcutkey") %></h3>
+        <div class="shortcut-keys">
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + M</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Shift + U</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Shift + P</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Shift + F</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + F</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + P</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + C</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Shift + R</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + R</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + I</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + T</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + F</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + L</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + G</span>
+          </div>
+          <div class="shortcut-key">
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + A</span>
           </div>
         </div>
+      </div>
     </div>
 <!--------未記述 追記修正予定------------>
   </div>
