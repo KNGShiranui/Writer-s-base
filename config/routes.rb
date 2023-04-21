@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     put 'users', to: 'users#update' # users_controllerでupdateを制御することにしたので追記
   end
 
+  get 'top/index', to: 'top#index'
+  get 'top/thanks', to: 'top#thanks'
+
   resources :assignees
   ## newアクションは使わないので書き換え。
   # resources :branches do
@@ -44,7 +47,11 @@ Rails.application.routes.draw do
     end
   end
   resources :points, only: %i(new create) # point送信用
-  resources :repositories
+  resources :repositories do
+    collection do
+      get :search
+    end
+  end
   resources :users, only: %i(index show update)
   resources :favorite_repositories, only: %i(index create destroy)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

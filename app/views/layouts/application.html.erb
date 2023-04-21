@@ -163,7 +163,7 @@
         <div class="row">
           <div class="col">
             <div class="footer-text">
-              <%= t('common.Your writing accelerates') %>&nbsp;&nbsp;&nbsp; <%= t("common.everyone's writing connects") %><br>
+              <%= link_to "#{t('common.Your writing accelerates')} #{'&nbsp;' * 3} #{t("common.everyone's writing connects")}".html_safe, top_thanks_path, style: "color: white;" %><br>
               <a href="https://twitter.com/KNG_DIC_WEF2301" class="footer-link">
                 Copyright &copy; This Website 2023
               </a>
