@@ -40,6 +40,7 @@
   <div class="actions">
     <%= form.submit %>
     <%= form.submit I18n.t('documents.save_draft'), name: "save_draft" %>
-
+    <%# name: "save_draft" は、HTMLの submit タグに名前を付けるためのオプション。 %>
+    <%# このオプションは、フォームの送信時にどの送信ボタンがクリックされたかを識別するために使われます。%>
   </div>
 <% end %>

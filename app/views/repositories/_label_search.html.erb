@@ -1,0 +1,15 @@
+<%= search_form_for @q, url: url, method: :get do |f| %>
+  <div class="search-container">
+    <% Label.all.each do |label| %>
+      <div>
+        <%= check_box_tag 'q[labels_id_in][]', label.id, (params[:q] && params[:q][:labels_id_in] || []).include?(label.id.to_s) %>
+        <%= label.name %>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :search_type, '検索タイプ' %>
+      <%= select_tag 'search_type', options_for_select([['AND検索', 'and'], ['OR検索', 'or']], params[:search_type]) %>
+    </div>
+  </div>
+  <%= f.submit '検索' %>
+<% end %>

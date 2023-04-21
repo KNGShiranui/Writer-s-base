@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隠しページ - 感謝の気持ち</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        body {
+            font-family: "Helvetica", "Arial", sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .parallax {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .parallax-1 {
+            background-image: url('https://source.unsplash.com/random/1600x900?nature');
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .parallax-1 h1 {
+            font-size: 4rem;
+        }
+
+        .parallax-2 {
+            background-image: url('https://source.unsplash.com/random/1600x900?technology');
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .parallax-2 h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax parallax-1" style="background-image: url('https://source.unsplash.com/random/1600x900?youth');">
+        <h1>感謝の気持ち</h1>
+    </div>
+    <div class="grid-container">
+        <!-- 仲間への感謝の部分 -->
+        <div class="grid-item">
+            <h3>仲間への感謝</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 3fr); gap: 0.5rem;">
+                <!-- 9枚の画像をコラージュ -->
+                <%= image_tag "isa.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "kino.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "sho.jpg", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "ryo.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "soga.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "ban.jpg", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "mori.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "yoko.jpg", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "yone.jpg", alt: "メンターKB写真", style: "width: 100%;" %>
+                <!-- 他の画像を追加 -->
+            </div>
+            <p>4か月間一緒に学んだ仲間たちに感謝します。</p>
+        </div>
+
+        <!-- メンターへの感謝の部分 -->
+        <div class="grid-item">
+            <h3>メンターへの感謝</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 2fr); gap: 0.5rem;">
+                <!-- 3枚の画像をコラージュ -->
+                <%= image_tag "mentor_KB.png", alt: "メンターKB写真", style: "width: 100%;" %>
+                <%= image_tag "mentor_I.png", alt: "メンターI写真", style: "width: 100%;" %>
+                <%= image_tag "mentor_K.png", alt: "メンターK写真", style: "width: 100%;" %>
+                <%= image_tag "mentor_N.png", alt: "メンターK写真", style: "width: 100%;" %>
+                <!-- 他の画像を追加 -->
+            </div>
+            <p>常にサポートしてくれたメンターの皆さんに感謝します。</p>
+        </div>
+
+        <!-- スクール関係者への感謝の部分 -->
+        <div class="grid-item">
+            <h3>スクール関係者への感謝</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 2fr); gap: 0.5rem;">
+                <!-- 4枚の画像をコラージュ -->
+                <%= image_tag "CEO_N.png", alt: "メンターK写真", style: "width: 100%;" %>
+                <%= image_tag "staff_T.png", alt: "メンターK写真", style: "width: 100%;" %>
+                <%= image_tag "staff_I.png", alt: "メンターK写真", style: "width: 100%;" %>
+                <!-- 他の画像を追加 -->
+            </div>
+            <p>素晴らしい環境を提供してくれたスクール関係者に感謝します。</p>
+        </div>
+
+    </div>
+
+    <div class="parallax parallax-2">
+        <h2>感謝を込めて</h2>
+        <p>このプログラミングスクールでの経験は、私たちの人生に大きな影響を与えました。仲間、メンター、そしてスクール関係者の皆さんに心から感謝します。</p>
+    </div>
+
+    <footer>
+        &copy; 2023 Kengo Mizobata. All rights reserved.
+    </footer>
+</body>
+</html>
