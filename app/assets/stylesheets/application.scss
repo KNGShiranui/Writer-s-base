@@ -185,14 +185,16 @@ nav.nav-item {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-a.footer-link {
+.footer-link a {
   color: inherit;
   text-decoration: none;
+  background-color: transparent; /* 追加: 背景色を透明に設定 */
 }
 
-a.footer-link:hover {
-  background-color: transparent;
-  text-decoration: underline;
+.footer-icon a:hover {
+  color: transparent;
+  background-color:  transparent;
+  text-decoration: none;
 }
 
 .footer-icon {
@@ -202,6 +204,7 @@ a.footer-link:hover {
   transform: translateY(-50%);
   /* 他のスタイル */
 }
+
 
 /* SNS icons */
 .twitter-icon {
@@ -243,9 +246,30 @@ a.footer-link:hover {
   filter: brightness(5.0);
 }
 
+/* labyrinth */
+.labyrinth-icon {
+  background-color: transparent;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.labyrinth-icon:hover {
+  background-color: transparent;
+  filter: brightness(1.5);
+  transition: filter 0.2s;
+  border-radius: 5px;
+}
+
+.footer-icon a.labyrinth-icon { /* 修正: <a>タグにスタイルを適用 */
+  display: inline-block;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 /* Blue_Mystic */
 .Blue_Mystic-icon {
-  color: #00C300;
   background-color: transparent;
   transition: filter 0.2s;
   border-radius: 5px;
@@ -253,8 +277,17 @@ a.footer-link:hover {
 }
 
 .Blue_Mystic-icon:hover {
-  color: #33e833;
+  background-color: transparent;
   filter: brightness(1.5);
+  transition: filter 0.2s;
+  border-radius: 5px;
+}
+
+.footer-icon a.Blue_Mystic-icon { /* 修正: <a>タグにスタイルを適用 */
+  display: inline-block;
+  transition: filter 0.2s;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 /* プルダウン設定 */
