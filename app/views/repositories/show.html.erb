@@ -26,11 +26,11 @@
     </p>
   <% end %>
   <hr>
-  <%# <p> %>
-    <%# <strong>ブランチ作成:</strong> %>
-    <%#= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
+  <p>
+    <strong>ブランチ作成:</strong>
+    <%= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
     <%# ↑おそらく(repository_id: @repository.id)を明示的に書く必要あり %>
-  <%# </p> %>
+  </p>
   <p><strong>
     <%= t('branches.branches') %>:
     <%= @repository.description %>
