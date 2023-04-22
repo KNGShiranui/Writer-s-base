@@ -50,12 +50,14 @@ class BranchesController < ApplicationController
 
   ## 基本的に以下の部分は結構苦労した
   def create_from_existing
+    # @user = User.find(params[:user_id])
     @repository = Repository.find(params[:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
     @existing_branch = Branch.find(params[:id])
     @new_branch = Branch.new(
       name: "#{@existing_branch.name}のbranch",
       repository_id: @repository.id,
+      user_id: params[:user_id],
       status: @existing_branch.status + 1
     )
     if @new_branch.save
@@ -114,6 +116,6 @@ class BranchesController < ApplicationController
   end
 
   def branch_params
-    params.require(:branch).permit(:name, :repository_id)
+    params.require(:branch).permit(:name, :repository_id, :user_id)
   end
 end

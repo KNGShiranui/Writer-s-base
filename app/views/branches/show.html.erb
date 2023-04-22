@@ -10,7 +10,7 @@
         <td><%= @branch.repository.name %></td>
       </tr>
     </table>
-    <%= button_to create_from_existing_branch_path(@branch, repository_id: @repository.id), method: :post, class: "btn btn-primary" do %>
+    <%= button_to create_from_existing_branch_path(@branch, repository_id: @repository.id, user_id: current_user.id), method: :post, class: "btn btn-primary" do %>
       <i class="fas fa-code-branch"></i> <%= t('branches.copy_branch') %>:
     <% end %>
 

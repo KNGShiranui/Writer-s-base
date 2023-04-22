@@ -75,7 +75,7 @@
 
           </h2>
           <%= link_to ('<i class="fas fa-edit"></i>' + t('common.edit')).html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
-          <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
+          <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <div>
           <h3><%= t('documents.content') %>:</h3>
             <%= simple_format(@document.content) %>
@@ -99,11 +99,11 @@
                 </div>
                 <div>
                   <span>
-                    <%= link_to '<i class="fas fa-edit"></i>このバージョンを表示する'.html_safe, document_version_path(version.item, version) %>
+                    <%= link_to '<i class="fas fa-edit"></i>このバージョンを表示する'.html_safe, document_version_path(version.item, version, @document, branch_id: @branch.id, repository_id: @repository.id) %>
                   </span>
                   <span>
                   <% if version.item.present? && version.present? %>
-                    <%= link_to '<i class="fas fa-exchange-alt"></i>差分を表示する'.html_safe, document_change_path(version.item, version) %>
+                    <%= link_to '<i class="fas fa-exchange-alt"></i>差分を表示する'.html_safe, document_change_path(version.item, version, @document, branch_id: @branch.id, repository_id: @repository.id) %>
                   <% end %>
                   </span>
                 </div>
