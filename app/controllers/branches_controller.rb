@@ -114,6 +114,6 @@ class BranchesController < ApplicationController
   end
 
   def branch_params
-    params.require(:branch).permit(:name, :repository_id)
+    params.require(:branch).permit(:name, :repository_id, :user_id)
   end
 end
