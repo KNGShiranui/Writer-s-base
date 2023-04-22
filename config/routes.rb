@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # resources :branches do
   #   post 'create_from_existing', on: :member
   # end
-  resources :branches, except: :new do
+  resources :branches do
     post 'create_from_existing', on: :member
   end  
   resources :commits
