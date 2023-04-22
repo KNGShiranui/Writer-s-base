@@ -18,9 +18,10 @@
       <% @documents.where(draft: false).each do |document| %>
         <tr>
           <td><%= document.name %></td>
-          <td><%= truncate_html(simple_format(document.content), length: 100) %>
+          <td class="custom-font">
+            <%= truncate_html(simple_format(document.content), length: 100, class: 'read-more-link') %>
             <% if document.content.size >= 100 %>
-              <%= link_to document do %> <%= t('documents.read more') %> <% end %>
+              <%= link_to document_path(document, branch_id: @branch, repository_id: @repository), class: 'read-more-link' do %> <%= t('documents.read more') %> <% end %>
             <% end %>
           </td>
           <td><%= document.user.name %></td>

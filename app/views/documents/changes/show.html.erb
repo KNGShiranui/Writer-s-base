@@ -48,7 +48,7 @@
               <th><%= Document.human_attribute_name(key) %>: <%= t('documents.old_version') %></th>
             </tr>
             <tr>
-              <td><%= raw @version.changeset[key][0] %></td>
+              <td><%= raw @version.changeset[key][0].to_s.gsub("\n", "<br>").html_safe %></td>
             </tr>
           <% end %>
         </table>
@@ -64,18 +64,20 @@
               <td>
                 <% old_version = @version.changeset[key][0].nil? ? '' : strip_tags(@version.changeset[key][0]) %>
                 <% new_version = @version.changeset[key][1].nil? ? '' : strip_tags(@version.changeset[key][1]) %>
+          <% old_version_with_markers = old_version.gsub("\n", "\n\u200B") %>
+          <% new_version_with_markers = new_version.gsub("\n", "\n\u200B") %>
                 <%# diff_mainとdiff_cleanupSemanticは、diff_match_patchというライブラリのメソッド。 %>
                 <%# このライブラリは、テキストの差分を計算し、適切な形式で表示するためのツールを提供している。 %>
                 <%# @dmpは、diff_match_patchライブラリのインスタンス。 %>
                 <%# このインスタンスを使って、diff_mainやdiff_cleanupSemanticなどのメソッドにアクセスできる。 %> 
-                <% diffs = @dmp.diff_main(old_version, new_version) %>
+                <%#TODO: diffs = @dmp.diff_main(old_version, new_version) %>
+          <% diffs = @dmp.diff_main(old_version_with_markers, new_version_with_markers) %>
                 <%# @dmp.diff_cleanupSemantic(diffs) だけでは、diffs変数が未定義のままになる。 %>
                 <%# diffs変数は、diffs = @dmp.diff_main(old_version, new_version) で定義され、old_versionとnew_versionの間の差分を格納 %>
                 <% @dmp.diff_cleanupSemantic(diffs) %>
-                <% pretty_html = @dmp.diff_prettyHtml(diffs).html_safe %>
-<% pretty_html_with_breaks = pretty_html.to_str.gsub(/&para;\n/, '<br>') %>
-<%= raw pretty_html_with_breaks %>
-
+                <% pretty_html = @dmp.diff_prettyHtml(diffs) %>
+                <% pretty_html_with_breaks = pretty_html.gsub(/\n/, "&#x21B5;<br>") %>
+                <%= raw pretty_html_with_breaks.html_safe %>
                 <%# FIXME:以下のようにすることで、改行を原文通りに表示できる %>
                 <%#= raw @dmp.diff_prettyHtml(diffs).gsub("\n", "<br>").html_safe %>
               </td>
@@ -83,6 +85,12 @@
           <% end %>
         </table>
       </div>
+
+
+
+
+
+
       <div class="column">
         <table>
           <% @version.changeset.keys.select { |key| %w[name content].include?(key) }.each do |key| %>
@@ -90,7 +98,7 @@
               <th><%= Document.human_attribute_name(key) %>: <%= t('documents.new_version') %></th>
             </tr>
             <tr>
-              <td><%= raw @version.changeset[key][1] %></td>
+              <td><%= raw @version.changeset[key][1].to_s.gsub("\n", "<br>").html_safe %></td>
             </tr>
           <% end %>
         </table>
