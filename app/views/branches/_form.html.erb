@@ -19,7 +19,7 @@
   <%# <div class="field"> %>
     <%#= form.label :repository_id %>
     <%= form.hidden_field :repository_id %>
-    <%= form.hidden_field :current_user.id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   <%# </div> %>
 
   <div class="actions">
