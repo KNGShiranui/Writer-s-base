@@ -13,7 +13,7 @@ class Repository < ApplicationRecord
   # has_many :teams, through: :repository_holder_teams # 機能拡張時に使うかも
 
   ## 以下でリポジトリのお気に入りを定義
-  has_many :favorite_repositories
+  has_many :favorite_repositories, dependent: :destroy
   has_many :favorited_by_users, through: :favorite_repositories, source: :user
   has_many :repository_labels, dependent: :destroy
   has_many :labels, through: :repository_labels

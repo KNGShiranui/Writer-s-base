@@ -16,8 +16,15 @@ Rails.application.routes.draw do
     put 'users', to: 'users#update' # users_controllerでupdateを制御することにしたので追記
   end
 
+  ## top
   get 'top/index', to: 'top#index'
   get 'top/thanks', to: 'top#thanks'
+
+  ## game
+  get 'game', to: 'game#index'
+  get 'game/maze', to: 'game#maze'
+  get 'game/puzzle', to: 'game#puzzle'
+  get 'game/painting', to: 'game#painting'
 
   resources :assignees
   ## newアクションは使わないので書き換え。

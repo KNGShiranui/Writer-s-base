@@ -1,0 +1,43 @@
+/* フォント設定 */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+/* 背景画像設定 */
+body {
+  background-image: url('labyrinth_bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* コンテナ設定 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+/* 謎解き要素のリンク設定 */
+.mystery-element .painting-link {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 100px; /* 画像上でリンクを配置したい座標に合わせて変更 */
+  left: 200px; /* 画像上でリンクを配置したい座標に合わせて変更 */
+}
+
+.mystery-elements {
+  display: flex;
+  justify-content: space-between; /* 画像間に均等な余白を追加 */
+}
+
+.mystery-elements img {
+  width: 100%; /* 追加: 画像の幅を調整 */
+  max-width: calc(33.333% - 10px); /* 追加: 画像の最大幅を設定し、余白を考慮 */
+  box-sizing: border-box; /* 追加: 画像のサイズ計算方法を変更 */
+}

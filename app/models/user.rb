@@ -27,7 +27,7 @@ class User < ApplicationRecord
   has_many :received_conversations, foreign_key: :recipient_id, class_name: 'Conversation', dependent: :destroy
 
   ## 以下でリポジトリのお気に入りを定義
-  has_many :favorite_repositories
+  has_many :favorite_repositories, dependent: :destroy
   has_many :favorited_repositories, through: :favorite_repositories, source: :repository
 
   validates :name, presence: true, length: { maximum: 30}

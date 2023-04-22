@@ -1,0 +1,27 @@
+<h1>不思議な絵画</h1>
+<p>
+  この彫像には、何やら意味深なメッセージが隠されているようだ。よく観察し、謎を解こう。
+</p>
+
+<!-- 謎解き要素を配置 -->
+<div class="mystery-element">
+  <img src="path/to/mysterious_painting.jpg" alt="不思議な絵画" />
+</div>
+
+<!-- 謎が解けた後に表示される答え -->
+<div class="answer" style="display: none;">
+  <p>答え: SECRET</p>
+  <p>この答えを迷宮ページのコマンド入力欄に入力し、脱出しよう。</p>
+</div>
+
+<!-- 迷宮ページへ戻るリンク -->
+<%= link_to "迷宮ページへ戻る", game_maze_path %>
+
+<!-- JavaScriptで謎が解けたときに答えを表示する処理 -->
+<script>
+  // ここに謎が解けたときの処理を記述
+  // 例: イベントリスナーを使って画像をクリックしたときに答えを表示する
+  document.querySelector('.mystery-element img').addEventListener('click', function() {
+    document.querySelector('.answer').style.display = 'block';
+  });
+</script>

@@ -16,12 +16,42 @@
       /* 背景画像の表示方法を指定する場合は、background-size, background-positionなどのプロパティを追加することができます */
       background-size: cover; /* 画面いっぱいに表示 */
       background-position: center center; /* 画像を中央に表示 */
-      /* その他のスタイルを追加 */
+      background-attachment: fixed;
       min-height: 100vh; /* 追加 */
       padding-top: 100px; /* 追加 */
     }
-
     
+    .content-row {
+      display: flex;
+    }
+
+    .content-row .top-content {
+      flex: 1;
+      padding: 0 20px;
+      margin-bottom: 100px;
+    }
+    
+    .top-content_title {
+      top: 100%;
+      left: 100%;
+      transform: translate(-50%, -50%);
+    }
+
+    .shortcut-keys {
+      flex-wrap: wrap;
+      justify-content: left;
+      margin-top: 20px;
+    }
+    .shortcut-key {
+      display: flex;
+      align-items: left;
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      max-width: 100px;
+    }
+
   </style>
   <title>Writer's Base</title>
 </head>
@@ -40,19 +70,101 @@
       <p><%= t("writers_base.community") %></p>
       <p><%= t("writers_base.invitation") %></p>
     </div>
-    <div class="top-content" data-aos="fade-up" data-aos-delay="600">
-      <h3><%= t("app_features.title") %></h3>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-          <div class="spacing">
-            <i class="fas fa-code-branch icon"></i>
-            <p><%= t("app_features.version_control") %></p>
-            <p><%= t("app_features.diff_display") %></p>
+    <div class="content-row">
+      <div class="top-content-1" data-aos="fade-up" data-aos-delay="600">
+        <h3><%= t("app_features.title") %></h3>
+          <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <div class="spacing">
+              <i class="fas fa-code-branch icon"></i>
+              <p><%= t("app_features.version_control") %></p>
+              <p><%= t("app_features.diff_display") %></p>
+            </div>
+            <div class="spacing">
+              <i class="fas fa-tasks icon"></i>
+              <p><%= t("app_features.issue_management") %></p>
+            </div>
           </div>
-          <div class="spacing">
-            <i class="fas fa-tasks icon"></i>
-            <p><%= t("app_features.issue_management") %></p>
+      </div>
+      <div class="top-content-2" data-aos="fade-up" data-aos-delay="600">
+        <h3><%= t("app_features.shortcutkey") %></h3>
+        <div class="shortcut-keys">
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + M</span>: プルダウンメニューを表示/非表示に切り替えます。  
           </div>
+          
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Shift + U</span>: ユーザ一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Shift + P</span>: 自分のプロフィールページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Shift + F</span>: フォロー中のユーザ一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + F</span>: フォロワー一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + P</span>: ポイント送信ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + C</span>: チャット一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Shift + R</span>: リポジトリ一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + R</span>: お気に入りリポジトリ一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + I</span>: イシュー一覧ページに移動します。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + T</span>: 現在のページのURLとタイトルでTwitterでシェアします。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + F</span>: 現在のページのURLをFacebookでシェアします。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + L</span>: 現在のページのURLをLINEでシェアします。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Alt + G</span>: GitHubのリポジトリページを開きます。
+          </div>
+
+          <div>
+            <i class="fas fa-key"></i>
+            <span>Ctrl + Shift + A</span>: 管理人のTwitterアカウントページを開きます。
+          </div>
+
         </div>
+      </div>
     </div>
 <!--------未記述 追記修正予定------------>
   </div>
