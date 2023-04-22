@@ -22,6 +22,7 @@ class BranchesController < ApplicationController
 
   # newアクションを使用しないためコメントアウト
   def new
+    # binding.pry
     @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
     @branch = @repository.branches.build
   end
@@ -32,6 +33,7 @@ class BranchesController < ApplicationController
   end
 
   def create  # createはrepositoryの新規作成時のみに同時に実行される。
+    # binding.pry
     @repository = Repository.find(params[:branch][:repository_id])  # 明示的に書く必要あり
     @repository_id = @repository.id # 明示的に書く必要あり
     @branch = Branch.new(branch_params)
