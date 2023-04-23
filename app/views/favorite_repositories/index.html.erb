@@ -1,11 +1,16 @@
 <div class="favorite-repositories-wrapper">
-  <h1><%= t('repositories.favorite repository') %></h1>
   <div class="favorite-repositories-container">
+  <h1><%= t('repositories.favorite repository') %></h1>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th><%= t('repositories.name') %></th>
-          <th class="text-center"><%= t('repositories.favorite') %></th>
+          <th><%= t('repositories.description') %></th>
+          <th><%= t('repositories.status') %></th>
+          <th><%= t('repositories.priority') %></th>
+          <th><%= t('repositories.label') %></th>
+          <th><%= t('repositories.owner') %></th>
+          <th class="action"><%= t('common.favorite') %></th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +19,20 @@
             <td>
               <%= link_to favorite_repository.name, repository_path(favorite_repository), class: "repository-link" %>
             </td>
+            <td><%= favorite_repository.description %></td>
+            <td><%= favorite_repository.status %></td>
+            <td><%= favorite_repository.priority %></td>
+            <td class="label-cell">
+              <% favorite_repository.labels.each_with_index do |label, index| %>
+                <%= label.name %><%= ',' unless index == favorite_repository.labels.size - 1 %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user_path(favorite_repository.user.id) do %>
+                <%= content_tag(:i, '', class: 'fa fa-book') %> <%= favorite_repository.user.name %>
+              <% end %>
+            </td>
+
             <td class="text-center">
               <%= link_to t('repositories.non favorite') , favorite_repository_path(favorite_repository, repository_id: favorite_repository.id), method: :delete, class: "btn btn-danger btn-sm" %>
             </td>

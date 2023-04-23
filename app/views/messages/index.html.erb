@@ -14,8 +14,6 @@
 
 <div class="message-wrapper">
   <div class="message-container">
-    <h3 class="recipient-user"><%= "#{@conversation.recipient.name}さんとのメッセージ" %></h3>
-
     <% if @over_ten %>
       <div class="previous-messages">
         <%= link_to t('messages.previous message'), '?m=all' %>
@@ -23,6 +21,7 @@
     <% end %>
 
     <div class="message-list">
+      <h2 class="recipient-user"><%= "#{@conversation.recipient.name}さんとのメッセージ" %></h2>
       <% @messages.each do |message| %>
         <% if message.content.present? %>
           <div class="message-item">

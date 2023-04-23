@@ -1,6 +1,5 @@
 <div class="documents-container">
   <h1> <%= t('documents.documents') %></h1>
-
   <h3><%= t('documents.published document') %></h3>
   <table class="documents-table">
     <thead>
@@ -33,10 +32,9 @@
       <% end %>
     </tbody>
   </table>
-    <div class="pagination-container">
-      <%= paginate @documents, param_name: 'documents_page' %>
-    </div>
-
+  <div class="pagination-container">
+    <%= paginate @documents, param_name: 'documents_page' %>
+  </div>
   <h3><%= t('documents.draft document') %></h3>
   <table class="documents-table">
     <thead>
@@ -68,14 +66,22 @@
       <% end %>
     </tbody>
   </table>
-    <div class="action-bar">
-      <div class="pagination-container">
-        <%= paginate @document_drafts, param_name: 'document_drafts_page' %>
-      </div>
-    </div>
   <div class="action-bar">
-    <div class="new-document-link">
-      <%= link_to t('documents.new_document'), new_document_path(branch_id: @branch, repository_id: @repository), class: 'new-document-btn' %>
+    <div class="pagination-container">
+      <%= paginate @document_drafts, param_name: 'document_drafts_page' %>
+    </div>
+  </div>
+  <div class="document-action-container">
+    <div class="action-bar">
+      <div class="new-document-link">
+        <%= link_to t('documents.new_document'), new_document_path(branch_id: @branch, repository_id: @repository), class: 'new-document-btn' %>
+      </div>
+      <div class="new-document-link">
+        <%= link_to t('documents.back_branch'), branch_path(@branch, repository_id: @branch.repository), class: 'new-document-btn' %>
+      </div>
+      <div class="new-document-link">
+        <%= link_to t('documents.back_repository'), repository_path(@repository), class: 'new-document-btn' %>
+      </div>
     </div>
   </div>
 </div>
