@@ -1,5 +1,14 @@
-<h1><%= t('branches.new_branch') %></h1>
+<div class="branch-edit-container">
+  <h1 class="title">
+    <i class="fas fa-code-branch"></i>&nbsp;
+    <%= t('branches.new_branch') %>
+  </h1>
 
-<%= render 'form', branch: @branch %>
 
-<%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, branches_path(@branch, repository_id: @repository) %>
+  <%= render 'form', branch: @branch %>
+
+  <div class="branch-actions">
+    <%= link_to ('<i class="fas fa-eye"></i>' + t('common.show')).html_safe, @branch %>
+    <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, branches_path(@branch, repository_id: @repository) %>
+  </div>
+</div>
