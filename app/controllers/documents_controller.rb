@@ -16,6 +16,7 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:repository_id]) 
     @branch = Branch.find(params[:branch_id])
     @versions = @document.versions.reorder(created_at: :desc).page(params[:page]).per(5)
+    @full_content = params[:full_content] == 'true'   #FIXME:これで続きを読む、をクリックした場合に続きを表示させるようにできる。
     # orderはpapertrailでは使えないらしい。代わりにreorderを使うと成功
   end
   
