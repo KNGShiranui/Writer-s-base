@@ -36,10 +36,12 @@
     </style>
   </head>
   <body>
-    <div class="d-flex justify-content-between mb-3">
-      <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document, branch_id: @branch.id, repository_id: @repository.id) %>
+    <div class="container">
+      <div class="d-flex justify-content-between mb-3">
+        <%= link_to "\"#{@document.name}\"へ戻る", document_path(@document, branch_id: @branch.id, repository_id: @repository.id) %>
+        <h1><%= t('documents.show_diff') %></h1>
+      </div>
     </div>
-    <h1><%= t('documents.show_diff') %></h1>
     <div class="container">
       <div class="column">
         <table>

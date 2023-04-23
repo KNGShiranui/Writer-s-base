@@ -75,10 +75,18 @@
           <%= link_to ('<i class="fas fa-edit"></i>' + t('common.edit')).html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <div>
-          <h3><%= t('documents.content') %>:</h3>
-            <%= simple_format(@document.content) %>
+            <h3><%= t('documents.content') %>:</h3>
+            <% if @full_content %>
+              <%= simple_format(@document.content) %>
+              <%= link_to document_path(@document, branch_id: @branch.id, repository_id: @repository.id, full_content: false) do %>折りたたむ<% end %>
+            <% else %>
+              <%= truncate_html(simple_format(@document.content), length: 500) %>
+              <% if @document.content.size >= 500 %>
+                <%= link_to document_path(@document, branch_id: @branch.id, repository_id: @repository.id, full_content: true) do %>続きを読む<% end %>
+              <% end %>
+            <% end %>
           </div>
-          
+
           <hr>
 
           <div>
