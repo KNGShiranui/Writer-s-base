@@ -1,12 +1,12 @@
 /* Common Styles */
 .repository-form-container {
   width: 80%;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto ;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   margin-bottom: 2rem;
 }
 
@@ -92,7 +92,7 @@ h1 i {
 
   /* Show Page */
 .repository-show-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
   background-color: #fff;

@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= form.label :content, t("documents.content") %>
-    <%= form.text_field :content, placeholder: t("documents.content") %>
+    <%= form.text_area :content, placeholder: t("documents.content") %>
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id %>

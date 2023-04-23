@@ -30,7 +30,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to t('branches.repositories'), repositories_path(repository_id: @repository), class: 'new-branch-btn' %>
+  <%= link_to t('branches.repositories'), repositories_path(repository_id: @repository), class: 'new-branch-btn' %> |
+  <%= link_to t('common.back'), repository_path(@repository), class: 'new-branch-btn' %>
   <%= paginate @branches %>
 </div>
 

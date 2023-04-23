@@ -1,4 +1,5 @@
 <div class="repository-show-container">
+  <h1><%= t('repositories.repository') %></h1>
 
   <p>
     <strong><%= t('repositories.name') %>:</strong>
@@ -28,12 +29,11 @@
   <hr>
   <p>
     <strong>ブランチ作成:</strong>
-    <%= link_to 'ブランチ作成', new_branch_path(repository_id: @repository.id) %>
+    <%= link_to '作成する', new_branch_path(repository_id: @repository.id) %>
     <%# ↑おそらく(repository_id: @repository.id)を明示的に書く必要あり %>
   </p>
   <p><strong>
     <%= t('branches.branches') %>:
-    <%= @repository.description %>
   </strong></p>
   <table>
     <thead>

@@ -53,18 +53,16 @@
   </style>
 </head>
 <body>
-  <p> <strong><%= t('users.user_name') %>:</strong> <%= @document.user.name %> </p>    
-  <p> <strong><%= t('branches.name') %>:</strong> <%= @document.branch.name %> </p>
-  <p> <strong><%= t('commits.message') %>:</strong>
+  <div class="content-wrapper">
+  <h2> <strong><%= t('users.user_name') %>:</strong> <%= @document.user.name %> </h2>    
+  <h2> <strong><%= t('branches.name') %>:</strong> <%= @document.branch.name %> </h2>
+  <h2> <strong><%= t('commits.message') %>:</strong>
     <% if @document.commit.present? && @document.commit.message.present? %>
       <%= @document.commit.message %>
     <% else %>
       <%= t('commits.No commit message provided.') %>
     <% end %>
-  </p>
-
-
-  <div class="content-wrapper">
+  </h2>
     <div class="row justify-content-md-center">
       <div class="col-8 p-4">
         <div class="content">
