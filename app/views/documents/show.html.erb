@@ -118,11 +118,12 @@
         </div>
       </div>
     </div>
-    <% if @levenshtein_distance.nil? %>
-      <p>前のバージョンはありません</p>
-    <% else %>
-      <p>ひとつ前のバージョンからの内容変更度合: <%= @levenshtein_distance %></p>
-    <% end %>
+    <%# if @levenshtein_distance.nil? %>
+      <%# 前のバージョンはありません> %>
+    <%# else %>
+      <%# ひとつ前のバージョンからの内容変更度合: %>
+      <%#= @levenshtein_distance %> 
+    <%# end %>
   </div>
 </body>
 </html>

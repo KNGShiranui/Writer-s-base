@@ -7,7 +7,7 @@
         <%= t('common.version') %><%= @version.index+1 %>
       </h1>
       <% if @version.next.present? %>
-        <%= button_to document_version_path(@document, @version),
+        <%= button_to document_version_path(@document, @version, repository_id: @document.branch.repository.id, branch_id: @document.branch.id),
           class: 'btn revert-btn',
           method: :patch,
           data: { confirm: '本当によろしいですか？' } do %>
