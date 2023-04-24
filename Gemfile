@@ -29,6 +29,7 @@ gem 'ransack'
 gem 'redcarpet'
 gem 'diff_match_patch'
 gem 'dotenv-rails' #本番環境でもenvファイルを使用するためインストール
+gem 'damerau-levenshtein' # レーベンシュタイン距離の算出
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
