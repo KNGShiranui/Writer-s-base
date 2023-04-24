@@ -1,5 +1,5 @@
 class Document < ApplicationRecord
-  # FIXME:require 'damerau-levenshtein'
+  require 'damerau-levenshtein'
 
   belongs_to :user
   belongs_to :branch
@@ -33,22 +33,25 @@ class Document < ApplicationRecord
   # 保存（save）する前に、set_embedsメソッドを実行するように設定。  
 
   # FIXME:以下の書き方で機能実装はOK。ただし、バージョン戻る等に不具合。時間がないのでとりあえずコメントアウト。
-    # def levenshtein_distance_to_previous_version
-    # require 'damerau-levenshtein'
+    def levenshtein_distance_to_previous_version
+    require 'damerau-levenshtein'
 
-    # previous_version = self.versions.last
-    # return nil if previous_version.nil?
+    previous_version = self.versions.last
+    return nil if previous_version.nil?
 
-    # previous_content = previous_version.reify.content
-    # current_content = self.content
+    reified_version = previous_version.reify
+    return nil if reified_version.nil?
+
+    previous_content = previous_version.reify.content
+    current_content = self.content
 
     # FIXME:以下の書き方では不具合が出た
     # dl = DamerauLevenshtein.new(previous_content, current_content)
     # dl.distance
     # 理由:damerau-levenshteinはモジュールであり、newメソッドが定義されていないため、
     # undefined method 'new'が発生。
-    # DamerauLevenshtein.distance(previous_content, current_content)
-    # end
+    DamerauLevenshtein.distance(previous_content, current_content)
+  end
 
   private
   

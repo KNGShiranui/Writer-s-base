@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
     # orderはpapertrailでは使えないらしい。代わりにreorderを使うと成功
     @full_content = params[:full_content] == 'true'   #FIXME:これで続きを読む、をクリックした場合に続きを表示させるようにできる。
     # FIXME:以下はレーベンシュタイン距離の算出用。旧バージョンに戻す部分でエラーが出たのでとりあえずコメントアウト
-    # @levenshtein_distance = @document.levenshtein_distance_to_previous_version # モデルで定義したメソッドを使用
+    @levenshtein_distance = @document.levenshtein_distance_to_previous_version # モデルで定義したメソッドを使用
     
     
     # FIXME:以下、使用しないかもしれない保留ネタ
