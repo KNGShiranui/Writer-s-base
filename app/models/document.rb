@@ -1,10 +1,11 @@
 class Document < ApplicationRecord
+  require 'damerau-levenshtein'
+
   belongs_to :user
   belongs_to :branch
   has_one :commit, dependent: :destroy
   accepts_nested_attributes_for :commit, allow_destroy: true, reject_if: :all_blank
   # , update_only: true  # commitかcommitsかどっち？
-
   # TODO:has_many :versionsのような記載はいらない？
   has_paper_trail
   # paper_trailを使用してバージョン記録・追跡。
@@ -30,10 +31,29 @@ class Document < ApplicationRecord
   # 関連するモデルでファイルにアクセスできるようになる。そのため、belongs_to :documentのような記述は必要ない。
   before_save :set_embeds
   # 保存（save）する前に、set_embedsメソッドを実行するように設定。  
+
+    def levenshtein_distance_to_previous_version
+    require 'damerau-levenshtein'
+
+    previous_version = self.versions.last
+    return nil if previous_version.nil?
+
+    previous_content = previous_version.reify.content
+    current_content = self.content
+
+    # FIXME:以下の書き方では不具合が出た
+    # dl = DamerauLevenshtein.new(previous_content, current_content)
+    # dl.distance
+    # 理由:damerau-levenshteinはモジュールであり、newメソッドが定義されていないため、
+    # undefined method 'new'が発生。
+    DamerauLevenshtein.distance(previous_content, current_content)
+  end
+
   private
   
   scope :official, -> { where(draft: false) } #正規版のみ抽出
   scope :draft, -> { where(draft: true) } #下書きのみ抽出
+
   def set_embeds
     return if content.blank?
     nokogiri_html = Nokogiri::HTML.parse(content)

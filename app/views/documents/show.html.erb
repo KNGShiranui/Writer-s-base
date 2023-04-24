@@ -54,23 +54,22 @@
 </head>
 <body>
   <div class="content-wrapper">
-  <h2> <strong><%= t('users.user_name') %>:</strong> <%= @document.user.name %> </h2>    
-  <h2> <strong><%= t('branches.name') %>:</strong> <%= @document.branch.name %> </h2>
-  <h2> <strong><%= t('commits.message') %>:</strong>
-    <% if @document.commit.present? && @document.commit.message.present? %>
-      <%= @document.commit.message %>
-    <% else %>
-      <%= t('commits.No commit message provided.') %>
-    <% end %>
-  </h2>
+    <h2> <strong><%= t('users.user_name') %>:</strong> <%= @document.user.name %> </h2>    
+    <h2> <strong><%= t('branches.name') %>:</strong> <%= @document.branch.name %> </h2>
+    <h2> <strong><%= t('commits.message') %>:</strong>
+      <% if @document.commit.present? && @document.commit.message.present? %>
+        <%= @document.commit.message %>
+      <% else %>
+        <%= t('commits.No commit message provided.') %>
+      <% end %>
+    </h2>
     <div class="row justify-content-md-center">
       <div class="col-8 p-4">
         <div class="content">
           <div class="d-flex justify-content-between mb-3">
           </div>
           <h2 class="font-weight-bold mb-4">
-          <%= "タイトル：&nbsp;#{@document.name}".html_safe %>
-
+            <%= "タイトル：&nbsp;#{@document.name}".html_safe %>
           </h2>
           <%= link_to ('<i class="fas fa-edit"></i>' + t('common.edit')).html_safe, edit_document_path(@document, repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
           <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(repository_id: params[:repository_id], branch_id: params[:branch_id]), class: 'btn' %>
@@ -86,7 +85,6 @@
               <% end %>
             <% end %>
           </div>
-
           <hr>
 
           <div>
@@ -120,6 +118,11 @@
         </div>
       </div>
     </div>
+    <% if @levenshtein_distance.nil? %>
+      <p>前のバージョンはありません</p>
+    <% else %>
+      <p>ひとつ前のバージョンからの内容変更度合: <%= @levenshtein_distance %></p>
+    <% end %>
   </div>
 </body>
 </html>

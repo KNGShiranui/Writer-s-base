@@ -16,8 +16,19 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:repository_id]) 
     @branch = Branch.find(params[:branch_id])
     @versions = @document.versions.reorder(created_at: :desc).page(params[:page]).per(5)
-    @full_content = params[:full_content] == 'true'   #FIXME:これで続きを読む、をクリックした場合に続きを表示させるようにできる。
     # orderはpapertrailでは使えないらしい。代わりにreorderを使うと成功
+    @full_content = params[:full_content] == 'true'   #FIXME:これで続きを読む、をクリックした場合に続きを表示させるようにできる。
+    @levenshtein_distance = @document.levenshtein_distance_to_previous_version # モデルで定義したメソッドを使用
+    
+    
+    # FIXME:以下、使用しないかもしれない保留ネタ
+    # @similar_documents = Document.similar_documents(@document, 10) # 10 is the threshold
+    # このコードでは、@similar_documentsに類似したドキュメントを格納。Document.similar_documents(@document, 10)の部分で、
+    # @document（現在表示しているドキュメント）と類似性が高いドキュメントを検索。
+    # ここでの10は閾値（threshold）を意味する。この閾値はDamerau-Levenshtein距離の最大値で、この値以下の距離を持つドキュメントが類似しているとみなされる。
+    # Damerau-Levenshtein距離は、2つの文字列間の編集距離を表す数値。この距離が小さいほど、2つの文字列は類似していると考えられる。
+    # この例では、閾値が10なので、Damerau-Levenshtein距離が10以下のドキュメントが類似ドキュメントとしてリストされる。
+    # 閾値を変更することで、類似度の判断基準を調整することができる。
   end
   
   def new
