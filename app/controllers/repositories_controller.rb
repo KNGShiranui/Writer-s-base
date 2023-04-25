@@ -4,8 +4,6 @@ class RepositoriesController < ApplicationController
   before_action :set_repository, only: %i(show edit update destroy)
 
   def index
-    # @repositories = Repository.all.includes(:user).order(created_at: :desc).page(params[:page])
-    #このよくある１文を下記2行に変換
     @q = Repository.ransack(params[:q])
     @filtered_repositories = @q.result(distinct: true).where.not(status: :closed)
     @repositories = Kaminari.paginate_array(@filtered_repositories).page(params[:page]).per(5)
@@ -19,9 +17,7 @@ class RepositoriesController < ApplicationController
       end
     else
       @branches = current_repository.branches.order(created_at: :desc).page(params[:branches_page])
-      # @issues = Issue.all.order(created_at: :desc).page(params[:page])
       @issues = current_repository.issues.all.order(created_at: :desc).page(params[:issues_page])
-      # binding.pry
     end
   end
 
@@ -81,9 +77,6 @@ class RepositoriesController < ApplicationController
   end
 
   private
-  # def current_repository
-  #   @current_repository ||= Repository.find_by(id: @repository[:id])
-  # end
 
   def set_repository
     @repository = Repository.find(params[:id])

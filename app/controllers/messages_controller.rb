@@ -1,45 +1,34 @@
 class MessagesController < ApplicationController
   before_action do
+    # チャットルーム情報の取得
     @conversation = Conversation.find(params[:conversation_id])
-    # どの会話（チャットルーム）でなされているメッセージなのか？を取得する処理
   end
   before_action :authorized_user, only: [:index, :create]
 
   def index
-    # 一つ一つの部分で何をしているかの理解をわかりやすくするために
-    # このような記載にしていますが、実戦で用いるのには少々冗長なコード
     # 要リファクタリング
     @messages = @conversation.messages
     if @messages.length > 10
       # メッセージが10件以上ある場合
       @over_ten = true
       @messages = Message.where(id: @messages[-10..-1].pluck(:id))
-      # @messages[-10..-1]のような形でmessageの配列を取り出してしまうと、
-      # RailsのDB操作の機能を持ったActiveRecord_Relationというクラスが、
-      # ただのArrayクラスへと変換されてしまう（[-10..-1]というメソッドの処理で返却される値は配列である）
-      # ため、whereなどのメソッドが使用できなくなってしまいます
-      # （whereはDB操作の機能を持ったActiveRecordのクラスでなければ使えないメソッドのため）。
-      # そのため、直近で登録されたメッセージの10件のidを取得し、そのidのmessageの配列を
-      # whereメソッドで取得するという、少々回りくどい操作をここでは行なっています。
+      # @messages[-10..-1]のような形でmessageの配列を取り出してしまうと、Arrayクラス
+      # へと変換されてしまう（[-10..-1]というメソッドの処理で返却される値は配列）ため、
+      # whereなどのメソッドが使用できなくなってしまう。そのため、直近で登録されたメッセージ
+      # の10件のidを取得し、そのidのmessageの配列をwhereメソッドで取得。
     end
-  
+
     if params[:m]
-      # params[:m]の意味。link_toにオプションで追記するクエリパラメータ
-      # ここでは、params[:m]というパラメータをチェックした時、
-      # そこに値があれば（trueであれば）その下の二行を実行するという意味
+      # params[:m]に値があれば（trueであれば）下二行を実行
       @over_ten = false
       @messages = @conversation.messages
     end
-  
+
     if @messages.last
       @messages.where.not(user_id: current_user.id).update_all(read: true)
     end
-  
     @messages = @messages.order(:created_at)
     @message = @conversation.messages.build
-    # buildはnewとほぼ同じ内容の処理をしますが、慣習的に「すでにアソシエーションしてあるインスタンスの生成」
-    # ということを表す。上記のような「これはピカピカの状態のインスタンスではなく、既にアソシエーションで他の
-    # ものと紐づけられているインスタンスである」ということを表したい記述の場合は、newではなくbuildが使われる
   end
 
   def create
@@ -48,8 +37,6 @@ class MessagesController < ApplicationController
       redirect_to conversation_messages_path(@conversation)
     else
       @messages = @conversation.messages
-      # これがないとバリデーションで弾かれた後,indexをレンダリングした際に、@messagesがnilになりeach do
-      # でエラーが出る。注意。
       render 'index'
     end
   end
@@ -59,8 +46,7 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:content, :user_id)
   end
-  ## 以下のコードとbefore_action :authorized_user, only: [:index, :create]で当事者しか
-  # 閲覧と送信ができなくなっている。
+
   def authorized_user
     unless @conversation.sender_id == current_user.id || @conversation.recipient_id == current_user.id
       flash[:alert] = t("messages.not_authorized")

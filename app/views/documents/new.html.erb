@@ -1,6 +1,5 @@
 <div class="repository-form-container">
   <h1><i class="fas fa-plus-circle"></i>&nbsp;<%= t('documents.new_document') %></h1>
   <%= render 'form', document: @document, repository_id: params[:repository_id], branch_id: params[:branch_id] %>
-  <%# binding.pry  %>
 <%= link_to ('<i class="fas fa-arrow-left"></i>' + t('common.back')).html_safe, documents_path(@document, repository_id: @repository.id, branch_id: @branch.id) %>
 </div>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Example</title>
-  <style>
-    .form-container {
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+      .form-container {
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
@@ -13,81 +13,80 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: #fff;
         border-radius: 5px;
-    }
+      }
 
-    .field {
-      width: 400px;
-      max-width: 550px;
-      margin-bottom: 20px;
-    }
+      .field {
+        width: 400px;
+        max-width: 550px;
+        margin-bottom: 20px;
+      }
 
-    .field label {
-      display: block;
-      margin-bottom: 5px;
-    }
+      .field label {
+        display: block;
+        margin-bottom: 5px;
+      }
 
-    .field input {
-      width: 100%;
-      padding: 5px 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
+      .field input {
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
 
-    .actions {
-      text-align: center;
-    }
+      .actions {
+        text-align: center;
+      }
 
-    .actions input[type="submit"] {
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 3px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
+      .actions input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 3px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-    .actions input[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-
-  </style>
-</head>
-<body>
-<h1>ユーザー新規作成</h1>
+      .actions input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ユーザー新規作成</h1>
     <div class="form-container">
-        <%= form_with model: @user, local: true do |form| %>
-            <div class="field">
-                <%= form.label :name, "Name" %>
-                <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
-            </div>
-            <div class="field">
-                <%= form.label :email, "Email" %>
-                <%= form.email_field :email, autocomplete: "email" %>
-            </div>
-            <div class="field">
-                <%= form.label :content, "Content" %>
-                <%= form.text_field :content, autocomplete: "content" %>
-            </div>
-            <div class="field">
-                <%= form.label :icon, "Icon" %>
-                <%= form.text_field :icon, autocomplete: "icon" %>
-            </div>
-            <div class="field">
-                <%= form.label :password, "Password" %>
-                <%= form.password_field :password, autocomplete: "new-password" %>
-            </div>
-            <div class="field">
-                <%= form.label :password_confirmation, "Password Confirmation" %>
-                <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
-            </div>
-            <div class="actions">
-                <%= form.submit "アカウント登録・更新" %>
-            </div>
-        <% end %>
-        <%= link_to 'ログイン', new_user_session_path , class: 'login-button' %>
+      <%= form_with model: @user, local: true do |form| %>
+        <div class="field">
+          <%= form.label :name, "Name" %>
+          <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
+        </div>
+        <div class="field">
+          <%= form.label :email, "Email" %>
+          <%= form.email_field :email, autocomplete: "email" %>
+        </div>
+        <div class="field">
+          <%= form.label :content, "Content" %>
+          <%= form.text_field :content, autocomplete: "content" %>
+        </div>
+        <div class="field">
+          <%= form.label :icon, "Icon" %>
+          <%= form.text_field :icon, autocomplete: "icon" %>
+        </div>
+        <div class="field">
+          <%= form.label :password, "Password" %>
+          <%= form.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <div class="field">
+          <%= form.label :password_confirmation, "Password Confirmation" %>
+          <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="actions">
+          <%= form.submit "アカウント登録・更新" %>
+        </div>
+      <% end %>
+      <%= link_to 'ログイン', new_user_session_path , class: 'login-button' %>
     </div>
-</body>
+  </body>
 </html>
 

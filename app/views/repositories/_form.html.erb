@@ -1,17 +1,17 @@
 <%= form_with(model: repository, html: { autocomplete: "off", class: "repository-form"}) do |form| %>
-<div id="error_wrapper" style="display: flex; justify-content: center; align-items: center;">
-  <% if repository.errors.any? %>
-    <div id="error_explanation" style="padding_left: 30px; background-color: #ffcccc; border-radius: 10px; padding: 20px;">
-      <h2 style="color: #ffcccc;"><i class="fas fa-exclamation-triangle"></i><%= t("helpers.pluralize.other", count: repository.errors.count) %></h2>
-      <h3 style="color: #cc0000;"><i class="fas fa-ban"></i> <%= t("activerecord.errors.repositories.prohibited") %></h3>
-      <ul style="list-style-type: none;">
-        <% repository.errors.full_messages.each do |msg| %>
-          <ul style="color: #990000;"><i class="fas fa-times-circle"></i> <%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-</div>
+  <div id="error_wrapper" style="display: flex; justify-content: center; align-items: center;">
+    <% if repository.errors.any? %>
+      <div id="error_explanation" style="padding_left: 30px; background-color: #ffcccc; border-radius: 10px; padding: 20px;">
+        <h2 style="color: #ffcccc;"><i class="fas fa-exclamation-triangle"></i><%= t("helpers.pluralize.other", count: repository.errors.count) %></h2>
+        <h3 style="color: #cc0000;"><i class="fas fa-ban"></i> <%= t("activerecord.errors.repositories.prohibited") %></h3>
+        <ul style="list-style-type: none;">
+          <% repository.errors.full_messages.each do |msg| %>
+            <ul style="color: #990000;"><i class="fas fa-times-circle"></i> <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 
   <div class="field">
     <%= form.label :name, t('repositories.name') %>
@@ -33,22 +33,17 @@
     <%= form.select :priority, Repository.priorities.keys, {prompt: t("repository.select_prompt")}, class: "priority_select" %>
   </div>
 
-<div class="field">
-  <%= form.label :ラベル %>
-  <div class="label-container">
-    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b| %>
-      <div class="label-item">
-        <%= b.check_box %>
-        <%= b.label %>
-      </div>
-    <% end %>
+  <div class="field">
+    <%= form.label :ラベル %>
+    <div class="label-container">
+      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b| %>
+        <div class="label-item">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
-
-  <%# <div class="field"> %>
-    <%#= form.label :user_id %>
-    <%#= form.text_field :user_id %>
-  <%# </div> %>
 
   <div class="actions">
     <%= form.submit %>

@@ -13,7 +13,6 @@ class Documents::VersionsController < ApplicationController
     @branch = Branch.find(params[:branch_id])
     @repository = Repository.find(params[:repository_id])
     @version = @document.versions.find(params[:id])
-    # binding.pry
     if @version.next.present?
       @document = @version.next.reify
       @document.save!

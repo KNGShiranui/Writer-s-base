@@ -1,6 +1,6 @@
 class Issue < ApplicationRecord
   belongs_to :repository
-  belongs_to :user  # これ忘れてたせいでissueのテストが進まなかった。注意。
+  belongs_to :user
   has_many :assignees, dependent: :destroy
   has_many :users, through: :assignees
 

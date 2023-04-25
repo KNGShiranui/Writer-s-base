@@ -17,7 +17,6 @@ class AssigneesController < ApplicationController
   end
 
   def create
-    # binding.pry
     if params[:repository_id].present?
       @user = User.find(params[:user_id])
       @issue = Issue.find(params[:issue])
@@ -48,6 +47,7 @@ class AssigneesController < ApplicationController
   end
 
   private
+
   def set_issue
     @issue = Issue.find(params[:issue])
   end
@@ -55,7 +55,6 @@ class AssigneesController < ApplicationController
   def set_assignee
     @assignee = @issue.assignees.find_by(user_id: params[:user_id])
   end
-
 
   def assignee_params
     params.require(:assignee).permit(:user_id, :issue_id)
