@@ -1,4 +1,3 @@
-# app/controllers/points_controller.rb
 class PointsController < ApplicationController
   before_action :authenticate_user!
 

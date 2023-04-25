@@ -2,7 +2,6 @@
 class SessionsController < Devise::SessionsController
   def guest_sign_in
     sign_in User.guest
-    # binding.pry
     user = User.guest
     redirect_to after_sign_in_path_for(user), notice: 'ログインしました。'
   end

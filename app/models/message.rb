@@ -5,7 +5,7 @@ class Message < ApplicationRecord
   validates_presence_of :conversation_id, :user_id
   validates :content, presence: true
 
-  scope :unread, -> { where(read: false) } #未読のみを抽出するクエリ
+  scope :unread, -> { where(read: false) } #未読のみ抽出
   def message_time
     created_at.strftime("%m/%d/%y at %l:%M %p")
   end

@@ -4,36 +4,15 @@ class Document < ApplicationRecord
   belongs_to :user
   belongs_to :branch
   has_one :commit, dependent: :destroy
+  has_many_attached :embeds
   accepts_nested_attributes_for :commit, allow_destroy: true, reject_if: :all_blank
-  # , update_only: true  # commitかcommitsかどっち？
-  # TODO:has_many :versionsのような記載はいらない？
-  has_paper_trail
-  # paper_trailを使用してバージョン記録・追跡。
-  # 他のテーブルにも適用可能
-  has_many_attached :embeds  # 1対多(複数枚画像投稿)で関連付けるという宣言
-  # Active Storageを使って、embedsという名前で1対多の関係（複数の画像投稿）を持つことを宣言
-  # embedsは、このコード内では明示的に定義されていないが、has_many_attached :embedsという宣言（has_manyではなくhas_many_attachedであることが大事）
-  # によって、embedsという名前で、DocumentモデルとActive Storageで管理されるファイル（画像など）との間に1対多の関係が作られている。
-  # つまり、embedsは、このDocumentモデルに添付された複数のファイル（例えば、画像）を表しています。
-  ## Active Storageで管理されるファイル（画像など）との間に1対多の関係が作られているのであれば、
-  # どこかにbelongs_to: documentのような記載がされている箇所が別ファイルであるということか？
-  # ⇒実際には、belongs_to :documentのような記述は別ファイルに存在しない。
-  # RailsのActive Storageは、has_many_attachedやhas_one_attachedメソッドを使って、モデルとファイル（画像など）との間に関連付けを行うが、
-  # この関連付けは通常のhas_manyやbelongs_toとは異なる方法で実現されている。
-  # Active Storageは、2つのテーブル（active_storage_blobsとactive_storage_attachments）を使用して、
-  # ファイルのメタデータとそのファイルが関連付けられたモデル間の関連を管理する。
-  # active_storage_blobsテーブルにはファイルのメタデータが、active_storage_attachmentsテーブルには関連付け情報が格納される。
-  # たとえば、has_many_attached :embedsを使用すると、Active Storageはactive_storage_attachmentsテーブルに、
-  # record_type（ここではDocument）、record_id（モデルのID）、name（ここではembeds）、
-  # およびblob_id（関連するactive_storage_blobsテーブルのID）といった情報を持つレコードを作成する。
-  # これにより、embedsという名前で、Documentモデルとファイルの間に1対多の関係が作られる。
-  # has_many_attachedやhas_one_attachedを使用すると、Active Storageは自動的にこの関連付けを処理し、
-  # 関連するモデルでファイルにアクセスできるようになる。そのため、belongs_to :documentのような記述は必要ない。
-  before_save :set_embeds
-  # 保存（save）する前に、set_embedsメソッドを実行するように設定。  
 
-  # FIXME:以下の書き方で機能実装はOK。ただし、バージョン戻る等に不具合。時間がないのでとりあえずコメントアウト。
-    def levenshtein_distance_to_previous_version
+  # paper_trailを使用してバージョン記録・追跡。  
+  has_paper_trail
+
+  before_save :set_embeds
+
+  def levenshtein_distance_to_previous_version
     require 'damerau-levenshtein'
 
     previous_version = self.versions.last
@@ -45,18 +24,13 @@ class Document < ApplicationRecord
     previous_content = previous_version.reify.content
     current_content = self.content
 
-    # FIXME:以下の書き方では不具合が出た
-    # dl = DamerauLevenshtein.new(previous_content, current_content)
-    # dl.distance
-    # 理由:damerau-levenshteinはモジュールであり、newメソッドが定義されていないため、
-    # undefined method 'new'が発生。
     DamerauLevenshtein.distance(previous_content, current_content)
   end
 
   private
   
-  scope :official, -> { where(draft: false) } #正規版のみ抽出
-  scope :draft, -> { where(draft: true) } #下書きのみ抽出
+  scope :official, -> { where(draft: false) } #正規版抽出
+  scope :draft, -> { where(draft: true) } #下書き抽出
 
   def set_embeds
     return if content.blank?

@@ -6,7 +6,6 @@ class DocumentsController < ApplicationController
   def index
     @repository = Repository.find(params[:repository_id])
     @branch = @repository.branches.find(params[:branch_id])
-    # @documents = Document.all.includes(:user).order(created_at: :desc).page(params[:page])
     @documents = @branch.documents.official.order(created_at: :desc).page(params[:documents_page])
     @document_drafts = @branch.documents.draft.where(user: current_user).order(created_at: :desc).page(params[:document_drafts_page])
   end
@@ -16,38 +15,19 @@ class DocumentsController < ApplicationController
     @repository = Repository.find(params[:repository_id]) 
     @branch = Branch.find(params[:branch_id])
     @versions = @document.versions.reorder(created_at: :desc).page(params[:page]).per(5)
-    # orderはpapertrailでは使えないらしい。代わりにreorderを使うと成功
+    # orderはpapertrailでは使えない。代わりにreorderを使うと成功
     @full_content = params[:full_content] == 'true'   #FIXME:これで続きを読む、をクリックした場合に続きを表示させるようにできる。
     # FIXME:以下はレーベンシュタイン距離の算出用。旧バージョンに戻す部分でエラーが出たのでとりあえずコメントアウト
-    @levenshtein_distance = @document.levenshtein_distance_to_previous_version # モデルで定義したメソッドを使用
-    
-    
-    # FIXME:以下、使用しないかもしれない保留ネタ
-    # @similar_documents = Document.similar_documents(@document, 10) # 10 is the threshold
-    # このコードでは、@similar_documentsに類似したドキュメントを格納。Document.similar_documents(@document, 10)の部分で、
-    # @document（現在表示しているドキュメント）と類似性が高いドキュメントを検索。
-    # ここでの10は閾値（threshold）を意味する。この閾値はDamerau-Levenshtein距離の最大値で、この値以下の距離を持つドキュメントが類似しているとみなされる。
-    # Damerau-Levenshtein距離は、2つの文字列間の編集距離を表す数値。この距離が小さいほど、2つの文字列は類似していると考えられる。
-    # この例では、閾値が10なので、Damerau-Levenshtein距離が10以下のドキュメントが類似ドキュメントとしてリストされる。
-    # 閾値を変更することで、類似度の判断基準を調整することができる。
+    @levenshtein_distance = @document.levenshtein_distance_to_previous_version # モデルで定義したメソッドを使用    
   end
   
   def new
-    # binding.pry
     @repository = Repository.find(params[:repository_id])
     @branch = Branch.find(params[:branch_id])
     if current_user.id == @repository.user_id || current_user.id == @branch.repository.user_id
       # @commit = @document.commit.build
       @document = Document.new # これがないせいでcommitの作成ができなくなっていた。
       @commit = @document.build_commit # これによってcommitメッセージ欄を出している。
-      # @document = @branch.commit.build
-      # has_oneアソシエーションの場合、build_associationメソッドを使う。
-      # このメソッドは、関連付けられたモデルの新しいインスタンスをビルドし、現在のモデルに関連付ける。
-      # @document.build_commitが正しく動作しているのは、build_commitメソッドがhas_one関連付けで使用されるため。
-      # @document.commit.buildの場合、まず@document.commitを実行して、関連するCommitオブジェクトを取得しようとする。
-      # しかし、Commitオブジェクトがまだ存在しないため、nilが返される。
-      # その後、nilに対してbuildメソッドを呼び出そうとしてNoMethodErrorが発生してしまう。
-      # @document.build_commitを使用することで、Documentに関連する新しいCommitオブジェクトをビルドし、エラーを回避できるらしい。
     else
       flash[:alert] = t("documents.not_authorized")
       redirect_to repository_url(@repository)
@@ -67,9 +47,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    # @document.user = current_user  # いらんかも
-    @repository = Repository.find(params[:document][:repository_id])  # ひとつ前のページであるnewアクションの
-    # _formからhidden_fieldでRepository_id渡さないとkokoganilになるはず。んで、次のページ遷移でIDがない旨エラーが出る
+    @repository = Repository.find(params[:document][:repository_id])
     @branch = Branch.find(params[:document][:branch_id])
     # ActiveRecord::Base.transaction do
     # @commit = Commit.create(document_id: @document.id, message: 'Your commit message', user_id: current_user.id, branch_id: @document.branch_id)
@@ -103,7 +81,6 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    # binding.pry
     @repository = Repository.find(params[:document][:repository_id])
     @branch = Branch.find(params[:document][:branch_id])
     ActiveRecord::Base.transaction do
@@ -142,6 +119,7 @@ class DocumentsController < ApplicationController
   end
 
   private
+
   def set_document
     @document = Document.find(params[:id])
   end

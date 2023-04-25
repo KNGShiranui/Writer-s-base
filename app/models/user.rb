@@ -1,9 +1,6 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
-        #  ,:omniauthable, omniauth_providers: %i[github]
 
   has_many :repositories, dependent: :destroy
   has_many :commits, dependent: :destroy
@@ -14,15 +11,10 @@ class User < ApplicationRecord
   # has_many :team_members, dependent: :destroy  # 機能拡張時に使うかも
   # has_many :teams, through: :team_members  # 機能拡張時に使うかも
   # has_many :owned_teams, class_name: 'Team', foreign_key: 'owner_id', dependent: :destroy
-  # ↑機能拡張時に使うかも
   has_many :active_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
   has_many :passive_relationships, foreign_key: 'followed_id', class_name: 'Relationship', dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-
-  ## 以下でconversationsのassociationを定義
-  # ....
-  # has_many :conversations, dependent: :destroy
   has_many :sent_conversations, foreign_key: :sender_id, class_name: 'Conversation', dependent: :destroy
   has_many :received_conversations, foreign_key: :recipient_id, class_name: 'Conversation', dependent: :destroy
 
@@ -32,7 +24,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 30}
   validates :email, presence: true, length: { maximum: 255}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-  # validates :password, length: { minimum: 6 }
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true, on: :create
   validates :password, length: { minimum: 6 }, confirmation: true, allow_blank: true, on: :update
 
@@ -49,25 +40,22 @@ class User < ApplicationRecord
   def unfollow!(other_user)
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
-  # has_secure_password
-  #上の記述はいらないのでコメントアウト。deviseでencrypt_passwordを使用しているので。
 
   ## ransack使用のためのattributes設定
   def self.ransackable_attributes(auth_object = nil)
-    %w[name content] # カラム名
+    %w[name content]
   end
 
   ## ransack使用のためのassociations設定
   def self.ransackable_associations(auth_object = nil)
-    %w[user] # テーブル名
+    %w[user]
   end
 
   ## ゲストユーザーに関するメソッド
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = 'Guest User' # ここで名前を設定
-      # 必要に応じて他の属性を設定
+      user.name = 'Guest User'
     end
   end
 
@@ -75,9 +63,8 @@ class User < ApplicationRecord
   def self.guest_admin
     find_or_create_by!(email: 'guest_admin@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = 'Guest Admin' # ここで名前を設定
+      user.name = 'Guest Admin'
       user.admin = true
-      # 必要に応じて他の属性を設定
     end
   end
 
@@ -91,7 +78,7 @@ class User < ApplicationRecord
       receiver.save!
     end
     true
-  rescue StandardError => e
+    rescue StandardError => e
     false
   end
 end

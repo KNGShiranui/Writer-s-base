@@ -4,19 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    ## 以下2行はcancancan関係のための記述（issues_controller、ability.rb、application_controllerに記載あり
-    ## ややこしいので気を付けて！
     user ||= current_user
     repository_id = Thread.current[:current_repository_id]
-    # 以下のコードの意味の解説
-    # ログイン中のユーザに管理者権限がある場合はrails_adminへのアクセスと、
-    # すべてのモデルのCRUD（Create、Read、Update、Delete）を許可する
     if user&.admin?
       can :access, :rails_admin
       can :manage, :all
     end
-
-    ## assigneeについて（なくていいかも）
 
     ## branchについて
     ## TODO:とりあえず一度権限制約外した
@@ -28,10 +21,8 @@ class Ability
       branch.repository.user_id == user.id || branch.user_id == user.id
     end
 
-    ## commitについて
-
     ## conversationについて
-    # かえってややこしいのでconversations_controllerで制御。
+    # conversations_controllerで制御。
   
     ## documentについて（結局controllerで制御。以下、コメントアウト）
     # can :read, Document
@@ -57,29 +48,9 @@ class Ability
     # end
     # can [:update, :destroy], Issue, repository: { user_id: user.id }
     
-    ## messageについて
-    # かえってややこしいのでconversations_controllerで制御。
-
-    ## relationshipについて
-    # とりあえず今はなくてOK
-
     ## repositoryについて
     can [:create, :read], Repository
     can :update, Repository, user_id: user.id
     can :destroy, Repository, user_id: user.id  
   end
-  ## 以下参考
-  # class Ability
-  #   include CanCan::Ability
-
-  #   def initialize(user)
-  #     can :read, Post, public: true
-
-  #     return unless user.present?  # additional permissions for logged in users (they can read their own posts)
-  #     can :read, Post, user: user
-
-  #     return unless user.admin?  # additional permissions for administrators
-  #     can :read, Post
-  #   end
-  # end
 end

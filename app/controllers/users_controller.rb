@@ -1,21 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i(edit update show destroy)
-  # before_action :ensure_correct_user, only: %i(show)  
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :current_user
   
   def index
     @q = User.ransack(params[:q])
     @filtered_users = @q.result(distinct: true).where.not(id: current_user.id)
-    @users = Kaminari.paginate_array(@filtered_users).page(params[:page]).per(5) # per(5) の部分は、表示したいユーザー数に応じて調整
-    # @users = @q.result(distinct: true).page(params[:page]).order("created_at desc")
-    # binding.pry
+    @users = Kaminari.paginate_array(@filtered_users).page(params[:page]).per(5)
     @count = @users.total_count
   end
 
   def new
     redirect_to user_path(current_user) if user_signed_in?
-    @user = User.new # 上記以外の場合はこっち
+    @user = User.new
   end
 
   def create
@@ -23,10 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       current_user = @user
-      # log_inメソッドでもいいかも？
       redirect_to new_user_session_path, notice: "ユーザー登録が完了しました" 
-      # redirect_to user_path(current_user), notice: "ユーザー登録が完了しました" 
-      # redirect_to user_path(session[:user_id])でもOK
     else
       render :new, status: :unprocessable_entity 
     end
@@ -34,29 +28,16 @@ class UsersController < ApplicationController
 
   def show
     if current_user == @user
-      # リポジトリの表示とページネーション
       @repositories = current_user.repositories.page(params[:repository_page]).per(5).order("created_at desc")
-      # 会話のページネーション
       @conversations = Conversation.where("(sender_id = ?) OR (recipient_id = ?)", current_user.id, current_user.id).page(params[:conversation_page]).per(5)
-      # @conversations = Conversation.page(params[:conversation_page]).per(5)
       current_user = @user
-      # follower情報
       @followers = @user.followers.page(params[:page]).per(5)
-      # follow情報
       @users = @user.following.page(params[:page]).per(5)
     elsif current_user != @user
       @repositories = @user.repositories.page(params[:repository_page]).per(5).order("created_at desc")
-      # follower情報
       @followers = @user.followers.page(params[:page]).per(5)
-      # follow情報
       @users = @user.following.page(params[:page]).per(5)
-      ## 以下、ユーザが非公開設定している場合のリダイレクト先
-      # redirect_to(repositories_path, danger:"権限がありません") if @user.status == closed
     end
-    # set_userで定義した@user = User.find(params[:id])のこと
-    # ログインしているユーザーが他のユーザーのページを表示しようとした場合、
-    # current_user != @user となり、redirect_to(tasks_path, danger:"権限がありません")
-    # によってタスク一覧ページにリダイレクトされます。
   end
 
   def edit
@@ -70,11 +51,6 @@ class UsersController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-
-#   def destroy
-#     @user.destroy
-#     redirect_to new_session_path, notice: "ユーザー情報が削除されました"
-#   end
 
   private
 

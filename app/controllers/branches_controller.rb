@@ -4,11 +4,8 @@ class BranchesController < ApplicationController
   before_action :set_branch, only: %i(show edit update destroy)
 
   def index
-    # binding.pry
-    @repository = Repository.find(params[:repository_id])  #親リポジトリのデータ取得
-    # これでbranchのindexビューからnew branch作成可能になる
+    @repository = Repository.find(params[:repository_id])
     @branches = current_repository.branches.order(created_at: :desc).page(params[:page])
-    # @branches = current_user.branches.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -20,10 +17,8 @@ class BranchesController < ApplicationController
     end
   end
 
-  # newアクションを使用しないためコメントアウト
   def new
-    # binding.pry
-    @repository = Repository.find(params[:repository_id]) # 明示的に書く必要あり
+    @repository = Repository.find(params[:repository_id])
     @branch = @repository.branches.build
   end
 
@@ -32,10 +27,9 @@ class BranchesController < ApplicationController
     @repository_id = @repository.id
   end
 
-  def create  # createはrepositoryの新規作成時のみに同時に実行される。
-    # binding.pry
-    @repository = Repository.find(params[:branch][:repository_id])  # 明示的に書く必要あり
-    @repository_id = @repository.id # 明示的に書く必要あり
+  def create
+    @repository = Repository.find(params[:branch][:repository_id])
+    @repository_id = @repository.id
     @branch = Branch.new(branch_params)
     respond_to do |format|
       if @branch.save
@@ -51,8 +45,8 @@ class BranchesController < ApplicationController
   ## 基本的に以下の部分は結構苦労した
   def create_from_existing
     # @user = User.find(params[:user_id])
-    @repository = Repository.find(params[:repository_id])  # 明示的に書く必要あり
-    @repository_id = @repository.id # 明示的に書く必要あり
+    @repository = Repository.find(params[:repository_id])
+    @repository_id = @repository.id
     @existing_branch = Branch.find(params[:id])
     @new_branch = Branch.new(
       name: "#{@existing_branch.name}のbranch",
@@ -90,27 +84,23 @@ class BranchesController < ApplicationController
 
   def destroy
     # TODO:owner以外削除できなくすること！  
-    @repository_id = params[:repository_id] # 明示的に書く必要あり!
+    @repository_id = params[:repository_id]
     if @branch.status == 0
       respond_to do |format|
         format.html { redirect_to branches_path(repository_id: @repository_id), notice: t("branches.Master branch cannot be deleted destroyed") }
         format.json { head :no_content }
       end
     elsif @branch.status != 0 
-      # これにより、以下のbranches_path(repository_id: @repository_id)でbranch#indexへrepository_id:
-      # を持っていけるようになる
       @branch.destroy
       respond_to do |format|
-        # binding.pry
         format.html { redirect_to branches_path(repository_id: @repository_id), notice: t("branches.Branch was successfully destroyed") }
-        # 以下のように書くと@Repositoryがnilなのでダメ！注意！
-        # format.html { redirect_to branches_path(repository_id: @repository), notice: "Branch was successfully destroyed." }
         format.json { head :no_content }
       end
     end
   end
 
   private
+
   def set_branch
     @branch = Branch.find(params[:id])
   end
