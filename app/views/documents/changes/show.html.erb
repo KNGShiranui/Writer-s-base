@@ -66,14 +66,14 @@
               <td>
                 <% old_version = @version.changeset[key][0].nil? ? '' : strip_tags(@version.changeset[key][0]) %>
                 <% new_version = @version.changeset[key][1].nil? ? '' : strip_tags(@version.changeset[key][1]) %>
-          <% old_version_with_markers = old_version.gsub("\n", "\n\u200B") %>
-          <% new_version_with_markers = new_version.gsub("\n", "\n\u200B") %>
+                <% old_version_with_markers = old_version.gsub("\n", "\n\u200B") %>
+                <% new_version_with_markers = new_version.gsub("\n", "\n\u200B") %>
                 <%# diff_mainとdiff_cleanupSemanticは、diff_match_patchというライブラリのメソッド。 %>
                 <%# このライブラリは、テキストの差分を計算し、適切な形式で表示するためのツールを提供している。 %>
                 <%# @dmpは、diff_match_patchライブラリのインスタンス。 %>
                 <%# このインスタンスを使って、diff_mainやdiff_cleanupSemanticなどのメソッドにアクセスできる。 %> 
                 <%#TODO: diffs = @dmp.diff_main(old_version, new_version) %>
-          <% diffs = @dmp.diff_main(old_version_with_markers, new_version_with_markers) %>
+                <% diffs = @dmp.diff_main(old_version_with_markers, new_version_with_markers) %>
                 <%# @dmp.diff_cleanupSemantic(diffs) だけでは、diffs変数が未定義のままになる。 %>
                 <%# diffs変数は、diffs = @dmp.diff_main(old_version, new_version) で定義され、old_versionとnew_versionの間の差分を格納 %>
                 <% @dmp.diff_cleanupSemantic(diffs) %>
