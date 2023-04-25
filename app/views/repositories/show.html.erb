@@ -26,7 +26,9 @@
       <% end %>
     </p>
   <% end %>
+
   <hr>
+
   <p>
     <strong>ブランチ作成:</strong>
     <%= link_to '作成する', new_branch_path(repository_id: @repository.id) %>
@@ -107,26 +109,26 @@
                   <% end %>
                 <% end %>
               </td>
+            </tr>
+          <% end %>
+        <% elsif current_user.present? == false %>
+          <tr>
+            <td><%= issue.name %></td>
+            <td><%= issue.description %></td>
+            <td><%= issue.status %></td>
+            <td><%= issue.priority %></td>
+            <td><%= issue.repository.name %></td>
           </tr>
         <% end %>
-      <% elsif current_user.present? == false %>
-        <tr>
-          <td><%= issue.name %></td>
-          <td><%= issue.description %></td>
-          <td><%= issue.status %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.repository.name %></td>
-        </tr>
       <% end %>
+    </tbody>
+  </table>
+  <%= paginate @issues, param_name: 'issues_page' %>
+  <div class="Edit-RSpec">
+    <% if current_user == @repository.user %>
+      <%= link_to t('common.edit'), edit_repository_path(@repository) %> |
     <% end %>
-  </tbody>
-</table>
-<%= paginate @issues, param_name: 'issues_page' %>
-<div class="Edit-RSpec">
-  <% if current_user == @repository.user %>
-    <%= link_to t('common.edit'), edit_repository_path(@repository) %> |
-  <% end %>
-  <%= link_to t('common.back'), repositories_path %> |
-  <%= link_to t('issues.new issue'), new_issue_path(repository_id: @repository.id, user_id: current_user.id) %>
-</div>
+    <%= link_to t('common.back'), repositories_path %> |
+    <%= link_to t('issues.new issue'), new_issue_path(repository_id: @repository.id, user_id: current_user.id) %>
+  </div>
 </div>

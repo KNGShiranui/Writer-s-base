@@ -1,4 +1,3 @@
-<!-- 変更後のHTML -->
 <%= form_with(model: branch) do |form| %>
   <% if branch.errors.any? %>
     <div id="error_explanation" class="error-messages">
@@ -16,11 +15,8 @@
     <%= form.text_field :name, placeholder: t("branches.name")  %>
   </div>
 
-  <%# <div class="field"> %>
-    <%#= form.label :repository_id %>
-    <%= form.hidden_field :repository_id %>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  <%# </div> %>
+  <%= form.hidden_field :repository_id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div class="actions">
     <%= form.submit %>

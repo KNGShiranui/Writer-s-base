@@ -28,10 +28,8 @@
     <style>
       body {
         background-image: url(<%= asset_url 'fountain_pen_2.jpg' %>);
-        /* 背景画像の表示方法を指定する場合は、background-size, background-positionなどのプロパティを追加することができます */
         background-size: cover; /* 画面いっぱいに表示 */
         background-position: center center; /* 画像を中央に表示 */
-        /* その他のスタイルを追加 */
         min-height: 100vh; /* 追加 */
       }
       
@@ -58,7 +56,7 @@
         z-index: -1;
       }
       
-    .dropdown-content { /* プルダウンのクラス名に置き換えてください */
+    .dropdown-content {
       max-height: calc(80vh - 100px); /* 画面の高さの80%からフッターの高さ（30px）を引く */
       overflow-y: auto; /* 必要に応じてスクロールバーを表示 */
     }
@@ -73,7 +71,6 @@
           <nav class="nav-item">
             <div class="website-name">
               <% if current_user&.admin? %>
-              <%# if current_user.try!admin?は上記と意味は同じ。 %>
                 <h1 class="header-title"><%= link_to "Writer's Base admin", root_path, class: 'nav-title' %></h1>
               <% else %>
                 <h1 class="header-title"><%= link_to "Writer's Base", root_path, class: 'nav-title' %></h1>
@@ -127,12 +124,9 @@
                 <% if current_user&.admin? %>
                   <%= link_to raw('<i class="material-icons">security</i>' + t('common.administrator')), rails_admin_path %>
                 <% end %>
-                
-
                   <%= link_to raw('<i class="material-icons">people</i>' + t('common.users')), users_path %>
                   <%= link_to raw('<i class="material-icons">person</i>' + t('common.profile')), user_path(current_user.id) %>
                   <%= link_to raw('<i class="material-icons">person_add</i>' +t('common.follow')), following_relationships_path(user_id: current_user.id) %>
-                  <%# followerとfollowをindexアクション内で条件分岐したらOK %>
                   <%= link_to raw('<i class="material-icons">person_outline</i>' +t('common.follower')), followers_relationships_path(user_id: current_user.id) %>
                   <%= link_to raw('<i class="material-icons">send</i>' +t('common.send points')).html_safe, new_point_path %>
                   <%= link_to raw('<i class="material-icons">chat</i>' +t('common.conversations')), conversations_path %>

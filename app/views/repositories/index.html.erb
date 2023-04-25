@@ -29,7 +29,6 @@
       <% @repositories.each do |repository| %>
         <% if current_user.present? == true %>
           <% if !repository.status_closed? || repository.user_id == current_user.id %>
-            <%# unless repository.status_closed? && repository.user_id != current_user.id %>
             <tr>
               <td><%= repository.name %></td>
               <td><%= repository.description %></td>
