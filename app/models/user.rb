@@ -59,14 +59,14 @@ class User < ApplicationRecord
     end
   end
 
-  ## ゲスト管理者に関するメソッド
-  def self.guest_admin
-    find_or_create_by!(email: 'guest_admin@example.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.name = 'Guest Admin'
-      user.admin = true
-    end
-  end
+  ## ゲスト管理者に関するメソッド（コメントアウトで除外）
+  # def self.guest_admin
+  #   find_or_create_by!(email: 'guest_admin@example.com') do |user|
+  #     user.password = SecureRandom.urlsafe_base64
+  #     user.name = 'Guest Admin'
+  #     user.admin = true
+  #   end
+  # end
 
   ## ポイントを他のユーザに渡すためのメソッド  #points_controllerと関係
   def send_points(receiver, amount)

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     get 'guest_sign_in', to: 'sessions#guest_sign_in'
-    get 'guest_admin_sign_in', to: 'sessions#guest_admin_sign_in'
+    # ゲスト管理者機能は除外
+    # get 'guest_admin_sign_in', to: 'sessions#guest_admin_sign_in'
     get 'users/edit', to: 'users#edit'
     put 'users', to: 'users#update'
   end
